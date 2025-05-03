@@ -1,0 +1,139 @@
+:root {
+    --main-bg-color: #f4f4f4;
+    --main-color: #333;
+    --highlight-color: #ff6347;
+    --button-color: #4CAF50;
+    --header-color: #333;
+    --link-hover-color: #ff6347;
+    --card-bg-color: #fff;
+    --card-border-color: #ddd;
+    --transition-duration: 0.3s;
+  }
+  
+  /* Общие стили */
+  body {
+    font-family: 'Arial', sans-serif;
+    background-color: var(--main-bg-color);
+    color: var(--main-color);
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Шапка сайта */
+  header {
+    background-color: var(--header-color);
+    color: #fff;
+    padding: 10px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Стили для навигации */
+  nav {
+    text-align: center;
+  }
+  
+  nav a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 15px;
+    font-size: 18px;
+    padding: 10px;
+    transition: color var(--transition-duration), background-color var(--transition-duration);
+  }
+  
+  nav a:hover {
+    color: var(--link-hover-color);
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+  
+  /* Стили для контента */
+  .main-content {
+    padding: 20px;
+    text-align: center;
+  }
+  
+  h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+  }
+  
+  /* Стили для карточек */
+  .card {
+    background-color: var(--card-bg-color);
+    border: 1px solid var(--card-border-color);
+    padding: 20px;
+    margin: 15px;
+    border-radius: 8px;
+    transition: transform var(--transition-duration), box-shadow var(--transition-duration);
+  }
+  
+  .card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Форма */
+  form {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  form input, form button {
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid var(--card-border-color);
+  }
+  
+  form button {
+    background-color: var(--button-color);
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  form button:hover {
+    background-color: #45a049;
+  }
+  
+  /* Анимация появления элементов */
+  .visible {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.5s ease-in, transform 0.5s ease-in;
+  }
+  
+  .hidden {
+    opacity: 0;
+    transform: translateY(100px);
+  }
+  
+  @media (max-width: 768px) {
+    header {
+      padding: 15px;
+    }
+  
+    nav a {
+      font-size: 16px;
+      margin: 0 10px;
+    }
+  
+    .main-content {
+      padding: 10px;
+    }
+  
+    h1 {
+      font-size: 2em;
+    }
+  
+    .card {
+      margin: 10px;
+      padding: 15px;
+    }
+  }
