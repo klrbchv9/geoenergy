@@ -85,6 +85,14 @@
       margin: 0;
     }
     
+    .language-switcher {
+      margin-left: auto;
+      display: flex;
+      gap: 5px;
+      align-items: center;
+      font-weight: bold;
+    }
+
     /* Навигация */
     nav {
       width: 100%;
@@ -523,14 +531,12 @@
         <li class="nav-item"><a href="#account" class="nav-link">Вход</a></li>
         <li class="nav-item"><a href="#profile" id="profileLink" class="nav-link hidden">Профиль</a></li>
         <li class="nav-item"><a href="#" onclick="logout()" id="logoutBtn" class="nav-link hidden">Выйти</a></li>
-        
-<div class="language-switcher">
-  <a href="index.html" class="lang-btn">Рус</a>
-  |
-  <a href="index-en.html" class="lang-btn">Eng</a>
-</div>
-
     </ul>
+    <div class="language-switcher">
+      <a href="index.html" class="lang-btn">Рус</a>
+      |
+      <a href="index-en.html" class="lang-btn">Eng</a>
+    </div>
     </nav>
   </div>
 </header>
