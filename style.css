@@ -1,15 +1,15 @@
 /* Переменные для цветовой палитры */
 :root {
-  --primary: #1a3c34; /* Тёмно-зелёный для хедера */
-  --accent: #4caf50; /* Яркий зелёный для кнопок */
-  --secondary: #66bb6a; /* Светло-зелёный для акцентов */
-  --background: #e8f5e9; /* Светлый фон с зелёным оттенком */
+  --primary: #1e3a8a; /* Глубокий тёмно-синий */
+  --accent: #60a5fa; /* Яркий голубой */
+  --secondary: #93c5fd; /* Светло-голубой */
+  --background: #eff6ff; /* Светлый голубой фон */
   --card-bg: #ffffff; /* Белый для карточек */
-  --text: #263238; /* Тёмно-серый для текста */
-  --text-light: #78909c; /* Светло-серый для второстепенного текста */
+  --text: #1e293b; /* Тёмно-синий для текста */
+  --text-light: #64748b; /* Серо-голубой для второстепенного текста */
   --white: #ffffff;
-  --shadow: rgba(0, 0, 0, 0.15);
-  --gradient: linear-gradient(135deg, #4caf50, #81c784); /* Градиент для кнопок */
+  --shadow: rgba(0, 0, 0, 0.1);
+  --gradient: linear-gradient(135deg, #1e3a8a, #60a5fa); /* Градиент синий → голубой */
 }
 
 /* Сброс стилей */
@@ -25,6 +25,7 @@ body {
   background: var(--background);
   line-height: 1.6;
   overflow-x: hidden;
+  transition: background 0.3s ease;
 }
 
 /* Хедер */
@@ -38,7 +39,13 @@ body {
   position: sticky;
   top: 0;
   z-index: 1000;
-  box-shadow: 0 2px 5px var(--shadow);
+  box-shadow: 0 2px 10px var(--shadow);
+  animation: fadeInHeader 0.5s ease-in-out;
+}
+
+@keyframes fadeInHeader {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .logo {
@@ -52,26 +59,30 @@ body {
   background: url('https://i.imgur.com/zD3oX2x.png') center/cover no-repeat;
   border-radius: 50%;
   margin-right: 1rem;
-  transition: transform 0.3s;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .logo-icon:hover {
   transform: scale(1.1);
+  box-shadow: 0 0 10px rgba(96, 165, 250, 0.5);
 }
 
 .logo-text h1 {
   font-size: 1.8rem;
   font-weight: 700;
+  animation: slideIn 0.5s ease-out;
 }
 
 .logo-text p {
   font-size: 0.9rem;
   opacity: 0.9;
+  animation: fadeIn 0.5s ease-out 0.2s backwards;
 }
 
 .nav-menu {
   display: flex;
   list-style: none;
+  animation: fadeIn 0.5s ease-out;
 }
 
 .nav-item {
@@ -84,7 +95,7 @@ body {
   text-decoration: none;
   font-size: 1rem;
   font-weight: 500;
-  transition: color 0.3s;
+  transition: color 0.3s ease, transform 0.2s ease;
 }
 
 .nav-link::after {
@@ -92,10 +103,10 @@ body {
   position: absolute;
   width: 0;
   height: 2px;
-  background: var(--white);
+  background: var(--secondary);
   bottom: -5px;
   left: 0;
-  transition: width 0.3s;
+  transition: width 0.4s ease-in-out;
 }
 
 .nav-link:hover::after,
@@ -105,6 +116,7 @@ body {
 
 .nav-link:hover {
   color: var(--secondary);
+  transform: translateY(-2px);
 }
 
 .language-switcher {
@@ -119,13 +131,14 @@ body {
   text-decoration: none;
   border-radius: 20px;
   font-size: 0.9rem;
-  transition: background 0.3s, transform 0.2s;
+  transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
 }
 
 .lang-btn:hover {
   background: var(--secondary);
   color: var(--white);
   transform: translateY(-2px);
+  box-shadow: 0 2px 5px var(--shadow);
 }
 
 .lang-btn.active {
@@ -141,11 +154,12 @@ body {
   font-size: 1.8rem;
   color: var(--white);
   cursor: pointer;
-  transition: transform 0.3s;
+  transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
 .burger-menu:hover {
   transform: rotate(90deg);
+  opacity: 0.8;
 }
 
 @media (max-width: 768px) {
@@ -164,14 +178,15 @@ body {
     position: absolute;
     top: 70px;
     left: 0;
-    box-shadow: 0 5px 10px var(--shadow);
+    box-shadow: 0 5px 15px var(--shadow);
+    animation: slideDown 0.3s ease-out;
   }
   .nav-menu.active {
     display: flex;
-    animation: slideIn 0.3s ease-in-out;
   }
   .nav-item {
     margin: 0.5rem 0;
+    animation: fadeIn 0.3s ease-out;
   }
   .language-switcher {
     margin-top: 1rem;
@@ -179,15 +194,9 @@ body {
   }
 }
 
-@keyframes slideIn {
-  from {
-    transform: translateY(-20px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
+@keyframes slideDown {
+  from { transform: translateY(-20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
 }
 
 /* Секции */
@@ -204,6 +213,7 @@ section {
   color: var(--primary);
   text-align: center;
   position: relative;
+  animation: bounceIn 0.8s ease-out;
 }
 
 .section-title::after {
@@ -215,6 +225,18 @@ section {
   bottom: -10px;
   left: 50%;
   transform: translateX(-50%);
+  animation: pulse 2s infinite;
+}
+
+@keyframes bounceIn {
+  from { transform: scale(0.9); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes pulse {
+  0% { transform: translateX(-50%) scaleX(1); }
+  50% { transform: translateX(-50%) scaleX(1.2); }
+  100% { transform: translateX(-50%) scaleX(1); }
 }
 
 .card {
@@ -224,18 +246,25 @@ section {
   box-shadow: 0 8px 20px var(--shadow);
   margin: 1rem auto;
   max-width: 700px;
-  transition: transform 0.3s, box-shadow 0.3s;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: floatUp 0.5s ease-out backwards;
 }
 
 .card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 25px var(--shadow);
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 12px 30px var(--shadow);
+}
+
+@keyframes floatUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
 }
 
 .card h3 {
   font-size: 1.5rem;
   color: var(--primary);
   margin-bottom: 1rem;
+  animation: fadeIn 0.5s ease-out;
 }
 
 .animate-on-scroll {
@@ -263,6 +292,11 @@ section::before {
   background: url('https://images.unsplash.com/photo-1448375240586-882707db888b') center/cover fixed;
   opacity: 0.05;
   z-index: -1;
+  transition: transform 0.1s ease;
+}
+
+section:hover::before {
+  transform: scale(1.02);
 }
 
 /* Формы */
@@ -274,6 +308,7 @@ section::before {
   padding: 2rem;
   border-radius: 15px;
   box-shadow: 0 8px 20px var(--shadow);
+  animation: slideIn 0.5s ease-out;
 }
 
 .form-group {
@@ -286,12 +321,13 @@ section::before {
   border: 2px solid var(--text-light);
   border-radius: 10px;
   font-size: 1rem;
-  transition: border-color 0.3s, box-shadow 0.3s;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
 }
 
 .form-control:focus {
   border-color: var(--accent);
-  box-shadow: 0 0 8px rgba(76, 175, 80, 0.3);
+  box-shadow: 0 0 10px rgba(96, 165, 250, 0.4);
+  transform: scale(1.01);
   outline: none;
 }
 
@@ -302,7 +338,8 @@ section::before {
   cursor: pointer;
   font-size: 1rem;
   font-weight: 600;
-  transition: all 0.3s;
+  transition: all 0.3s ease;
+  animation: pulseBtn 2s infinite;
 }
 
 .btn-primary {
@@ -311,8 +348,8 @@ section::before {
 }
 
 .btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 5px 15px rgba(96, 165, 250, 0.5);
 }
 
 .btn-outline {
@@ -324,6 +361,13 @@ section::before {
 .btn-outline:hover {
   background: var(--accent);
   color: var(--white);
+  transform: translateY(-2px);
+}
+
+@keyframes pulseBtn {
+  0% { box-shadow: 0 0 0 0 rgba(96, 165, 250, 0.4); }
+  50% { box-shadow: 0 0 0 10px rgba(96, 165, 250, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(96, 165, 250, 0.4); }
 }
 
 /* Карта */
@@ -333,6 +377,7 @@ section::before {
   box-shadow: 0 8px 20px var(--shadow);
   position: relative;
   overflow: hidden;
+  animation: fadeIn 0.5s ease-out;
 }
 
 #geoMap.loading::before {
@@ -357,6 +402,7 @@ section::before {
   transform: translate(-50%, -50%);
   color: var(--text-light);
   font-size: 1.2rem;
+  animation: fadeIn 0.5s ease-out;
 }
 
 @keyframes spin {
@@ -373,6 +419,7 @@ section::before {
   background: var(--card-bg);
   box-shadow: 0 8px 20px var(--shadow);
   text-align: left;
+  animation: slideIn 0.5s ease-out;
 }
 
 .result-item {
@@ -380,6 +427,11 @@ section::before {
   justify-content: space-between;
   margin-bottom: 0.8rem;
   font-size: 1.1rem;
+  transition: transform 0.2s ease;
+}
+
+.result-item:hover {
+  transform: translateX(5px);
 }
 
 .result-item.highlight {
@@ -411,13 +463,14 @@ section::before {
   cursor: pointer;
   font-size: 1rem;
   font-weight: 600;
-  transition: all 0.3s;
+  transition: all 0.3s ease;
+  animation: bounceIn 0.8s ease-out;
 }
 
 .tab-btn:hover {
   background: var(--gradient);
   color: var(--white);
-  transform: translateY(-2px);
+  transform: translateY(-2px) scale(1.05);
 }
 
 .tab-btn.active {
@@ -431,12 +484,12 @@ section::before {
 
 .tab-content.active {
   display: block;
-  animation: fadeIn 0.5s ease-in;
+  animation: fadeInUp 0.5s ease-out;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .project-list {
@@ -452,27 +505,32 @@ section::before {
   box-shadow: 0 8px 20px var(--shadow);
   margin-bottom: 1.5rem;
   text-align: left;
-  transition: transform 0.3s;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: floatUp 0.5s ease-out backwards;
 }
 
 .project-item:hover {
-  transform: translateY(-5px);
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 12px 30px var(--shadow);
 }
 
 .project-title {
   font-size: 1.4rem;
   color: var(--primary);
   margin-bottom: 0.8rem;
+  animation: fadeIn 0.5s ease-out;
 }
 
 /* Изображения */
 .mt-4 img {
-  transition: transform 0.3s, box-shadow 0.3s;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 10px;
+  animation: fadeIn 0.5s ease-out;
 }
 
 .mt-4 img:hover {
   transform: scale(1.05);
-  box-shadow: 0 10px 25px var(--shadow);
+  box-shadow: 0 10px 25px rgba(96, 165, 250, 0.3);
 }
 
 /* Футер */
@@ -482,6 +540,7 @@ footer {
   text-align: center;
   padding: 1.5rem;
   font-size: 0.9rem;
+  animation: fadeIn 0.5s ease-out;
 }
 
 /* Мобильная адаптация */
