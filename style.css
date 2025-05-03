@@ -1,3 +1,6 @@
+/* Подключение шрифтов Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&family=Open+Sans:wght@400;600&family=Roboto:wght@500&display=swap');
+
 /* Переменные для цветовой палитры */
 :root {
   --primary: #1e3a8a; /* Глубокий тёмно-синий */
@@ -20,7 +23,7 @@
 }
 
 body {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Open Sans', sans-serif; /* Основной шрифт для текста */
   color: var(--text);
   background: var(--background);
   line-height: 1.6;
@@ -68,12 +71,14 @@ body {
 }
 
 .logo-text h1 {
-  font-size: 1.8rem;
+  font-family: 'Poppins', sans-serif; /* Шрифт для заголовков */
   font-weight: 700;
+  font-size: 1.8rem;
   animation: slideIn 0.5s ease-out;
 }
 
 .logo-text p {
+  font-family: 'Open Sans', sans-serif;
   font-size: 0.9rem;
   opacity: 0.9;
   animation: fadeIn 0.5s ease-out 0.2s backwards;
@@ -91,6 +96,7 @@ body {
 }
 
 .nav-link {
+  font-family: 'Roboto', sans-serif; /* Шрифт для ссылок */
   color: var(--white);
   text-decoration: none;
   font-size: 1rem;
@@ -125,6 +131,7 @@ body {
 }
 
 .lang-btn {
+  font-family: 'Roboto', sans-serif;
   padding: 0.5rem 1rem;
   background: var(--white);
   color: var(--text);
@@ -207,8 +214,9 @@ section {
 }
 
 .section-title {
-  font-size: 2.5rem;
+  font-family: 'Poppins', sans-serif;
   font-weight: 700;
+  font-size: 2.5rem;
   margin-bottom: 2rem;
   color: var(--primary);
   text-align: center;
@@ -261,10 +269,15 @@ section {
 }
 
 .card h3 {
+  font-family: 'Poppins', sans-serif;
   font-size: 1.5rem;
   color: var(--primary);
   margin-bottom: 1rem;
   animation: fadeIn 0.5s ease-out;
+}
+
+.card p {
+  font-family: 'Open Sans', sans-serif;
 }
 
 .animate-on-scroll {
@@ -316,6 +329,7 @@ section:hover::before {
 }
 
 .form-control {
+  font-family: 'Open Sans', sans-serif;
   width: 100%;
   padding: 0.8rem;
   border: 2px solid var(--text-light);
@@ -332,6 +346,7 @@ section:hover::before {
 }
 
 .btn {
+  font-family: 'Roboto', sans-serif;
   padding: 0.8rem 2rem;
   border: none;
   border-radius: 25px;
@@ -456,6 +471,7 @@ section:hover::before {
 }
 
 .tab-btn {
+  font-family: 'Roboto', sans-serif;
   padding: 0.8rem 2rem;
   background: var(--card-bg);
   border: 2px solid var(--accent);
@@ -515,6 +531,7 @@ section:hover::before {
 }
 
 .project-title {
+  font-family: 'Poppins', sans-serif;
   font-size: 1.4rem;
   color: var(--primary);
   margin-bottom: 0.8rem;
