@@ -8,20 +8,20 @@
     --card-bg-color: #fff;
     --card-border-color: #ddd;
     --transition-duration: 0.3s;
-  }
-  
-  /* Общие стили */
-  body {
+}
+
+/* Общие стили */
+body {
     font-family: 'Arial', sans-serif;
     background-color: var(--main-bg-color);
     color: var(--main-color);
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-  }
-  
-  /* Шапка сайта */
-  header {
+}
+
+/* Шапка сайта */
+header {
     background-color: var(--header-color);
     color: #fff;
     padding: 10px 0;
@@ -29,111 +29,159 @@
     top: 0;
     z-index: 1000;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* Стили для навигации */
-  nav {
+}
+
+/* Стили для навигации */
+nav {
     text-align: center;
-  }
-  
-  nav a {
+}
+
+nav a {
     color: #fff;
     text-decoration: none;
     margin: 0 15px;
     font-size: 18px;
     padding: 10px;
     transition: color var(--transition-duration), background-color var(--transition-duration);
-  }
-  
-  nav a:hover {
+}
+
+nav a:hover {
     color: var(--link-hover-color);
     background-color: rgba(255, 255, 255, 0.2);
-  }
-  
-  /* Стили для контента */
-  .main-content {
+}
+
+/* Стили для контента */
+.main-content {
     padding: 20px;
     text-align: center;
-  }
-  
-  h1 {
+}
+
+h1 {
     font-size: 2.5em;
     margin-bottom: 20px;
-  }
-  
-  /* Стили для карточек */
-  .card {
+}
+
+/* Стили для карточек */
+.card {
     background-color: var(--card-bg-color);
     border: 1px solid var(--card-border-color);
     padding: 20px;
     margin: 15px;
     border-radius: 8px;
     transition: transform var(--transition-duration), box-shadow var(--transition-duration);
-  }
-  
-  .card:hover {
+}
+
+.card:hover {
     transform: scale(1.05);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* Форма */
-  form {
+}
+
+/* Форма */
+form {
     margin-top: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
-  }
-  
-  form input, form button {
+}
+
+form input, form button {
     margin: 5px 0;
     padding: 10px;
     border-radius: 5px;
     border: 1px solid var(--card-border-color);
-  }
-  
-  form button {
+}
+
+form button {
     background-color: var(--button-color);
     color: white;
     border: none;
     cursor: pointer;
-  }
-  
-  form button:hover {
+}
+
+form button:hover {
     background-color: #45a049;
-  }
-  
-  /* Анимация появления элементов */
-  .visible {
+}
+
+/* Анимация появления элементов */
+.visible {
     opacity: 1;
     transform: translateY(0);
     transition: opacity 0.5s ease-in, transform 0.5s ease-in;
-  }
-  
-  .hidden {
+}
+
+.hidden {
     opacity: 0;
     transform: translateY(100px);
-  }
-  
-  @media (max-width: 768px) {
+}
+
+/* Мобильная адаптация */
+@media (max-width: 768px) {
     header {
-      padding: 15px;
+        padding: 15px;
     }
-  
+
     nav a {
-      font-size: 16px;
-      margin: 0 10px;
+        font-size: 16px;
+        margin: 0 10px;
     }
-  
+
     .main-content {
-      padding: 10px;
+        padding: 10px;
     }
-  
+
     h1 {
-      font-size: 2em;
+        font-size: 2em;
     }
-  
+
     .card {
-      margin: 10px;
-      padding: 15px;
+        margin: 10px;
+        padding: 15px;
     }
-  }
+
+    form input, form button {
+        width: 100%;  /* Расширяем форму на всю ширину */
+        padding: 15px;
+        font-size: 16px;
+    }
+
+    form button {
+        font-size: 18px;
+    }
+}
+
+/* Для очень маленьких экранов (например, телефоны) */
+@media (max-width: 480px) {
+    header {
+        padding: 10px;
+    }
+
+    nav {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    nav a {
+        margin: 10px 0;
+        font-size: 14px;
+    }
+
+    h1 {
+        font-size: 1.8em;
+    }
+
+    .card {
+        margin: 5px;
+        padding: 10px;
+    }
+
+    form input, form button {
+        width: 100%;
+        font-size: 16px;
+    }
+
+    form button {
+        padding: 15px;
+        font-size: 18px;
+    }
+}
