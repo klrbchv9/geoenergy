@@ -59,7 +59,7 @@ body {
 .logo-icon {
   width: 50px;
   height: 50px;
-  background: url('https://i.imgur.com/zD3oX2x.png') center/cover no-repeat;
+  background: url('[https://imgur.com/a/QFwlaV6]') center/contain no-repeat;
   border-radius: 50%;
   margin-right: 1rem;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -67,7 +67,7 @@ body {
 
 .logo-icon:hover {
   transform: scale(1.1);
-  box-shadow: 0 0 10px rgba(96, 165, 250, 0.5);
+  box-shadow: 0 0 15px rgba(96, 165, 250, 0.7);
 }
 
 .logo-text h1 {
