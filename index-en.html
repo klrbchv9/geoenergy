@@ -1,673 +1,562 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Meta tags and title -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ZherBulagy — Geothermal Energy of the Future</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <title>ZherBulagy - Geothermal Energy</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" href="https://i.imgur.com/zD3oX2x.png">
+  
+  <!-- External resources -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+  
+  <!-- Local stylesheet -->
   <link rel="stylesheet" href="style.css">
 </head>
-<body class="animate__animated animate__fadeIn">
-
-<header>
-  <div class="header-container">
-    <div class="logo">
-      <div class="logo-icon"></div>
-      <div class="logo-text">
-        <h1>ZherBulagy</h1>
-        <p>Geothermal Energy of the Future</p>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="header-container">
+      <div class="logo">
+        <div class="logo-icon"></div>
+        <div class="logo-text">
+          <h1>ZherBulagy</h1>
+          <p>Geothermal Energy of the Future</p>
+        </div>
       </div>
+      <!-- Burger menu for mobile -->
+      <button class="burger-menu" onclick="toggleMenu()">☰</button>
+      <nav>
+        <ul class="nav-menu">
+          <li class="nav-item"><a href="#about" class="nav-link">Home</a></li>
+          <li class="nav-item"><a href="#benefits" class="nav-link">Benefits</a></li>
+          <li class="nav-item"><a href="#education" class="nav-link">Education</a></li>
+          <li class="nav-item"><a href="#map" class="nav-link">Map</a></li>
+          <li class="nav-item"><a href="#calculator" class="nav-link">Calculator</a></li>
+          <li class="nav-item"><a href="#invest" class="nav-link">Investors</a></li>
+          <li class="nav-item"><a href="#register" class="nav-link">Register</a></li>
+          <li class="nav-item"><a href="#account" class="nav-link">Login</a></li>
+          <li class="nav-item"><a href="#profile" id="profileLink" class="nav-link hidden">Profile</a></li>
+          <li class="nav-item"><a href="#" onclick="logout()" id="logoutBtn" class="nav-link hidden">Logout</a></li>
+        </ul>
+        <div class="language-switcher">
+          <a href="index.html" class="lang-btn">RU</a>
+          <a href="index-en.html" class="lang-btn active">EN</a>
+        </div>
+      </nav>
     </div>
-    <nav>
-      <ul class="nav-menu">
-        <li class="nav-item"><a href="#about" class="nav-link">Home</a></li>
-        <li class="nav-item"><a href="#benefits" class="nav-link">Benefits</a></li>
-        <li class="nav-item"><a href="#education" class="nav-link">Education</a></li>
-        <li class="nav-item"><a href="#map" class="nav-link">Map</a></li>
-        <li class="nav-item"><a href="#calculator" class="nav-link">Calculator</a></li>
-        <li class="nav-item"><a href="#invest" class="nav-link">For Investors</a></li>
-        <li class="nav-item"><a href="#register" class="nav-link">Registration</a></li>
-        <li class="nav-item"><a href="#account" class="nav-link">Login</a></li>
-        <li class="nav-item"><a href="#profile" id="profileLink" class="nav-link hidden">Profile</a></li>
-        <li class="nav-item"><a href="#" onclick="logout()" id="logoutBtn" class="nav-link hidden">Logout</a></li>
-        <li class="nav-item language-switch">
-          <a href="index.html" class="lang-btn">Русский</a>
-        </li>
-        
-    </ul>
-    </nav>
-  </div>
-</header>
+  </header>
 
-<main class="container">
-  <!-- О проекте -->
-  <section id="about" class="section">
-    <div class="section-header">
-      <h2 class="section-title">Geothermal Energy</h2>
-      <p class="section-subtitle">Renewable energy source of the future for Kyrgyzstan</p>
-    </div>
-    
-    <div class="animate-on-scroll">
+  <!-- Main content -->
+  <main>
+    <!-- About section -->
+    <section id="about">
+      <h2 class="section-title animate__animated animate__fadeIn">About ZherBulagy</h2>
       <div class="card">
-        <p>Our project promotes geothermal energy — a clean and inexhaustible energy source that uses Earth's heat to generate electricity and warmth.</p>
-        <p class="mt-2">Geothermal Energy is especially relevant for Kyrgyzstan, where there are significant reserves of this natural resource..</p>
+        <p>ZherBulagy is a project aimed at promoting geothermal energy in Kyrgyzstan. We strive to make eco-friendly heating accessible to every home, reduce CO₂ emissions, and cut energy costs.</p>
       </div>
-      
       <div class="mt-4" style="text-align: center;">
-        <img src="https://i.imgur.com/JzQZQ9u.jpg" alt="Geothermal Energy" style="max-width: 100%; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+        <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba" alt="Geothermal Source in Kyrgyzstan" style="max-width: 100%; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Benefits -->
-  <section id="benefits" class="section" style="background-color: rgba(10, 61, 98, 0.05);">
-    <div class="section-header">
-      <h2 class="section-title">Benefits</h2>
-      <p class="section-subtitle">Why geothermal energy is better than other sources</p>
-    </div>
-    
-    <div class="animate-on-scroll" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
-      <div class="card">
-        <h3 class="card-title">Weather Independence</h3>
-        <p class="card-text">Operates around the clock, regardless of weather or time of day.</p>
+    <!-- Benefits section -->
+    <section id="benefits">
+      <h2 class="section-title animate__animated animate__fadeIn">Benefits of Geothermal Energy</h2>
+      <div class="animate-on-scroll">
+        <div class="card">
+          <h3>Eco-Friendliness</h3>
+          <p>Geothermal energy reduces carbon emissions by 80% compared to traditional sources.</p>
+        </div>
+        <div class="card">
+          <h3>Cost Savings</h3>
+          <p>Save up to 50% on heating and hot water costs annually.</p>
+        </div>
+        <div class="card">
+          <h3>Reliability</h3>
+          <p>Geothermal systems operate consistently year-round.</p>
+        </div>
       </div>
-      
-      <div class="card" style="transition-delay: 0.2s">
-        <h3 class="card-title">Cost-efficiency</h3>
-        <p class="card-text">Low operational costs and high efficiency.</p>
+      <div class="mt-4" style="text-align: center;">
+        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e" alt="Renewable Energy Benefits" style="max-width: 100%; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
       </div>
-      
-      <div class="card" style="transition-delay: 0.4s">
-        <h3 class="card-title">Eco-friendliness</h3>
-        <p class="card-text">Almost zero CO₂ and other pollutant emissions.</p>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Education -->
-  <section id="education" class="section">
-    <div class="section-header">
-      <h2 class="section-title">Educational Materials</h2>
-      <p class="section-subtitle">Explore the possibilities of geothermal energy</p>
-    </div>
-    
-    <div class="animate-on-scroll" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
-      <div class="card">
-        <h3 class="card-title">Basics of Geothermal Energy</h3>
-        <p class="card-text">Learn how geothermal energy works, where it's used, and its potential in Kyrgyzstan.</p>
-        <button class="btn btn-outline" onclick="openCourse('basics')">Start Course</button>
+    <!-- Education section -->
+    <section id="education">
+      <h2 class="section-title animate__animated animate__fadeIn">Education</h2>
+      <div class="animate-on-scroll">
+        <div class="card">
+          <h3>Course for Homeowners</h3>
+          <p>Learn how to install a geothermal system in your home.</p>
+          <button class="btn btn-primary mt-2" onclick="openCourse('Course for Homeowners')">Enroll</button>
+        </div>
+        <div class="card">
+          <h3>Course for Engineers</h3>
+          <p>Master the design and maintenance of geothermal systems.</p>
+          <button class="btn btn-primary mt-2" onclick="openCourse('Course for Engineers')">Enroll</button>
+        </div>
       </div>
-      
-      <div class="card" style="transition-delay: 0.2s">
-        <h3 class="card-title">System Installation</h3>
-        <p class="card-text">A practical guide to installing geothermal systems for homes and businesses.</p>
-        <button class="btn btn-outline" onclick="openCourse('installation')">Start Course</button>
-      </div>
-      
-      <div class="card" style="transition-delay: 0.4s">
-        <h3 class="card-title">Project Economics</h3>
-        <p class="card-text">How to evaluate profitability and payback period of geothermal systems.</p>
-        <button class="btn btn-outline" onclick="openCourse('economics')">Start Course</button>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Map -->
-  <section id="map" class="section" style="background-color: rgba(10, 61, 98, 0.05);">
-    <div class="section-header">
-      <h2 class="section-title">Geothermal Zones</h2>
-      <p class="section-subtitle">Map of potential geothermal energy sources in Kyrgyzstan</p>
-    </div>
-    
-    <div class="animate-on-scroll">
-      <div id="geoMap"></div>
-      
-      <div class="text-center mt-3">
-        <label style="font-weight: 500;">Select region:
-          <select id="regionSelect" class="form-control" style="display: inline-block; width: auto; margin-left: 0.5rem;">
-            <option value="Kyrgyzstan">Entire country</option>
-            <option value="Issyk-Kul">Issyk-Kul Region</option>
-            <option value="Ak-Suu">Ak-Suu District</option>
-            <option value="Jeti-Oguz">Jeti-Oguz District</option>
-            <option value="Jyrgalang">Jyrgalang</option>
-            <option value="Barbulak">Barbulak</option>
-            <option value="Cholpon-Ata">Cholpon-Ata</option>
-            <option value="Kosh-Kol">Kosh-Kol</option>
-          </select>
-        </label>
+    <!-- Map section -->
+    <section id="map">
+      <h2 class="section-title animate__animated animate__fadeIn">Map of Geothermal Sources</h2>
+      <div class="form-container mt-4">
+        <label for="regionSelect">Select Region:</label>
+        <select id="regionSelect" class="form-control">
+          <option value="Kyrgyzstan">Kyrgyzstan</option>
+          <option value="Issyk-Kul">Issyk-Kul</option>
+          <option value="Ak-Suu">Ak-Suu</option>
+          <option value="Jeti-Oguz">Jeti-Oguz</option>
+          <option value="Jyrgalang">Jyrgalang</option>
+          <option value="Barbulak">Barbulak</option>
+          <option value="Cholpon-Ata">Cholpon-Ata</option>
+          <option value="Kosh-Kol">Kosh-Kol</option>
+        </select>
       </div>
-    </div>
-  </section>
+      <div id="geoMap" class="map-container mt-4"></div>
+    </section>
 
-  <!-- Calculator -->
-  <section id="calculator" class="section">
-    <div class="section-header">
-      <h2 class="section-title">Savings Calculator</h2>
-      <p class="section-subtitle">Find out how much you can save with geothermal energy</p>
-    </div>
-    
-    <div class="animate-on-scroll">
+    <!-- Calculator section -->
+    <section id="calculator">
+      <h2 class="section-title animate__animated animate__fadeIn">Savings Calculator</h2>
       <div class="form-container">
         <div class="form-group">
-          <label for="area" class="form-label">House area (m²)</label>
-          <input type="number" id="area" class="form-control" placeholder="Например, 120">
+          <label for="area">House Area (m²):</label>
+          <input type="number" id="area" class="form-control" placeholder="Enter area">
         </div>
-        
         <div class="form-group">
-          <label for="source" class="form-label">Current heating source</label>
+          <label for="source">Current Energy Source:</label>
           <select id="source" class="form-control">
-            <option value="coal">Coal</option>
+            <option value="coal"> Coal</option>
             <option value="wood">Wood</option>
             <option value="electricity">Electricity</option>
             <option value="gas">Natural Gas</option>
           </select>
         </div>
-        
         <div class="form-group">
-          <label for="region" class="form-label">Your region</label>
+          <label for="region">Region:</label>
           <select id="region" class="form-control">
-            <option value="Общий">General estimate</option>
+            <option value="General">General Estimate</option>
             <option value="Bishkek">Bishkek</option>
-            <option value="Иссык-Куль">Issyk-Kul Region</option>
-            <option value="Чуй">Chuy Region</option>
-            <option value="Нарын">Naryn Region</option>
-            <option value="Ош">Osh Region</option>
+            <option value="Issyk-Kul">Issyk-Kul</option>
+            <option value="Chuy">Chuy</option>
+            <option value="Naryn">Naryn</option>
+            <option value="Osh">Osh</option>
           </select>
         </div>
-        
-        <div class="form-group text-center">
-          <button class="btn" onclick="calculate()">Calculate Savings</button>
-        </div>
-        
-        <div id="result" class="result-container hidden">
-          <h3 style="color: var(--primary); margin-bottom: 1rem;">Calculation Results</h3>
-          <div id="resultContent"></div>
-        </div>
+        <button class="btn btn-primary mt-2" onclick="calculate()">Calculate</button>
       </div>
-    </div>
-  </section>
+      <div id="result" class="result hidden"></div>
+    </section>
 
-  <!-- Инвестиции -->
-  <section id="invest" class="section" style="background-color: rgba(10, 61, 98, 0.05);">
-    <div class="section-header">
-      <h2 class="section-title">Investment Opportunities</h2>
-      <p class="section-subtitle">Platform for cooperation between startups, investors, and government agencies</p>
-    </div>
-    
-    <div class="animate-on-scroll">
+    <!-- Investors section -->
+    <section id="invest">
+      <h2 class="section-title animate__animated animate__fadeIn">For Investors and Partners</h2>
       <div class="tabs">
-        <button class="tab-btn active" onclick="openTab('startups')">Startups</button>
-        <button class="tab-btn" onclick="openTab('investors')">Investors</button>
+        <button class="tab-btn active" onclick="openTab('investors')">Investors</button>
         <button class="tab-btn" onclick="openTab('government')">Government Programs</button>
+        <button class="tab-btn" onclick="openTab('monetization')">Monetization</button>
       </div>
-      
-      <div id="startups" class="tab-content active">
-        <p>Promising geothermal startups seeking investment:</p>
-        <ul class="project-list mt-2">
-          <li class="project-item">
-            <h3 class="project-title">GeoHeat Solutions</h3>
-            <p>Developing compact geothermal systems for private homes. Seeking $50,000 to complete prototype.</p>
-            <button class="btn btn-outline mt-2" onclick="contactProject('GeoHeat Solutions')">Contact</button>
-          </li>
-          <li class="project-item">
-            <h3 class="project-title">EcoTherm KG</h3>
-            <p>Project for the use of geothermal energy for greenhouses. Investment required: $120,000.</p>
-            <button class="btn btn-outline mt-2" onclick="contactProject('EcoTherm KG')">Contact</button>
-          </li>
-
-    </ul>
-      </div>
-      
-      <div id="investors" class="tab-content">
+      <div id="investors" class="tab-content active">
         <p>Investors interested in geothermal projects:</p>
         <ul class="project-list mt-2">
           <li class="project-item">
             <h3 class="project-title">Green Energy Fund</h3>
-            <p>Investment fund specializing in renewable energy. We are ready to consider projects from $25,000 to $500,000.</p>
+            <p>An investment fund specializing in renewable energy. Ready to consider projects from $25,000 to $500,000.</p>
             <button class="btn btn-outline mt-2" onclick="contactProject('Green Energy Fund')">Contact</button>
           </li>
-    </ul>
+        </ul>
       </div>
-      
       <div id="government" class="tab-content">
-        <p>State programs to support renewable energy:</p>
+        <p>Government programs supporting renewable energy:</p>
         <ul class="project-list mt-2">
           <li class="project-item">
-            <h3 class="project-title">Green Energy Program</h3>
-            <p>Subsidies of up to 30% of the cost of equipment for geothermal installations in private homes.</p>
-            <button class="btn btn-outline mt-2" onclick="contactProject('Программа Зеленая энергия')">More Info</button>
+            <h3 class="project-title">"Green Energy" Program</h3>
+            <p>Subsidies up to 30% of equipment costs for geothermal installations in private homes.</p>
+            <button class="btn btn-outline mt-2" onclick="contactProject('Green Energy Program')">Learn More</button>
           </li>
           <li class="project-item">
-            <h3 class="project-title">Grants for startups</h3>
-            <p>Competition for the best project in the field of renewable energy with a prize fund of up to $20,000.</p>
-            <button class="btn btn-outline mt-2" onclick="contactProject('Гранты для стартапов')">More Info</button>
+            <h3 class="project-title">Grants for Startups</h3>
+            <p>Competition for the best renewable energy project with a prize pool of up to $20,000.</p>
+            <button class="btn btn-outline mt-2" onclick="contactProject('Grants for Startups')">Learn More</button>
           </li>
-    </ul>
+        </ul>
       </div>
-    </div>
-  </section>
+      <div id="monetization" class="tab-content">
+        <p>How ZherBulagy generates revenue:</p>
+        <ul class="project-list mt-2">
+          <li class="project-item">
+            <h3 class="project-title">Premium Educational Courses</h3>
+            <p>Paid courses on geothermal energy for homeowners and professionals ($10–50 per course).</p>
+          </li>
+          <li class="project-item">
+            <h3 class="project-title">Consulting Services</h3>
+            <p>Consultations for businesses and households on installing geothermal systems (starting at $100).</p>
+          </li>
+          <li class="project-item">
+            <h3 class="project-title">Advertising Partnerships</h3>
+            <p>Collaborations with renewable energy companies for advertising on our platform.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
 
-  <!-- Registration -->
-  <section id="register" class="section">
-    <div class="section-header">
-      <h2 class="section-title">Registration</h2>
-      <p class="section-subtitle">Create an account to access all features of GeoEnergy</p>
-    </div>
-    
-    <div class="animate-on-scroll">
-      <div class="form-container">
-        <form onsubmit="return handleRegister(event)">
-          <div class="form-group">
-            <label for="regName" class="form-label">Username</label>
-            <input type="text" id="regName" class="form-control" placeholder="Create a login" required>
-          </div>
-          
-          <div class="form-group">
-            <label for="regEmail" class="form-label">Email</label>
-            <input type="email" id="regEmail" class="form-control" placeholder="Your email" required>
-          </div>
-          
-          <div class="form-group">
-            <label for="regPass" class="form-label">Password</label>
-            <input type="password" id="regPass" class="form-control" placeholder="At least 6 characters" required>
-          </div>
-          
-          <div class="form-group text-center">
-            <button type="submit" class="btn">Sign Up</button>
-          </div>
-          
-          <p class="text-center mt-3">
-            Already have an account? <a href="#account" style="color: var(--secondary);">Log in</a>
-          </p>
-        </form>
-      </div>
-    </div>
-  </section>
-
-  <!-- Login -->
-  <section id="account" class="section" style="background-color: rgba(10, 61, 98, 0.05);">
-    <div class="section-header">
-      <h2 class="section-title">Login to account</h2>
-      <p class="section-subtitle">Log in to access your personal account</p>
-    </div>
-    
-    <div class="animate-on-scroll">
-      <div class="form-container">
-        <form onsubmit="return handleLogin(event)">
-          <div class="form-group">
-            <label for="loginName" class="form-label">Username or Email</label>
-            <input type="text" id="loginName" class="form-control" placeholder="Your login" required>
-          </div>
-          
-          <div class="form-group">
-            <label for="loginPass" class="form-label">Password</label>
-            <input type="password" id="loginPass" class="form-control" placeholder="Your password" required>
-          </div>
-          
-          <div class="form-group text-center">
-            <button type="submit" class="btn">Log in</button>
-          </div>
-          
-          <p class="text-center mt-3">
-            No account? <a href="#register" style="color: var(--secondary);">Sign up</a>
-          </p>
-        </form>
-      </div>
-    </div>
-  </section>
-
-  <!-- Profile -->
-  <section id="profile" class="section hidden">
-    <div class="section-header">
-      <h2 class="section-title">Dashboard</h2>
-    </div>
-    
-    <div class="animate-on-scroll">
-      <div class="profile-header">
-        <img src="https://i.imgur.com/JzQZQ9u.jpg" alt="Аватар" class="avatar" id="avatar-preview">
-        <h3 id="welcomeText">Welcome!</h3>
-      </div>
-      
-      <div class="form-container">
-        <h3 style="color: var(--primary);">Personal Information</h3>
-        <div class="mt-2">
-          <p><strong>Username:</strong> <span id="profileUsername"></span></p>
-          <p class="mt-1"><strong>Email:</strong> <span id="profileEmail"></span></p>
+    <!-- Register section -->
+    <section id="register">
+      <h2 class="section-title animate__animated animate__fadeIn">Register</h2>
+      <form class="form-container" onsubmit="return handleRegister(event)">
+        <div class="form-group">
+          <label for="regName">Name:</label>
+          <input type="text" id="regName" class="form-control" placeholder="Enter your name" required>
         </div>
-        
-        <h3 class="mt-4" style="color: var(--primary);">Saved Calculations</h3>
-        <div id="savedCalculations" class="mt-2" style="background: #f9f9f9; padding: 1rem; border-radius: 5px;">
-          <p>You have no saved calculations yet.</p>
+        <div class="form-group">
+          <label for="regEmail">Email:</label>
+          <input type="email" id="regEmail" class="form-control" placeholder="Enter your email" required>
         </div>
-        
-        <h3 class="mt-4" style="color: var(--primary);">My Courses</h3>
-        <div id="myCourses" class="mt-2" style="background: #f9f9f9; padding: 1rem; border-radius: 5px;">
-          <p>You are not enrolled in any courses yet.</p>
+        <div class="form-group">
+          <label for="regPass">Password:</label>
+          <input type="password" id="regPass" class="form-control" placeholder="Enter password" required>
         </div>
-        
-        <div class="text-center mt-4">
-          <button class="btn" onclick="logout()">Logout</button>
+        <button type="submit" class="btn btn-primary mt-2">Register</button>
+      </form>
+    </section>
+
+    <!-- Login section -->
+    <section id="account">
+      <h2 class="section-title animate__animated animate__fadeIn">Login</h2>
+      <form class="form-container" onsubmit="return handleLogin(event)">
+        <div class="form-group">
+          <label for="loginName">Name or Email:</label>
+          <input type="text" id="loginName" class="form-control" placeholder="Enter name or email" required>
         </div>
+        <div class="form-group">
+          <label for="loginPass">Password:</label>
+          <input type="password" id="loginPass" class="form-control" placeholder="Enter password" required>
+        </div>
+        <button type="submit" class="btn btn-primary mt-2">Login</button>
+      </form>
+    </section>
+
+    <!-- Profile section -->
+    <section id="profile" class="hidden">
+      <h2 class="section-title animate__animated animate__fadeIn" id="welcomeText">Welcome!</h2>
+      <div class="card">
+        <p><strong>Name:</strong> <span id="profileUsername"></span></p>
+        <p><strong>Email:</strong> <span id="profileEmail"></span></p>
       </div>
-    </div>
-  </section>
-</main>
+    </section>
+  </main>
 
-<footer>
-  <div class="footer-container">
-    <div class="footer-logo">GeoEnergy</div>
-    <p>A platform for the development of geothermal energy in Kyrgyzstan</p>
-    
-    <div class="team-list">
-      <div class="team-member">Bakirova Saykal</div>
-      <div class="team-member">Babanazarova Sabina</div>
-      <div class="team-member">Bichevaya Kaleria</div>
-      <div class="team-member">Omurova Aidana</div>
-    </div>
-    
-    <p>© 2025 Technovation Girls, School №64</p>
-  </div>
-</footer>
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 ZherBulagy. All rights reserved.</p>
+  </footer>
 
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script>
-  // Инициализация карты
-  const map = L.map('geoMap').setView([41.5, 74.5], 6);
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; OpenStreetMap contributors'
-  }).addTo(map);
+  <!-- Scripts -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    // Initialize map
+    const map = L.map('geoMap').setView([41.5, 74.5], 6);
+    document.getElementById('geoMap').classList.add('loading');
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap contributors'
+    }).addTo(map).on('load', () => {
+      document.getElementById('geoMap').classList.remove('loading');
+    });
 
-  // Данные геотермальных источников
-  const sources = [
-    {
-      name: 'Zheti-Ogyz',
-      coords: [42.330556, 78.239722],
-      temp: '39–40 °C', 
-      depth: 'up to 200 m', 
-      activity: 'average', 
-      saving: '30%',
-      potential: 'For heating houses and greenhouses'
-    },
-    {
-      name: 'Jyrgalang',
-      coords: [42.600000, 79.030000],
-      temp: '35–43 °C', 
-      depth: 'up to 200 m', 
-      activity: 'average', 
-      saving: '25%',
-      potential: 'Resort use'
-    },
-    {
-      name: 'Ak-Suu (Teploklyuchenka)',
-      coords: [42.461981, 78.539749],
-      temp: '58 °C', 
-      depth: 'up to 150 m', 
-      activity: 'high', 
-      saving: '35%',
-      potential: 'Industrial use'
-    },
-    {
-      name: 'Barbulak',
-      coords: [42.247204, 76.579165],
-      temp: '39–42 °C', 
-      depth: 'up to 180 m', 
-      activity: 'average', 
-      saving: '28%',
-      potential: 'Local heating'
-    },
-    {
-      name: 'Cholpon-Ata',
-      coords: [42.650000, 77.083000],
-      temp: '35–53 °C', 
-      depth: '200–800 m', 
-      activity: 'high', 
-      saving: '30%',
-      potential: 'Resort and municipal use'
-    },
-    {
-      name: 'Kosh-Kol',
-      coords: [42.530000, 76.610000],
-      temp: '39–42 °C', 
-      depth: 'up to 200 m', 
-      activity: 'average', 
-      saving: '25%',
-      potential: 'Local heating'
-    }
-  ];
+    // Geothermal sources data
+    const sources = [
+      {
+        name: 'Jeti-Oguz',
+        coords: [42.330556, 78.239722],
+        temp: '39–40 °C',
+        depth: 'up to 200 m',
+        activity: 'medium',
+        saving: '30%',
+        potential: 'For home and greenhouse heating'
+      },
+      {
+        name: 'Jyrgalang',
+        coords: [42.600000, 79.030000],
+        temp: '35–43 °C',
+        depth: 'up to 200 m',
+        activity: 'medium',
+        saving: '25%',
+        potential: 'Resort use'
+      },
+      {
+        name: 'Ak-Suu (Teplokluchenka)',
+        coords: [42.461981, 78.539749],
+        temp: '58 °C',
+        depth: 'up to 150 m',
+        activity: 'high',
+        saving: '35%',
+        potential: 'Industrial use'
+      },
+      {
+        name: 'Barbulak',
+        coords: [42.247204, 76.579165],
+        temp: '39–42 °C',
+        depth: 'up to 180 m',
+        activity: 'medium',
+        saving: '28%',
+        potential: 'Local heating'
+      },
+      {
+        name: 'Cholpon-Ata',
+        coords: [42.650000, 77.083000],
+        temp: '35–53 °C',
+        depth: '200–800 m',
+        activity: 'high',
+        saving: '30%',
+        potential: 'Resort and municipal use'
+      },
+      {
+        name: 'Kosh-Kol',
+        coords: [42.530000, 76.610000],
+        temp: '39–42 °C',
+        depth: 'up to 200 m',
+        activity: 'medium',
+        saving: '25%',
+        potential: 'Local heating'
+      }
+    ];
 
-  // Добавление маркеров на карту
-  sources.forEach(src => {
-    L.marker(src.coords).addTo(map)
-      .bindPopup(`
-        <strong>${src.name}</strong><br>
-        <b>Temperature:</b> ${src.temp}<br>
-        <b>Depth:</b> ${src.depth}<br>
-        <b>Activity:</b> ${src.activity}<br>
-        <b>Potential savings:</b> ${src.saving}<br>
-        <b>Potential uses:</b> ${src.potential}
-      `);
-  });
+    // Add markers to map
+    sources.forEach(src => {
+      L.marker(src.coords).addTo(map)
+        .bindPopup(`
+          <strong>${src.name}</strong><br>
+          <b>Temperature:</b> ${src.temp}<br>
+          <b>Depth:</b> ${src.depth}<br>
+          <b>Activity:</b> ${src.activity}<br>
+          <b>Potential Savings:</b> ${src.saving}<br>
+          <b>Potential:</b> ${src.potential}
+        `);
+    });
 
-  // Координаты центров регионов
-  const regions = {
-    'Kyrgyzstan': [41.2044, 74.7661],
-    'Issyk-Kul': [42.416668, 77.250000],
-    'Ak-Suu': [42.461981, 78.539749],
-    'Jeti-Oguz': [42.330556, 78.239722],
-    'Jyrgalang': [42.600000, 79.030000],
-    'Barbulak': [42.247204, 76.579165],
-    'Cholpon-Ata': [42.650000, 77.083000],
-    'Kosh-Kol': [42.530000, 76.610000]
-  };
+    // Region coordinates
+    const regions = {
+      'Kyrgyzstan': [41.2044, 74.7661],
+      'Issyk-Kul': [42.416668, 77.250000],
+      'Ak-Suu': [42.461981, 78.539749],
+      'Jeti-Oguz': [42.330556, 78.239722],
+      'Jyrgalang': [42.600000, 79.030000],
+      'Barbulak': [42.247204, 76.579165],
+      'Cholpon-Ata': [42.650000, 77.083000],
+      'Kosh-Kol': [42.530000, 76.610000]
+    };
 
-  // Обработчик выбора региона
-  document.getElementById('regionSelect')
-    .addEventListener('change', e => {
+    // Region selection handler
+    document.getElementById('regionSelect').addEventListener('change', e => {
       const coords = regions[e.target.value];
       if (coords) {
         map.setView(coords, e.target.value === 'Kyrgyzstan' ? 6 : 10);
       }
     });
 
-  // Calculator
-  function calculate() {
-    const area = parseFloat(document.getElementById("area").value);
-    const source = document.getElementById("source").value;
-    const region = document.getElementById("region").value;
-    
-    if (isNaN(area) || area <= 0) {
-      showResult("Пожалуйста, введите корректную площадь дома", false);
-      return;
+    // Calculator
+    function calculate() {
+      const area = parseFloat(document.getElementById("area").value);
+      const source = document.getElementById("source").value;
+      const region = document.getElementById("region").value;
+
+      if (isNaN(area) || area <= 0) {
+        showResult("Please enter a valid house area", false);
+        return;
+      }
+
+      // Region factors
+      const regionFactors = {
+        "Bishkek": 1.1,
+        "Issyk-Kul": 0.9,
+        "Chuy": 1.05,
+        "Naryn": 0.95,
+        "Osh": 1.0,
+        "General": 1.0
+      };
+
+      const factor = regionFactors[region] || 1;
+
+      const data = {
+        coal: { cost: 90, co2: 3.5, name: "Coal" },
+        wood: { cost: 70, co2: 2.8, name: "Wood" },
+        electricity: { cost: 100, co2: 1.5, name: "Electricity" },
+        gas: { cost: 80, co2: 2.0, name: "Natural Gas" }
+      };
+
+      const current = data[source];
+      const geoCost = Math.round(area * 40 * factor);
+      const currentCost = Math.round(area * current.cost);
+      const saving = currentCost - geoCost;
+      const payback = saving > 0 ? Math.ceil(geoCost / saving) : "∞";
+      const co2Reduction = Math.round(area * current.co2 * 0.8);
+
+      showResult(`
+        <div class="result-item">
+          <span>Current Source:</span>
+          <span>${current.name}</span>
+        </div>
+        <div class="result-item">
+          <span>Current Costs:</span>
+          <span>${currentCost} KGS/year</span>
+        </div>
+        <div class="result-item highlight">
+          <span>With Geothermal:</span>
+          <span>${geoCost} KGS/year</span>
+        </div>
+        <div class="result-item highlight">
+          <span>Savings:</span>
+          <span>${saving} KGS/year (${Math.round(saving/currentCost*100)}%)</span>
+        </div>
+        <div class="result-item">
+          <span>Payback Period:</span>
+          <span>${payback} years</span>
+        </div>
+        <div class="result-item eco">
+          <span>CO₂ Reduction:</span>
+          <span>${co2Reduction} kg/year</span>
+        </div>
+      `, true);
     }
 
-    // Коэффициенты для регионов
-    const regionFactors = {
-      "Bishkek": 1.1,
-      "Issyk-Kul": 0.9,
-      "Chui": 1.05,
-      "Naryn": 0.95,
-      "Osh": 1.0,
-      "General": 1.0
-    };
-    
-    const factor = regionFactors[region] || 1;
+    function showResult(html, isSuccess) {
+      const result = document.getElementById("result");
+      result.innerHTML = html;
+      result.style.backgroundColor = isSuccess ? "rgba(76, 175, 80, 0.1)" : "rgba(255, 193, 7, 0.1)";
+      result.classList.remove("hidden");
+    }
 
-    const data = {
-      coal: { cost: 90, co2: 3.5, name: "coal" },
-      wood: { cost: 70, co2: 2.8, name: "firewood" },
-      electricity: { cost: 100, co2: 1.5, name: "electricity" },
-      gas: { cost: 80, co2: 2.0, name: "natural gas" }
-    };
+    // Registration and login
+    function handleRegister(event) {
+      event.preventDefault();
+      const name = document.getElementById("regName").value;
+      const pass = document.getElementById("regPass").value;
+      const email = document.getElementById("regEmail").value;
 
-    const current = data[source];
-    const geoCost = Math.round(area * 40 * factor);
-    const currentCost = Math.round(area * current.cost);
-    const saving = currentCost - geoCost;
-    const payback = saving > 0 ? Math.ceil(geoCost / saving) : "∞";
-    const co2Reduction = Math.round(area * current.co2 * 0.8);
+      if (pass.length < 6) {
+        alert("Password must be at least 6 characters long");
+        return false;
+      }
 
-    showResult(`
-      <div class="result-item">
-        <span>Current source:</span>
-        <span>${current.name}</span>
-      </div>
-      <div class="result-item">
-        <span>Current expenses:</span>
-        <span>${currentCost} сом/год</span>
-      </div>
-      <div class="result-item highlight">
-        <span>With a geothermal system:</span>
-        <span>${geoCost} сом/год</span>
-      </div>
-      <div class="result-item highlight">
-        <span>Saving:</span>
-        <span>${saving} KGS/year (${Math.round(saving/currentCost*100)}%)</span>
-      </div>
-      <div class="result-item">
-        <span>Payback:</span>
-        <span>${payback} year </span>
-      </div>
-      <div class="result-item eco">
-        <span>Reducing CO₂ emissions:</span>
-        <span>${co2Reduction} kg/year</span>
-      </div>
-    `, true);
-  }
+      localStorage.setItem("username", name);
+      localStorage.setItem("password", pass);
+      localStorage.setItem("email", email);
 
-  function showResult(html, isSuccess) {
-    const result = document.getElementById("result");
-    result.innerHTML = html;
-    result.style.backgroundColor = isSuccess ? "rgba(76, 175, 80, 0.1)" : "rgba(255, 193, 7, 0.1)";
-    result.classList.remove("hidden");
-  }
-
-  // Registration и вход
-  function handleRegister(event) {
-    event.preventDefault();
-    const name = document.getElementById("regName").value;
-    const pass = document.getElementById("regPass").value;
-    const email = document.getElementById("regEmail").value;
-    
-    if (pass.length < 6) {
-      alert("Password must be at least 6 characters long");
+      alert("You have successfully registered! You can now log in.");
+      window.location.href = "#account";
       return false;
     }
-    
-    localStorage.setItem("username", name);
-    localStorage.setItem("password", pass);
-    localStorage.setItem("email", email);
-    
-    alert("You have successfully registered! Now you can log in.");
-    window.location.href = "#account";
-    return false;
-  }
 
-  function handleLogin(event) {
-    event.preventDefault();
-    const name = document.getElementById("loginName").value;
-    const pass = document.getElementById("loginPass").value;
-    const savedName = localStorage.getItem("username");
-    const savedPass = localStorage.getItem("password");
-    const savedEmail = localStorage.getItem("email");
-    
-    if ((name === savedName || name === savedEmail) && pass === savedPass) {
-      // Успешный вход
-      document.getElementById("account").classList.add("hidden");
-      document.getElementById("profile").classList.remove("hidden");
-      document.getElementById("profileLink").classList.remove("hidden");
-      document.getElementById("logoutBtn").classList.remove("hidden");
-      
-      // Заполняем профиль
-      document.getElementById("welcomeText").textContent = `Welcome, ${savedName}!`;
-      document.getElementById("profileUsername").textContent = savedName;
-      document.getElementById("profileEmail").textContent = savedEmail;
-      
-      // Обновляем навигацию
+    function handleLogin(event) {
+      event.preventDefault();
+      const name = document.getElementById("loginName").value;
+      const pass = document.getElementById("loginPass").value;
+      const savedName = localStorage.getItem("username");
+      const savedPass = localStorage.getItem("password");
+      const savedEmail = localStorage.getItem("email");
+
+      if ((name === savedName || name === savedEmail) && pass === savedPass) {
+        document.getElementById("account").classList.add("hidden");
+        document.getElementById("profile").classList.remove("hidden");
+        document.getElementById("profileLink").classList.remove("hidden");
+        document.getElementById("logoutBtn").classList.remove("hidden");
+
+        document.getElementById("welcomeText").textContent = `Welcome, ${savedName}!`;
+        document.getElementById("profileUsername").textContent = savedName;
+        document.getElementById("profileEmail").textContent = savedEmail;
+
+        document.querySelectorAll('.nav-link').forEach(link => {
+          if (link.getAttribute('href') === '#register' || link.getAttribute('href') === '#account') {
+            link.classList.add('hidden');
+          }
+        });
+
+        window.location.href = "#profile";
+      } else {
+        alert("Incorrect username or password");
+      }
+      return false;
+    }
+
+    function logout() {
+      document.getElementById("profile").classList.add("hidden");
+      document.getElementById("profileLink").classList.add("hidden");
+      document.getElementById("logoutBtn").classList.add("hidden");
+
       document.querySelectorAll('.nav-link').forEach(link => {
         if (link.getAttribute('href') === '#register' || link.getAttribute('href') === '#account') {
-          link.classList.add('hidden');
+          link.classList.remove('hidden');
         }
       });
-      
-      window.location.href = "#profile";
-    } else {
-      alert("Incorrect username or password");
+
+      window.location.href = "#about";
     }
-    return false;
-  }
 
-  function logout() {
-    document.getElementById("profile").classList.add("hidden");
-    document.getElementById("profileLink").classList.add("hidden");
-    document.getElementById("logoutBtn").classList.add("hidden");
-    
-    // Обновляем навигацию
-    document.querySelectorAll('.nav-link').forEach(link => {
-      if (link.getAttribute('href') === '#register' || link.getAttribute('href') === '#account') {
-        link.classList.remove('hidden');
-      }
+    // Courses
+    function openCourse(courseId) {
+      alert(`Course "${courseId}" will be available soon!`);
+    }
+
+    // Tabs
+    function openTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(tab => {
+        tab.classList.remove('active');
+      });
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      document.getElementById(tabId).classList.add('active');
+      event.currentTarget.classList.add('active');
+    }
+
+    // Contact project
+    function contactProject(projectName) {
+      alert(`In the full version of the site, you will be able to contact "${projectName}"`);
+    }
+
+    // Burger menu
+    function toggleMenu() {
+      document.querySelector('.nav-menu').classList.toggle('active');
+    }
+
+    // Smooth scrolling
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth'
+          });
+        }
+      });
     });
-    
-    window.location.href = "#about";
-  }
 
-  // Курсы
-  function openCourse(courseId) {
-    alert(`Course "${courseId}" will be available soon!`);
-    // Здесь будет реализация открытия курса
-  }
+    // Scroll animation
+    function checkScroll() {
+      const elements = document.querySelectorAll('.animate-on-scroll');
+      elements.forEach(el => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 100) {
+          el.classList.add('visible');
+        }
+      });
+    }
 
-  // Табы
-  function openTab(tabId) {
-    // Скрыть все табы
-    document.querySelectorAll('.tab-content').forEach(tab => {
-      tab.classList.remove('active');
-    });
-    
-    // Убрать active у всех кнопок
-    document.querySelectorAll('.tab-btn').forEach(btn => {
-      btn.classList.remove('active');
-    });
-    
-    // Показать выбранный таб
-    document.getElementById(tabId).classList.add('active');
-    event.currentTarget.classList.add('active');
-  }
+    window.addEventListener('scroll', checkScroll);
+    checkScroll();
 
-  // Контакт с проектом
-  function contactProject(projectName) {
-    alert(`In the full version of the site you can contact the project "${projectName}"`);
-    // Реализация контакта с проектом
-  }
-
-  // Плавная прокрутка
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-      e.preventDefault();
-      const target = document.querySelector(this.getAttribute('href'));
-      if (target) {
-        target.scrollIntoView({
-          behavior: 'smooth'
-        });
-      }
-    });
-  });
-
-  // Анимация при скролле
-  function checkScroll() {
-    const elements = document.querySelectorAll('.animate-on-scroll');
-    elements.forEach(el => {
-      const rect = el.getBoundingClientRect();
-      if (rect.top < window.innerHeight - 100) {
-        el.classList.add('visible');
-      }
-    });
-  }
-  
-  window.addEventListener('scroll', checkScroll);
-  checkScroll(); // Проверить при загрузке
-</script>
+    // Language redirection (commented out for testing)
+    // const userLang = navigator.language || navigator.userLanguage;
+    // if (!userLang.startsWith('en') && !window.location.pathname.includes('index.html')) {
+    //   window.location.href = "index.html";
+    // }
+  </script>
 </body>
 </html>
