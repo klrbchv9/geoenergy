@@ -85,6 +85,14 @@
       margin: 0;
     }
     
+    .language-switcher {
+  margin-left: auto;
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  font-weight: bold;
+}
+
     /* Навигация */
     nav {
       width: 100%;
@@ -523,11 +531,10 @@
         <li class="nav-item"><a href="#account" class="nav-link">Login</a></li>
         <li class="nav-item"><a href="#profile" id="profileLink" class="nav-link hidden">Profile</a></li>
         <li class="nav-item"><a href="#" onclick="logout()" id="logoutBtn" class="nav-link hidden">Logout</a></li>
+        <li class="nav-item language-switch">
+          <a href="index.html" class="lang-btn">Русский</a>
+        </li>
         
-<div class="language-switch">
-  <a href="index.html">Русский</a>
-</div>
-
     </ul>
     </nav>
   </div>
