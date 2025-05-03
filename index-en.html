@@ -454,11 +454,11 @@
     L.marker(src.coords).addTo(map)
       .bindPopup(`
         <strong>${src.name}</strong><br>
-        <b>Температура:</b> ${src.temp}<br>
-        <b>Глубина:</b> ${src.depth}<br>
-        <b>Активность:</b> ${src.activity}<br>
-        <b>Потенциальная экономия:</b> ${src.saving}<br>
-        <b>Потенциальное использование:</b> ${src.potential}
+        <b>Temperature:</b> ${src.temp}<br>
+        <b>Depth:</b> ${src.depth}<br>
+        <b>Activity:</b> ${src.activity}<br>
+        <b>Potential savings:</b> ${src.saving}<br>
+        <b>Potential uses:</b> ${src.potential}
       `);
   });
 
@@ -497,20 +497,20 @@
     // Коэффициенты для регионов
     const regionFactors = {
       "Bishkek": 1.1,
-      "Иссык-Куль": 0.9,
-      "Чуй": 1.05,
-      "Нарын": 0.95,
-      "Ош": 1.0,
-      "Общий": 1.0
+      "Issyk-Kul": 0.9,
+      "Chui": 1.05,
+      "Naryn": 0.95,
+      "Osh": 1.0,
+      "General": 1.0
     };
     
     const factor = regionFactors[region] || 1;
 
     const data = {
-      coal: { cost: 90, co2: 3.5, name: "уголь" },
-      wood: { cost: 70, co2: 2.8, name: "дрова" },
-      electricity: { cost: 100, co2: 1.5, name: "электричество" },
-      gas: { cost: 80, co2: 2.0, name: "природный газ" }
+      coal: { cost: 90, co2: 3.5, name: "coal" },
+      wood: { cost: 70, co2: 2.8, name: "firewood" },
+      electricity: { cost: 100, co2: 1.5, name: "electricity" },
+      gas: { cost: 80, co2: 2.0, name: "natural gas" }
     };
 
     const current = data[source];
@@ -539,7 +539,7 @@
       </div>
       <div class="result-item">
         <span>Payback:</span>
-        <span>${payback} year or years </span>
+        <span>${payback} year </span>
       </div>
       <div class="result-item eco">
         <span>Reducing CO₂ emissions:</span>
