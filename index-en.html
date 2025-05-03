@@ -393,58 +393,58 @@
   // Данные геотермальных источников
   const sources = [
     {
-      name: 'Жети-Огуз',
+      name: 'Zheti-Ogyz',
       coords: [42.330556, 78.239722],
       temp: '39–40 °C', 
-      depth: 'до 200 м', 
-      activity: 'средняя', 
+      depth: 'up to 200 m', 
+      activity: 'average', 
       saving: '30%',
-      potential: 'Для отопления домов и теплиц'
+      potential: 'For heating houses and greenhouses'
     },
     {
       name: 'Jyrgalang',
       coords: [42.600000, 79.030000],
       temp: '35–43 °C', 
-      depth: 'до 200 м', 
-      activity: 'средняя', 
+      depth: 'up to 200 m', 
+      activity: 'average', 
       saving: '25%',
-      potential: 'Курортное использование'
+      potential: 'Resort use'
     },
     {
-      name: 'Ак-Суу (Теплоключенка)',
+      name: 'Ak-Suu (Teploklyuchenka)',
       coords: [42.461981, 78.539749],
       temp: '58 °C', 
-      depth: 'до 150 м', 
-      activity: 'высокая', 
+      depth: 'up to 150 m', 
+      activity: 'high', 
       saving: '35%',
-      potential: 'Промышленное использование'
+      potential: 'Industrial use'
     },
     {
       name: 'Barbulak',
       coords: [42.247204, 76.579165],
       temp: '39–42 °C', 
-      depth: 'до 180 м', 
-      activity: 'средняя', 
+      depth: 'up to 180 m', 
+      activity: 'average', 
       saving: '28%',
-      potential: 'Локальное отопление'
+      potential: 'Local heating'
     },
     {
       name: 'Cholpon-Ata',
       coords: [42.650000, 77.083000],
       temp: '35–53 °C', 
-      depth: '200–800 м', 
-      activity: 'высокая', 
+      depth: '200–800 m', 
+      activity: 'high', 
       saving: '30%',
-      potential: 'Курортное и коммунальное использование'
+      potential: 'Resort and municipal use'
     },
     {
       name: 'Kosh-Kol',
       coords: [42.530000, 76.610000],
       temp: '39–42 °C', 
-      depth: 'до 200 м', 
-      activity: 'средняя', 
+      depth: 'up to 200 m', 
+      activity: 'average', 
       saving: '25%',
-      potential: 'Локальное отопление'
+      potential: 'Local heating'
     }
   ];
 
@@ -521,28 +521,28 @@
 
     showResult(`
       <div class="result-item">
-        <span>Текущий источник:</span>
+        <span>Current source:</span>
         <span>${current.name}</span>
       </div>
       <div class="result-item">
-        <span>Текущие расходы:</span>
+        <span>Current expenses:</span>
         <span>${currentCost} сом/год</span>
       </div>
       <div class="result-item highlight">
-        <span>С геотермальной системой:</span>
+        <span>With a geothermal system:</span>
         <span>${geoCost} сом/год</span>
       </div>
       <div class="result-item highlight">
-        <span>Экономия:</span>
-        <span>${saving} сом/год (${Math.round(saving/currentCost*100)}%)</span>
+        <span>Saving:</span>
+        <span>${saving} KGS/year (${Math.round(saving/currentCost*100)}%)</span>
       </div>
       <div class="result-item">
-        <span>Окупаемость:</span>
-        <span>${payback} лет</span>
+        <span>Payback:</span>
+        <span>${payback} year or years </span>
       </div>
       <div class="result-item eco">
-        <span>Снижение выбросов CO₂:</span>
-        <span>${co2Reduction} кг/год</span>
+        <span>Reducing CO₂ emissions:</span>
+        <span>${co2Reduction} kg/year</span>
       </div>
     `, true);
   }
@@ -562,7 +562,7 @@
     const email = document.getElementById("regEmail").value;
     
     if (pass.length < 6) {
-      alert("Password должен содержать не менее 6 символов");
+      alert("Password must be at least 6 characters long");
       return false;
     }
     
@@ -570,7 +570,7 @@
     localStorage.setItem("password", pass);
     localStorage.setItem("email", email);
     
-    alert("Вы успешно зарегистрированы! Теперь вы можете войти.");
+    alert("You have successfully registered! Now you can log in.");
     window.location.href = "#account";
     return false;
   }
@@ -591,7 +591,7 @@
       document.getElementById("logoutBtn").classList.remove("hidden");
       
       // Заполняем профиль
-      document.getElementById("welcomeText").textContent = `Добро пожаловать, ${savedName}!`;
+      document.getElementById("welcomeText").textContent = `Welcome, ${savedName}!`;
       document.getElementById("profileUsername").textContent = savedName;
       document.getElementById("profileEmail").textContent = savedEmail;
       
@@ -604,7 +604,7 @@
       
       window.location.href = "#profile";
     } else {
-      alert("Неверное имя пользователя или пароль");
+      alert("Incorrect username or password");
     }
     return false;
   }
@@ -626,7 +626,7 @@
 
   // Курсы
   function openCourse(courseId) {
-    alert(`Курс "${courseId}" будет доступен в ближайшее время!`);
+    alert(`Course "${courseId}" will be available soon!`);
     // Здесь будет реализация открытия курса
   }
 
@@ -649,7 +649,7 @@
 
   // Контакт с проектом
   function contactProject(projectName) {
-    alert(`В полной версии сайта вы сможете связаться с проектом "${projectName}"`);
+    alert(`In the full version of the site you can contact the project "${projectName}"`);
     // Реализация контакта с проектом
   }
 
