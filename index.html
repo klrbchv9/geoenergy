@@ -1,162 +1,136 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+  <!-- Мета-теги и заголовок -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ЖерБулагы — Геотермальная энергия будущего</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <title>ЖерБулагы - Геотермальная энергия</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" href="https://i.imgur.com/zD3oX2x.png">
+  
+  <!-- Внешние ресурсы -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+  
+  <!-- Локальный файл стилей -->
   <link rel="stylesheet" href="style.css">
 </head>
-<body class="animate__animated animate__fadeIn">
-
-<header>
-  <div class="header-container">
-    <div class="logo">
-      <div class="logo-icon"></div>
-      <div class="logo-text">
-        <h1>ЖерБулагы</h1>
-        <p>Геотермальная энергия будущего</p>
+<body>
+  <!-- Хедер -->
+  <header>
+    <div class="header-container">
+      <div class="logo">
+        <div class="logo-icon"></div>
+        <div class="logo-text">
+          <h1>ЖерБулагы</h1>
+          <p>Геотермальная энергия будущего</p>
+        </div>
       </div>
+      <!-- Бургер-меню для мобильных -->
+      <button class="burger-menu" onclick="toggleMenu()">☰</button>
+      <nav>
+        <ul class="nav-menu">
+          <li class="nav-item"><a href="#about" class="nav-link">Главная</a></li>
+          <li class="nav-item"><a href="#benefits" class="nav-link">Преимущества</a></li>
+          <li class="nav-item"><a href="#education" class="nav-link">Обучение</a></li>
+          <li class="nav-item"><a href="#map" class="nav-link">Карта</a></li>
+          <li class="nav-item"><a href="#calculator" class="nav-link">Калькулятор</a></li>
+          <li class="nav-item"><a href="#invest" class="nav-link">Инвесторам</a></li>
+          <li class="nav-item"><a href="#register" class="nav-link">Регистрация</a></li>
+          <li class="nav-item"><a href="#account" class="nav-link">Вход</a></li>
+          <li class="nav-item"><a href="#profile" id="profileLink" class="nav-link hidden">Профиль</a></li>
+          <li class="nav-item"><a href="#" onclick="logout()" id="logoutBtn" class="nav-link hidden">Выйти</a></li>
+        </ul>
+        <div class="language-switcher">
+          <a href="index.html" class="lang-btn active">RU</a>
+          <a href="index-en.html" class="lang-btn">EN</a>
+        </div>
+      </nav>
     </div>
-    <nav>
-      <ul class="nav-menu">
-        <li class="nav-item"><a href="#about" class="nav-link">Главная</a></li>
-        <li class="nav-item"><a href="#benefits" class="nav-link">Преимущества</a></li>
-        <li class="nav-item"><a href="#education" class="nav-link">Обучение</a></li>
-        <li class="nav-item"><a href="#map" class="nav-link">Карта</a></li>
-        <li class="nav-item"><a href="#calculator" class="nav-link">Калькулятор</a></li>
-        <li class="nav-item"><a href="#invest" class="nav-link">Инвесторам</a></li>
-        <li class="nav-item"><a href="#register" class="nav-link">Регистрация</a></li>
-        <li class="nav-item"><a href="#account" class="nav-link">Вход</a></li>
-        <li class="nav-item"><a href="#profile" id="profileLink" class="nav-link hidden">Профиль</a></li>
-        <li class="nav-item"><a href="#" onclick="logout()" id="logoutBtn" class="nav-link hidden">Выйти</a></li>
-        <li class="nav-item language-switch">
-          <a href="index-en.html" class="lang-btn">Ehglish</a>
-        </li>
+  </header>
 
-    </ul>
-    </nav>
-  </div>
-</header>
-
-<main class="container">
-  <!-- О проекте -->
-  <section id="about" class="section">
-    <div class="section-header">
-      <h2 class="section-title">Геотермальная энергия</h2>
-      <p class="section-subtitle">Возобновляемый источник энергии будущего для Кыргызстана</p>
-    </div>
-    
-    <div class="animate-on-scroll">
+  <!-- Основной контент -->
+  <main>
+    <!-- Секция "О проекте" -->
+    <section id="about">
+      <h2 class="section-title animate__animated animate__fadeIn">О проекте ЖерБулагы</h2>
       <div class="card">
-        <p>Наш проект направлен на популяризацию геотермальной энергии - экологически чистого и неисчерпаемого источника энергии, который использует тепло Земли для выработки электричества и тепла.</p>
-        <p class="mt-2">Геотермальная энергия особенно актуальна для Кыргызстана, где есть значительные запасы этого природного ресурса.</p>
+        <p>ЖерБулагы — это проект, направленный на популяризацию геотермальной энергии в Кыргызстане. Мы стремимся сделать экологически чистое отопление доступным для каждого дома, снизить выбросы CO₂ и сократить расходы на энергию.</p>
       </div>
-      
       <div class="mt-4" style="text-align: center;">
-        <img src="https://i.imgur.com/JzQZQ9u.jpg" alt="Геотермальная энергия" style="max-width: 100%; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+        <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba" alt="Геотермальный источник в Кыргызстане" style="max-width: 100%; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Преимущества -->
-  <section id="benefits" class="section" style="background-color: rgba(10, 61, 98, 0.05);">
-    <div class="section-header">
-      <h2 class="section-title">Преимущества</h2>
-      <p class="section-subtitle">Почему геотермальная энергия выгоднее других источников</p>
-    </div>
-    
-    <div class="animate-on-scroll" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
-      <div class="card">
-        <h3 class="card-title">Независимость от погоды</h3>
-        <p class="card-text">Работает круглосуточно, не зависит от погодных условий или времени суток.</p>
+    <!-- Секция "Преимущества" -->
+    <section id="benefits">
+      <h2 class="section-title animate__animated animate__fadeIn">Преимущества геотермальной энергии</h2>
+      <div class="animate-on-scroll">
+        <div class="card">
+          <h3>Экологичность</h3>
+          <p>Геотермальная энергия снижает выбросы углерода на 80% по сравнению с традиционными источниками.</p>
+        </div>
+        <div class="card">
+          <h3>Экономия</h3>
+          <p>Экономьте до 50% на отоплении и горячем водоснабжении ежегодно.</p>
+        </div>
+        <div class="card">
+          <h3>Надежность</h3>
+          <p>Геотермальные системы работают стабильно в любое время года.</p>
+        </div>
       </div>
-      
-      <div class="card" style="transition-delay: 0.2s">
-        <h3 class="card-title">Экономичность</h3>
-        <p class="card-text">Низкие эксплуатационные расходы и высокая эффективность.</p>
+      <div class="mt-4" style="text-align: center;">
+        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e" alt="Преимущества возобновляемой энергии" style="max-width: 100%; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
       </div>
-      
-      <div class="card" style="transition-delay: 0.4s">
-        <h3 class="card-title">Экологичность</h3>
-        <p class="card-text">Почти нулевые выбросы CO₂ и других загрязнителей.</p>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Обучение -->
-  <section id="education" class="section">
-    <div class="section-header">
-      <h2 class="section-title">Обучающие материалы</h2>
-      <p class="section-subtitle">Изучите возможности геотермальной энергии</p>
-    </div>
-    
-    <div class="animate-on-scroll" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
-      <div class="card">
-        <h3 class="card-title">Основы геотермальной энергии</h3>
-        <p class="card-text">Узнайте, как работает геотермальная энергия, где она применяется и какие перспективы имеет в Кыргызстане.</p>
-        <button class="btn btn-outline" onclick="openCourse('basics')">Начать курс</button>
+    <!-- Секция "Обучение" -->
+    <section id="education">
+      <h2 class="section-title animate__animated animate__fadeIn">Обучение</h2>
+      <div class="animate-on-scroll">
+        <div class="card">
+          <h3>Курс для домовладельцев</h3>
+          <p>Узнайте, как установить геотермальную систему в вашем доме.</p>
+          <button class="btn btn-primary mt-2" onclick="openCourse('Курс для домовладельцев')">Записаться</button>
+        </div>
+        <div class="card">
+          <h3>Курс для инженеров</h3>
+          <p>Освойте проектирование и обслуживание геотермальных систем.</p>
+          <button class="btn btn-primary mt-2" onclick="openCourse('Курс для инженеров')">Записаться</button>
+        </div>
       </div>
-      
-      <div class="card" style="transition-delay: 0.2s">
-        <h3 class="card-title">Монтаж систем</h3>
-        <p class="card-text">Практическое руководство по установке геотермальных систем для частных домов и предприятий.</p>
-        <button class="btn btn-outline" onclick="openCourse('installation')">Начать курс</button>
-      </div>
-      
-      <div class="card" style="transition-delay: 0.4s">
-        <h3 class="card-title">Экономика проектов</h3>
-        <p class="card-text">Как оценить рентабельность и срок окупаемости геотермальных систем.</p>
-        <button class="btn btn-outline" onclick="openCourse('economics')">Начать курс</button>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Карта -->
-  <section id="map" class="section" style="background-color: rgba(10, 61, 98, 0.05);">
-    <div class="section-header">
-      <h2 class="section-title">Геотермальные зоны</h2>
-      <p class="section-subtitle">Карта потенциальных источников геотермальной энергии в Кыргызстане</p>
-    </div>
-    
-    <div class="animate-on-scroll">
-      <div id="geoMap"></div>
-      
-      <div class="text-center mt-3">
-        <label style="font-weight: 500;">Выберите регион:
-          <select id="regionSelect" class="form-control" style="display: inline-block; width: auto; margin-left: 0.5rem;">
-            <option value="Kyrgyzstan">Вся страна</option>
-            <option value="Issyk-Kul">Иссык-Кульская область</option>
-            <option value="Ak-Suu">Ак-Суйский район</option>
-            <option value="Jeti-Oguz">Жети-Огузский район</option>
-            <option value="Jyrgalang">Жыргалан</option>
-            <option value="Barbulak">Барбулак</option>
-            <option value="Cholpon-Ata">Чолпон-Ата</option>
-            <option value="Kosh-Kol">Кош-Кёл</option>
-          </select>
-        </label>
+    <!-- Секция "Карта" -->
+    <section id="map">
+      <h2 class="section-title animate__animated animate__fadeIn">Карта геотермальных источников</h2>
+      <div class="form-container mt-4">
+        <label for="regionSelect">Выберите регион:</label>
+        <select id="regionSelect" class="form-control">
+          <option value="Kyrgyzstan">Кыргызстан</option>
+          <option value="Issyk-Kul">Иссык-Куль</option>
+          <option value="Ak-Suu">Ак-Суу</option>
+          <option value="Jeti-Oguz">Джети-Огуз</option>
+          <option value="Jyrgalang">Джыргалан</option>
+          <option value="Barbulak">Барбулак</option>
+          <option value="Cholpon-Ata">Чолпон-Ата</option>
+          <option value="Kosh-Kol">Кош-Кол</option>
+        </select>
       </div>
-    </div>
-  </section>
+      <div id="geoMap" class="map-container mt-4"></div>
+    </section>
 
-  <!-- Калькулятор -->
-  <section id="calculator" class="section">
-    <div class="section-header">
-      <h2 class="section-title">Калькулятор экономии</h2>
-      <p class="section-subtitle">Узнайте, сколько вы сможете сэкономить с геотермальной энергией</p>
-    </div>
-    
-    <div class="animate-on-scroll">
+    <!-- Секция "Калькулятор" -->
+    <section id="calculator">
+      <h2 class="section-title animate__animated animate__fadeIn">Калькулятор экономии</h2>
       <div class="form-container">
         <div class="form-group">
-          <label for="area" class="form-label">Площадь дома (м²)</label>
-          <input type="number" id="area" class="form-control" placeholder="Например, 120">
+          <label for="area">Площадь дома (м²):</label>
+          <input type="number" id="area" class="form-control" placeholder="Введите площадь">
         </div>
-        
         <div class="form-group">
-          <label for="source" class="form-label">Текущий источник отопления</label>
+          <label for="source">Текущий источник энергии:</label>
           <select id="source" class="form-control">
             <option value="coal">Уголь</option>
             <option value="wood">Дрова</option>
@@ -164,63 +138,31 @@
             <option value="gas">Природный газ</option>
           </select>
         </div>
-        
         <div class="form-group">
-          <label for="region" class="form-label">Ваш регион</label>
+          <label for="region">Регион:</label>
           <select id="region" class="form-control">
-            <option value="Общий">Общий расчет</option>
-            <option value="Бишкек">Бишкек</option>
-            <option value="Иссык-Куль">Иссык-Кульская область</option>
-            <option value="Чуй">Чуйская область</option>
-            <option value="Нарын">Нарынская область</option>
-            <option value="Ош">Ошская область</option>
+            <option value="General">Общая оценка</option>
+            <option value="Bishkek">Бишкек</option>
+            <option value="Issyk-Kul">Иссык-Куль</option>
+            <option value="Chuy">Чуй</option>
+            <option value="Naryn">Нарын</option>
+            <option value="Osh">Ош</option>
           </select>
         </div>
-        
-        <div class="form-group text-center">
-          <button class="btn" onclick="calculate()">Рассчитать экономию</button>
-        </div>
-        
-        <div id="result" class="result-container hidden">
-          <h3 style="color: var(--primary); margin-bottom: 1rem;">Результаты расчета</h3>
-          <div id="resultContent"></div>
-        </div>
+        <button class="btn btn-primary mt-2" onclick="calculate()">Рассчитать</button>
       </div>
-    </div>
-  </section>
+      <div id="result" class="result hidden"></div>
+    </section>
 
-  <!-- Инвестиции -->
-  <section id="invest" class="section" style="background-color: rgba(10, 61, 98, 0.05);">
-    <div class="section-header">
-      <h2 class="section-title">Инвестиционные возможности</h2>
-      <p class="section-subtitle">Площадка для взаимодействия стартапов, инвесторов и государственных организаций</p>
-    </div>
-    
-    <div class="animate-on-scroll">
+    <!-- Секция "Инвесторам" -->
+    <section id="invest">
+      <h2 class="section-title animate__animated animate__fadeIn">Инвесторам и партнерам</h2>
       <div class="tabs">
-        <button class="tab-btn active" onclick="openTab('startups')">Стартапы</button>
-        <button class="tab-btn" onclick="openTab('investors')">Инвесторы</button>
-        <button class="tab-btn" onclick="openTab('government')">Госпрограммы</button>
+        <button class="tab-btn active" onclick="openTab('investors')">Инвесторы</button>
+        <button class="tab-btn" onclick="openTab('government')">Гос. программы</button>
+        <button class="tab-btn" onclick="openTab('monetization')">Монетизация</button>
       </div>
-      
-      <div id="startups" class="tab-content active">
-        <p>Перспективные геотермальные стартапы, ищущие инвестиции:</p>
-        <ul class="project-list mt-2">
-          <li class="project-item">
-            <h3 class="project-title">GeoHeat Solutions</h3>
-            <p>Разработка компактных геотермальных установок для частных домов. Ищут $50,000 для завершения прототипа.</p>
-            <button class="btn btn-outline mt-2" onclick="contactProject('GeoHeat Solutions')">Связаться</button>
-          </li>
-          <li class="project-item">
-            <h3 class="project-title">EcoTherm KG</h3>
-            <p>Проект по использованию геотермальной энергии для теплиц. Требуются инвестиции $120,000.</p>
-            <button class="btn btn-outline mt-2" onclick="contactProject('EcoTherm KG')">Связаться</button>
-          </li>
-
-    </ul>
-      </div>
-      
-      <div id="investors" class="tab-content">
+      <div id="investors" class="tab-content active">
         <p>Инвесторы, заинтересованные в геотермальных проектах:</p>
         <ul class="project-list mt-2">
           <li class="project-item">
@@ -228,15 +170,14 @@
             <p>Инвестиционный фонд, специализирующийся на возобновляемой энергетике. Готовы рассмотреть проекты от $25,000 до $500,000.</p>
             <button class="btn btn-outline mt-2" onclick="contactProject('Green Energy Fund')">Связаться</button>
           </li>
-    </ul>
+        </ul>
       </div>
-      
       <div id="government" class="tab-content">
         <p>Государственные программы поддержки возобновляемой энергетики:</p>
         <ul class="project-list mt-2">
           <li class="project-item">
             <h3 class="project-title">Программа "Зеленая энергия"</h3>
-            <p>Субсидии до 30% стоимости оборудования для геотермальных установок в частных домов.</p>
+            <p>Субсидии до 30% стоимости оборудования для геотермальных установок в частных домах.</p>
             <button class="btn btn-outline mt-2" onclick="contactProject('Программа Зеленая энергия')">Подробнее</button>
           </li>
           <li class="project-item">
@@ -244,438 +185,378 @@
             <p>Конкурс на лучший проект в области возобновляемой энергетики с призовым фондом до $20,000.</p>
             <button class="btn btn-outline mt-2" onclick="contactProject('Гранты для стартапов')">Подробнее</button>
           </li>
-    </ul>
+        </ul>
       </div>
-    </div>
-  </section>
+      <div id="monetization" class="tab-content">
+        <p>Как ЖерБулагы зарабатывает:</p>
+        <ul class="project-list mt-2">
+          <li class="project-item">
+            <h3 class="project-title">Платные образовательные курсы</h3>
+            <p>Платные курсы по геотермальной энергии для домовладельцев и профессионалов (500–2500 сом за курс).</p>
+          </li>
+          <li class="project-item">
+            <h3 class="project-title">Консультационные услуги</h3>
+            <p>Консультации для бизнеса и домохозяйств по установке геотермальных систем (от 5000 сом).</p>
+          </li>
+          <li class="project-item">
+            <h3 class="project-title">Рекламные партнерства</h3>
+            <p>Сотрудничество с компаниями в сфере возобновляемой энергетики для рекламы на платформе.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
 
-  <!-- Регистрация -->
-  <section id="register" class="section">
-    <div class="section-header">
-      <h2 class="section-title">Регистрация</h2>
-      <p class="section-subtitle">Создайте аккаунт для доступа ко всем возможностям GeoEnergy</p>
-    </div>
-    
-    <div class="animate-on-scroll">
-      <div class="form-container">
-        <form onsubmit="return handleRegister(event)">
-          <div class="form-group">
-            <label for="regName" class="form-label">Имя пользователя</label>
-            <input type="text" id="regName" class="form-control" placeholder="Придумайте логин" required>
-          </div>
-          
-          <div class="form-group">
-            <label for="regEmail" class="form-label">Email</label>
-            <input type="email" id="regEmail" class="form-control" placeholder="Ваш email" required>
-          </div>
-          
-          <div class="form-group">
-            <label for="regPass" class="form-label">Пароль</label>
-            <input type="password" id="regPass" class="form-control" placeholder="Не менее 6 символов" required>
-          </div>
-          
-          <div class="form-group text-center">
-            <button type="submit" class="btn">Зарегистрироваться</button>
-          </div>
-          
-          <p class="text-center mt-3">
-            Уже есть аккаунт? <a href="#account" style="color: var(--secondary);">Войдите</a>
-          </p>
-        </form>
-      </div>
-    </div>
-  </section>
-
-  <!-- Вход -->
-  <section id="account" class="section" style="background-color: rgba(10, 61, 98, 0.05);">
-    <div class="section-header">
-      <h2 class="section-title">Вход в аккаунт</h2>
-      <p class="section-subtitle">Войдите, чтобы получить доступ к личному кабинету</p>
-    </div>
-    
-    <div class="animate-on-scroll">
-      <div class="form-container">
-        <form onsubmit="return handleLogin(event)">
-          <div class="form-group">
-            <label for="loginName" class="form-label">Имя пользователя или Email</label>
-            <input type="text" id="loginName" class="form-control" placeholder="Ваш логин" required>
-          </div>
-          
-          <div class="form-group">
-            <label for="loginPass" class="form-label">Пароль</label>
-            <input type="password" id="loginPass" class="form-control" placeholder="Ваш пароль" required>
-          </div>
-          
-          <div class="form-group text-center">
-            <button type="submit" class="btn">Войти</button>
-          </div>
-          
-          <p class="text-center mt-3">
-            Нет аккаунта? <a href="#register" style="color: var(--secondary);">Зарегистрируйтесь</a>
-          </p>
-        </form>
-      </div>
-    </div>
-  </section>
-
-  <!-- Профиль -->
-  <section id="profile" class="section hidden">
-    <div class="section-header">
-      <h2 class="section-title">Личный кабинет</h2>
-    </div>
-    
-    <div class="animate-on-scroll">
-      <div class="profile-header">
-        <img src="https://i.imgur.com/JzQZQ9u.jpg" alt="Аватар" class="avatar" id="avatar-preview">
-        <h3 id="welcomeText">Добро пожаловать!</h3>
-      </div>
-      
-      <div class="form-container">
-        <h3 style="color: var(--primary);">Личные данные</h3>
-        <div class="mt-2">
-          <p><strong>Имя пользователя:</strong> <span id="profileUsername"></span></p>
-          <p class="mt-1"><strong>Email:</strong> <span id="profileEmail"></span></p>
+    <!-- Секция "Регистрация" -->
+    <section id="register">
+      <h2 class="section-title animate__animated animate__fadeIn">Регистрация</h2>
+      <form class="form-container" onsubmit="return handleRegister(event)">
+        <div class="form-group">
+          <label for="regName">Имя:</label>
+          <input type="text" id="regName" class="form-control" placeholder="Введите ваше имя" required>
         </div>
-        
-        <h3 class="mt-4" style="color: var(--primary);">Сохраненные расчеты</h3>
-        <div id="savedCalculations" class="mt-2" style="background: #f9f9f9; padding: 1rem; border-radius: 5px;">
-          <p>У вас пока нет сохраненных расчетов.</p>
+        <div class="form-group">
+          <label for="regEmail">Email:</label>
+          <input type="email" id="regEmail" class="form-control" placeholder="Введите ваш email" required>
         </div>
-        
-        <h3 class="mt-4" style="color: var(--primary);">Мои курсы</h3>
-        <div id="myCourses" class="mt-2" style="background: #f9f9f9; padding: 1rem; border-radius: 5px;">
-          <p>Вы пока не записаны на курсы.</p>
+        <div class="form-group">
+          <label for="regPass">Пароль:</label>
+          <input type="password" id="regPass" class="form-control" placeholder="Введите пароль" required>
         </div>
-        
-        <div class="text-center mt-4">
-          <button class="btn" onclick="logout()">Выйти</button>
+        <button type="submit" class="btn btn-primary mt-2">Зарегистрироваться</button>
+      </form>
+    </section>
+
+    <!-- Секция "Вход" -->
+    <section id="account">
+      <h2 class="section-title animate__animated animate__fadeIn">Вход</h2>
+      <form class="form-container" onsubmit="return handleLogin(event)">
+        <div class="form-group">
+          <label for="loginName">Имя или Email:</label>
+          <input type="text" id="loginName" class="form-control" placeholder="Введите имя или email" required>
         </div>
+        <div class="form-group">
+          <label for="loginPass">Пароль:</label>
+          <input type="password" id="loginPass" class="form-control" placeholder="Введите пароль" required>
+        </div>
+        <button type="submit" class="btn btn-primary mt-2">Войти</button>
+      </form>
+    </section>
+
+    <!-- Секция "Профиль" -->
+    <section id="profile" class="hidden">
+      <h2 class="section-title animate__animated animate__fadeIn" id="welcomeText">Добро пожаловать!</h2>
+      <div class="card">
+        <p><strong>Имя:</strong> <span id="profileUsername"></span></p>
+        <p><strong>Email:</strong> <span id="profileEmail"></span></p>
       </div>
-    </div>
-  </section>
-</main>
+    </section>
+  </main>
 
-<footer>
-  <div class="footer-container">
-    <div class="footer-logo">GeoEnergy</div>
-    <p>Платформа для развития геотермальной энергетики в Кыргызстане</p>
-    
-    <div class="team-list">
-      <div class="team-member">Бакирова Сайкал</div>
-      <div class="team-member">Бабаназарова Сабина</div>
-      <div class="team-member">Бичевая Калерия</div>
-      <div class="team-member">Омурова Айдана</div>
-    </div>
-    
-    <p>© 2025 Technovation Girls, СОШ №64</p>
-  </div>
-</footer>
+  <!-- Футер -->
+  <footer>
+    <p>© 2025 ЖерБулагы. Все права защищены.</p>
+  </footer>
 
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script>
-  // Инициализация карты
-  const map = L.map('geoMap').setView([41.5, 74.5], 6);
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; OpenStreetMap contributors'
-  }).addTo(map);
+  <!-- Скрипты -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    // Инициализация карты
+    const map = L.map('geoMap').setView([41.5, 74.5], 6);
+    document.getElementById('geoMap').classList.add('loading');
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap contributors'
+    }).addTo(map).on('load', () => {
+      document.getElementById('geoMap').classList.remove('loading');
+    });
 
-  // Данные геотермальных источников
-  const sources = [
-    {
-      name: 'Жети-Огуз',
-      coords: [42.330556, 78.239722],
-      temp: '39–40 °C', 
-      depth: 'до 200 м', 
-      activity: 'средняя', 
-      saving: '30%',
-      potential: 'Для отопления домов и теплиц'
-    },
-    {
-      name: 'Жыргалан',
-      coords: [42.600000, 79.030000],
-      temp: '35–43 °C', 
-      depth: 'до 200 м', 
-      activity: 'средняя', 
-      saving: '25%',
-      potential: 'Курортное использование'
-    },
-    {
-      name: 'Ак-Суу (Теплоключенка)',
-      coords: [42.461981, 78.539749],
-      temp: '58 °C', 
-      depth: 'до 150 м', 
-      activity: 'высокая', 
-      saving: '35%',
-      potential: 'Промышленное использование'
-    },
-    {
-      name: 'Барбулак',
-      coords: [42.247204, 76.579165],
-      temp: '39–42 °C', 
-      depth: 'до 180 м', 
-      activity: 'средняя', 
-      saving: '28%',
-      potential: 'Локальное отопление'
-    },
-    {
-      name: 'Чолпон-Ата',
-      coords: [42.650000, 77.083000],
-      temp: '35–53 °C', 
-      depth: '200–800 м', 
-      activity: 'высокая', 
-      saving: '30%',
-      potential: 'Курортное и коммунальное использование'
-    },
-    {
-      name: 'Кош-Кёл',
-      coords: [42.530000, 76.610000],
-      temp: '39–42 °C', 
-      depth: 'до 200 м', 
-      activity: 'средняя', 
-      saving: '25%',
-      potential: 'Локальное отопление'
-    }
-  ];
+    // Данные геотермальных источников
+    const sources = [
+      {
+        name: 'Джети-Огуз',
+        coords: [42.330556, 78.239722],
+        temp: '39–40 °C',
+        depth: 'до 200 м',
+        activity: 'средняя',
+        saving: '30%',
+        potential: 'Для отопления домов и теплиц'
+      },
+      {
+        name: 'Джыргалан',
+        coords: [42.600000, 79.030000],
+        temp: '35–43 °C',
+        depth: 'до 200 м',
+        activity: 'средняя',
+        saving: '25%',
+        potential: 'Курортное использование'
+      },
+      {
+        name: 'Ак-Суу (Теплоключенка)',
+        coords: [42.461981, 78.539749],
+        temp: '58 °C',
+        depth: 'до 150 м',
+        activity: 'высокая',
+        saving: '35%',
+        potential: 'Промышленное использование'
+      },
+      {
+        name: 'Барбулак',
+        coords: [42.247204, 76.579165],
+        temp: '39–42 °C',
+        depth: 'до 180 м',
+        activity: 'средняя',
+        saving: '28%',
+        potential: 'Локальное отопление'
+      },
+      {
+        name: 'Чолпон-Ата',
+        coords: [42.650000, 77.083000],
+        temp: '35–53 °C',
+        depth: '200–800 м',
+        activity: 'высокая',
+        saving: '30%',
+        potential: 'Курортное и муниципальное использование'
+      },
+      {
+        name: 'Кош-Кол',
+        coords: [42.530000, 76.610000],
+        temp: '39–42 °C',
+        depth: 'до 200 м',
+        activity: 'средняя',
+        saving: '25%',
+        potential: 'Локальное отопление'
+      }
+    ];
 
-  // Добавление маркеров на карту
-  sources.forEach(src => {
-    L.marker(src.coords).addTo(map)
-      .bindPopup(`
-        <strong>${src.name}</strong><br>
-        <b>Температура:</b> ${src.temp}<br>
-        <b>Глубина:</b> ${src.depth}<br>
-        <b>Активность:</b> ${src.activity}<br>
-        <b>Потенциальная экономия:</b> ${src.saving}<br>
-        <b>Потенциальное использование:</b> ${src.potential}
-      `);
-  });
+    // Добавление маркеров на карту
+    sources.forEach(src => {
+      L.marker(src.coords).addTo(map)
+        .bindPopup(`
+          <strong>${src.name}</strong><br>
+          <b>Температура:</b> ${src.temp}<br>
+          <b>Глубина:</b> ${src.depth}<br>
+          <b>Активность:</b> ${src.activity}<br>
+          <b>Потенциальная экономия:</b> ${src.saving}<br>
+          <b>Потенциал:</b> ${src.potential}
+        `);
+    });
 
-  // Координаты центров регионов
-  const regions = {
-    'Kyrgyzstan': [41.2044, 74.7661],
-    'Issyk-Kul': [42.416668, 77.250000],
-    'Ak-Suu': [42.461981, 78.539749],
-    'Jeti-Oguz': [42.330556, 78.239722],
-    'Jyrgalang': [42.600000, 79.030000],
-    'Barbulak': [42.247204, 76.579165],
-    'Cholpon-Ata': [42.650000, 77.083000],
-    'Kosh-Kol': [42.530000, 76.610000]
-  };
+    // Координаты центров регионов
+    const regions = {
+      'Kyrgyzstan': [41.2044, 74.7661],
+      'Issyk-Kul': [42.416668, 77.250000],
+      'Ak-Suu': [42.461981, 78.539749],
+      'Jeti-Oguz': [42.330556, 78.239722],
+      'Jyrgalang': [42.600000, 79.030000],
+      'Barbulak': [42.247204, 76.579165],
+      'Cholpon-Ata': [42.650000, 77.083000],
+      'Kosh-Kol': [42.530000, 76.610000]
+    };
 
-  // Обработчик выбора региона
-  document.getElementById('regionSelect')
-    .addEventListener('change', e => {
+    // Обработчик выбора региона
+    document.getElementById('regionSelect').addEventListener('change', e => {
       const coords = regions[e.target.value];
       if (coords) {
         map.setView(coords, e.target.value === 'Kyrgyzstan' ? 6 : 10);
       }
     });
 
-  // Калькулятор
-  function calculate() {
-    const area = parseFloat(document.getElementById("area").value);
-    const source = document.getElementById("source").value;
-    const region = document.getElementById("region").value;
-    
-    if (isNaN(area) || area <= 0) {
-      showResult("Пожалуйста, введите корректную площадь дома", false);
-      return;
+    // Калькулятор
+    function calculate() {
+      const area = parseFloat(document.getElementById("area").value);
+      const source = document.getElementById("source").value;
+      const region = document.getElementById("region").value;
+
+      if (isNaN(area) || area <= 0) {
+        showResult("Пожалуйста, введите корректную площадь дома", false);
+        return;
+      }
+
+      // Коэффициенты для регионов
+      const regionFactors = {
+        "Bishkek": 1.1,
+        "Issyk-Kul": 0.9,
+        "Chuy": 1.05,
+        "Naryn": 0.95,
+        "Osh": 1.0,
+        "General": 1.0
+      };
+
+      const factor = regionFactors[region] || 1;
+
+      const data = {
+        coal: { cost: 90, co2: 3.5, name: "Уголь" },
+        wood: { cost: 70, co2: 2.8, name: "Дрова" },
+        electricity: { cost: 100, co2: 1.5, name: "Электричество" },
+        gas: { cost: 80, co2: 2.0, name: "Природный газ" }
+      };
+
+      const current = data[source];
+      const geoCost = Math.round(area * 40 * factor);
+      const currentCost = Math.round(area * current.cost);
+      const saving = currentCost - geoCost;
+      const payback = saving > 0 ? Math.ceil(geoCost / saving) : "∞";
+      const co2Reduction = Math.round(area * current.co2 * 0.8);
+
+      showResult(`
+        <div class="result-item">
+          <span>Текущий источник:</span>
+          <span>${current.name}</span>
+        </div>
+        <div class="result-item">
+          <span>Текущие расходы:</span>
+          <span>${currentCost} сом/год</span>
+        </div>
+        <div class="result-item highlight">
+          <span>С геотермальной системой:</span>
+          <span>${geoCost} сом/год</span>
+        </div>
+        <div class="result-item highlight">
+          <span>Экономия:</span>
+          <span>${saving} сом/год (${Math.round(saving/currentCost*100)}%)</span>
+        </div>
+        <div class="result-item">
+          <span>Срок окупаемости:</span>
+          <span>${payback} лет</span>
+        </div>
+        <div class="result-item eco">
+          <span>Снижение выбросов CO₂:</span>
+          <span>${co2Reduction} кг/год</span>
+        </div>
+      `, true);
     }
 
-    // Коэффициенты для регионов
-    const regionFactors = {
-      "Бишкек": 1.1,
-      "Иссык-Куль": 0.9,
-      "Чуй": 1.05,
-      "Нарын": 0.95,
-      "Ош": 1.0,
-      "Общий": 1.0
-    };
-    
-    const factor = regionFactors[region] || 1;
+    function showResult(html, isSuccess) {
+      const result = document.getElementById("result");
+      result.innerHTML = html;
+      result.style.backgroundColor = isSuccess ? "rgba(76, 175, 80, 0.1)" : "rgba(255, 193, 7, 0.1)";
+      result.classList.remove("hidden");
+    }
 
-    const data = {
-      coal: { cost: 90, co2: 3.5, name: "уголь" },
-      wood: { cost: 70, co2: 2.8, name: "дрова" },
-      electricity: { cost: 100, co2: 1.5, name: "электричество" },
-      gas: { cost: 80, co2: 2.0, name: "природный газ" }
-    };
+    // Регистрация и вход
+    function handleRegister(event) {
+      event.preventDefault();
+      const name = document.getElementById("regName").value;
+      const pass = document.getElementById("regPass").value;
+      const email = document.getElementById("regEmail").value;
 
-    const current = data[source];
-    const geoCost = Math.round(area * 40 * factor);
-    const currentCost = Math.round(area * current.cost);
-    const saving = currentCost - geoCost;
-    const payback = saving > 0 ? Math.ceil(geoCost / saving) : "∞";
-    const co2Reduction = Math.round(area * current.co2 * 0.8);
+      if (pass.length < 6) {
+        alert("Пароль должен содержать не менее 6 символов");
+        return false;
+      }
 
-    showResult(`
-      <div class="result-item">
-        <span>Текущий источник:</span>
-        <span>${current.name}</span>
-      </div>
-      <div class="result-item">
-        <span>Текущие расходы:</span>
-        <span>${currentCost} сом/год</span>
-      </div>
-      <div class="result-item highlight">
-        <span>С геотермальной системой:</span>
-        <span>${geoCost} сом/год</span>
-      </div>
-      <div class="result-item highlight">
-        <span>Экономия:</span>
-        <span>${saving} сом/год (${Math.round(saving/currentCost*100)}%)</span>
-      </div>
-      <div class="result-item">
-        <span>Окупаемость:</span>
-        <span>${payback} лет</span>
-      </div>
-      <div class="result-item eco">
-        <span>Снижение выбросов CO₂:</span>
-        <span>${co2Reduction} кг/год</span>
-      </div>
-    `, true);
-  }
+      localStorage.setItem("username", name);
+      localStorage.setItem("password", pass);
+      localStorage.setItem("email", email);
 
-  function showResult(html, isSuccess) {
-    const result = document.getElementById("result");
-    result.innerHTML = html;
-    result.style.backgroundColor = isSuccess ? "rgba(76, 175, 80, 0.1)" : "rgba(255, 193, 7, 0.1)";
-    result.classList.remove("hidden");
-  }
-
-  // Регистрация и вход
-  function handleRegister(event) {
-    event.preventDefault();
-    const name = document.getElementById("regName").value;
-    const pass = document.getElementById("regPass").value;
-    const email = document.getElementById("regEmail").value;
-    
-    if (pass.length < 6) {
-      alert("Пароль должен содержать не менее 6 символов");
+      alert("Вы успешно зарегистрировались! Теперь вы можете войти.");
+      window.location.href = "#account";
       return false;
     }
-    
-    localStorage.setItem("username", name);
-    localStorage.setItem("password", pass);
-    localStorage.setItem("email", email);
-    
-    alert("Вы успешно зарегистрированы! Теперь вы можете войти.");
-    window.location.href = "#account";
-    return false;
-  }
 
-  function handleLogin(event) {
-    event.preventDefault();
-    const name = document.getElementById("loginName").value;
-    const pass = document.getElementById("loginPass").value;
-    const savedName = localStorage.getItem("username");
-    const savedPass = localStorage.getItem("password");
-    const savedEmail = localStorage.getItem("email");
-    
-    if ((name === savedName || name === savedEmail) && pass === savedPass) {
-      // Успешный вход
-      document.getElementById("account").classList.add("hidden");
-      document.getElementById("profile").classList.remove("hidden");
-      document.getElementById("profileLink").classList.remove("hidden");
-      document.getElementById("logoutBtn").classList.remove("hidden");
-      
-      // Заполняем профиль
-      document.getElementById("welcomeText").textContent = `Добро пожаловать, ${savedName}!`;
-      document.getElementById("profileUsername").textContent = savedName;
-      document.getElementById("profileEmail").textContent = savedEmail;
-      
-      // Обновляем навигацию
+    function handleLogin(event) {
+      event.preventDefault();
+      const name = document.getElementById("loginName").value;
+      const pass = document.getElementById("loginPass").value;
+      const savedName = localStorage.getItem("username");
+      const savedPass = localStorage.getItem("password");
+      const savedEmail = localStorage.getItem("email");
+
+      if ((name === savedName || name === savedEmail) && pass === savedPass) {
+        document.getElementById("account").classList.add("hidden");
+        document.getElementById("profile").classList.remove("hidden");
+        document.getElementById("profileLink").classList.remove("hidden");
+        document.getElementById("logoutBtn").classList.remove("hidden");
+
+        document.getElementById("welcomeText").textContent = `Добро пожаловать, ${savedName}!`;
+        document.getElementById("profileUsername").textContent = savedName;
+        document.getElementById("profileEmail").textContent = savedEmail;
+
+        document.querySelectorAll('.nav-link').forEach(link => {
+          if (link.getAttribute('href') === '#register' || link.getAttribute('href') === '#account') {
+            link.classList.add('hidden');
+          }
+        });
+
+        window.location.href = "#profile";
+      } else {
+        alert("Неверное имя пользователя или пароль");
+      }
+      return false;
+    }
+
+    function logout() {
+      document.getElementById("profile").classList.add("hidden");
+      document.getElementById("profileLink").classList.add("hidden");
+      document.getElementById("logoutBtn").classList.add("hidden");
+
       document.querySelectorAll('.nav-link').forEach(link => {
         if (link.getAttribute('href') === '#register' || link.getAttribute('href') === '#account') {
-          link.classList.add('hidden');
+          link.classList.remove('hidden');
         }
       });
-      
-      window.location.href = "#profile";
-    } else {
-      alert("Неверное имя пользователя или пароль");
+
+      window.location.href = "#about";
     }
-    return false;
-  }
 
-  function logout() {
-    document.getElementById("profile").classList.add("hidden");
-    document.getElementById("profileLink").classList.add("hidden");
-    document.getElementById("logoutBtn").classList.add("hidden");
-    
-    // Обновляем навигацию
-    document.querySelectorAll('.nav-link').forEach(link => {
-      if (link.getAttribute('href') === '#register' || link.getAttribute('href') === '#account') {
-        link.classList.remove('hidden');
-      }
+    // Курсы
+    function openCourse(courseId) {
+      alert(`Курс "${courseId}" будет доступен в ближайшее время!`);
+    }
+
+    // Табы
+    function openTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(tab => {
+        tab.classList.remove('active');
+      });
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      document.getElementById(tabId).classList.add('active');
+      event.currentTarget.classList.add('active');
+    }
+
+    // Контакт с проектом
+    function contactProject(projectName) {
+      alert(`В полной версии сайта вы сможете связаться с проектом "${projectName}"`);
+    }
+
+    // Бургер-меню
+    function toggleMenu() {
+      document.querySelector('.nav-menu').classList.toggle('active');
+    }
+
+    // Плавная прокрутка
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth'
+          });
+        }
+      });
     });
-    
-    window.location.href = "#about";
-  }
 
-  // Курсы
-  function openCourse(courseId) {
-    alert(`Курс "${courseId}" будет доступен в ближайшее время!`);
-    // Здесь будет реализация открытия курса
-  }
+    // Анимация при скролле
+    function checkScroll() {
+      const elements = document.querySelectorAll('.animate-on-scroll');
+      elements.forEach(el => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 100) {
+          el.classList.add('visible');
+        }
+      });
+    }
 
-  // Табы
-  function openTab(tabId) {
-    // Скрыть все табы
-    document.querySelectorAll('.tab-content').forEach(tab => {
-      tab.classList.remove('active');
-    });
-    
-    // Убрать active у всех кнопок
-    document.querySelectorAll('.tab-btn').forEach(btn => {
-      btn.classList.remove('active');
-    });
-    
-    // Показать выбранный таб
-    document.getElementById(tabId).classList.add('active');
-    event.currentTarget.classList.add('active');
-  }
+    window.addEventListener('scroll', checkScroll);
+    checkScroll();
 
-  // Контакт с проектом
-  function contactProject(projectName) {
-    alert(`В полной версии сайта вы сможете связаться с проектом "${projectName}"`);
-    // Реализация контакта с проектом
-  }
-
-  // Плавная прокрутка
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-      e.preventDefault();
-      const target = document.querySelector(this.getAttribute('href'));
-      if (target) {
-        target.scrollIntoView({
-          behavior: 'smooth'
-        });
-      }
-    });
-  });
-
-  // Анимация при скролле
-  function checkScroll() {
-    const elements = document.querySelectorAll('.animate-on-scroll');
-    elements.forEach(el => {
-      const rect = el.getBoundingClientRect();
-      if (rect.top < window.innerHeight - 100) {
-        el.classList.add('visible');
-      }
-    });
-  }
-  
-  window.addEventListener('scroll', checkScroll);
-  checkScroll(); // Проверить при загрузке
-</script>
-
-<script>
-  const userLang = navigator.language || navigator.userLanguage;
-  if (userLang.startsWith('en') && window.location.pathname.includes('index.html') && !window.location.pathname.includes('index-en.html')) {
-    window.location.href = "index-en.html";
-  }
-</script>
-
+    // Перенаправление по языку (временно закомментировано для тестирования)
+    // const userLang = navigator.language || navigator.userLanguage;
+    // if (!userLang.startsWith('ru') && !window.location.pathname.includes('index-en.html')) {
+    //   window.location.href = "index-en.html";
+    // }
+  </script>
 </body>
 </html>
