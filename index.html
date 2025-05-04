@@ -210,19 +210,11 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script>
       // Инициализация карты
-      var map = L.map('map', {
-        maxBounds: L.latLngBounds(
-          L.latLng(39.0, 69.0), // Юго-западный угол (мин. широта, мин. долгота)
-          L.latLng(43.0, 80.0)  // Северо-восточный угол (макс. широта, макс. долгота)
-        ),
-        maxBoundsViscosity: 1.0 // Жёсткое ограничение области
-      }).setView([41.2044, 74.7661], 6); // Центр Кыргызстана, зум 6
+      var map = L.map('map').setView([41.2044, 74.7661], 6); // Центр Кыргызстана, зум 6
     
       // Базовая карта (OpenStreetMap)
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-        maxZoom: 10,
-        minZoom: 5
+        attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       }).addTo(map);
     
       // Данные о геотермальных источниках
@@ -237,13 +229,12 @@
         { name: 'Altyn-Arashan', nameRu: 'Алтын-Арашан', coords: [42.8200, 75.3000], temp: '60°C', depth: '1700m', activity: 'высокая', saving: 550, potential: 'Высокий' },
         { name: 'Osh', nameRu: 'Ош', coords: [40.5300, 72.8000], temp: '35°C', depth: '800m', activity: 'низкая', saving: 250, potential: 'Низкий' },
         { name: 'Aravan', nameRu: 'Араван', coords: [40.7000, 72.6000], temp: '45°C', depth: '1100m', activity: 'средняя', saving: 350, potential: 'Средний' },
-        { name: 'Alai (Kashka-Suu)', nameRu: 'Алай (Кашка-Суу)', coords: [39.5000, 72.0000], temp: '50°C', depth: '1300m', activity: 'средняя', saving: 400, potential: 'Средний' },
         { name: 'Naryn', nameRu: 'Нарын', coords: [41.4300, 76.0000], temp: '30°C', depth: '2000m', activity: 'низкая', saving: 200, potential: 'Низкий' },
         { name: 'Ala-Buka', nameRu: 'Ала-Бука', coords: [41.0000, 72.9000], temp: '55°C', depth: '1500m', activity: 'высокая', saving: 450, potential: 'Высокий' },
         { name: 'Tash-Kumyr', nameRu: 'Таш-Кумыр', coords: [41.2000, 72.5000], temp: '40°C', depth: '1000m', activity: 'низкая', saving: 300, potential: 'Низкий' },
       ];
     
-      // Функция для создания иконок с цветом
+      // Функция для создания цветных маркеров с помощью SVG
       function getMarkerIcon(activity) {
         let color;
         switch (activity.toLowerCase()) {
@@ -262,13 +253,17 @@
           default:
             color = '#3388ff'; // Синий по умолчанию
         }
-        return new L.Icon({
-          iconUrl: `https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-${color.replace('#', '')}.png`,
-          shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-          iconSize: [25, 41],
-          iconAnchor: [12, 41],
-          popupAnchor: [1, -34],
-          shadowSize: [41, 41]
+        return L.divIcon({
+          className: 'custom-marker',
+          html: `
+            <svg width="24" height="36" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 0C5.373 0 0 5.373 0 12c0 9.36 12 24 12 24s12-14.64 12-24C24 5.373 18.627 0 12 0z" fill="${color}" stroke="#fff" stroke-width="1"/>
+              <circle cx="12" cy="12" r="4" fill="#fff"/>
+            </svg>
+          `,
+          iconSize: [24, 36],
+          iconAnchor: [12, 36],
+          popupAnchor: [0, -36]
         });
       }
     
