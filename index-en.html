@@ -1,23 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Meta tags and title -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ZherBulagy - Geothermal Energy</title>
-  
-  <!-- Favicon -->
   <link rel="icon" href="https://i.imgur.com/zD3oX2x.png">
-  
-  <!-- External resources -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-  
-  <!-- Local stylesheet -->
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Header -->
   <header>
     <div class="header-container">
       <div class="logo">
@@ -27,7 +19,6 @@
           <p>Geothermal Energy of the Future</p>
         </div>
       </div>
-      <!-- Burger menu for mobile -->
       <button class="burger-menu" onclick="toggleMenu()">☰</button>
       <nav>
         <ul class="nav-menu">
@@ -50,9 +41,7 @@
     </div>
   </header>
 
-  <!-- Main content -->
   <main>
-    <!-- About section -->
     <section id="about">
       <h2 class="section-title animate__animated animate__fadeIn">About ZherBulagy</h2>
       <div class="card">
@@ -63,7 +52,6 @@
       </div>
     </section>
 
-    <!-- Benefits section -->
     <section id="benefits">
       <h2 class="section-title animate__animated animate__fadeIn">Benefits of Geothermal Energy</h2>
       <div class="animate-on-scroll">
@@ -85,7 +73,6 @@
       </div>
     </section>
 
-    <!-- Education section -->
     <section id="education">
       <h2 class="section-title animate__animated animate__fadeIn">Education</h2>
       <div class="animate-on-scroll">
@@ -102,7 +89,6 @@
       </div>
     </section>
 
-    <!-- Map section -->
     <section id="map">
       <h2 class="section-title animate__animated animate__fadeIn">Map of Geothermal Sources</h2>
       <div class="form-container mt-4">
@@ -121,7 +107,6 @@
       <div id="geoMap" class="map-container mt-4"></div>
     </section>
 
-    <!-- Calculator section -->
     <section id="calculator">
       <h2 class="section-title animate__animated animate__fadeIn">Savings Calculator</h2>
       <div class="form-container">
@@ -132,7 +117,7 @@
         <div class="form-group">
           <label for="source">Current Energy Source:</label>
           <select id="source" class="form-control">
-            <option value="coal"> Coal</option>
+            <option value="coal">Coal</option>
             <option value="wood">Wood</option>
             <option value="electricity">Electricity</option>
             <option value="gas">Natural Gas</option>
@@ -154,306 +139,4 @@
       <div id="result" class="result hidden"></div>
     </section>
 
-    <!-- Investors section -->
-    <section id="invest">
-      <h2 class="section-title animate__animated animate__fadeIn">For Investors and Partners</h2>
-      <div class="tabs">
-        <button class="tab-btn active" onclick="openTab('investors')">Investors</button>
-        <button class="tab-btn" onclick="openTab('government')">Government Programs</button>
-        <button class="tab-btn" onclick="openTab('monetization')">Monetization</button>
-      </div>
-      <div id="investors" class="tab-content active">
-        <p>Investors interested in geothermal projects:</p>
-        <ul class="project-list mt-2">
-          <li class="project-item">
-            <h3 class="project-title">Green Energy Fund</h3>
-            <p>An investment fund specializing in renewable energy. Ready to consider projects from $25,000 to $500,000.</p>
-            <button class="btn btn-outline mt-2" onclick="contactProject('Green Energy Fund')">Contact</button>
-          </li>
-        </ul>
-      </div>
-      <div id="government" class="tab-content">
-        <p>Government programs supporting renewable energy:</p>
-        <ul class="project-list mt-2">
-          <li class="project-item">
-            <h3 class="project-title">"Green Energy" Program</h3>
-            <p>Subsidies up to 30% of equipment costs for geothermal installations in private homes.</p>
-            <button class="btn btn-outline mt-2" onclick="contactProject('Green Energy Program')">Learn More</button>
-          </li>
-          <li class="project-item">
-            <h3 class="project-title">Grants for Startups</h3>
-            <p>Competition for the best renewable energy project with a prize pool of up to $20,000.</p>
-            <button class="btn btn-outline mt-2" onclick="contactProject('Grants for Startups')">Learn More</button>
-          </li>
-        </ul>
-      </div>
-      <div id="monetization" class="tab-content">
-        <p>How ZherBulagy generates revenue:</p>
-        <ul class="project-list mt-2">
-          <li class="project-item">
-            <h3 class="project-title">Premium Educational Courses</h3>
-            <p>Paid courses on geothermal energy for homeowners and professionals ($10–50 per course).</p>
-          </li>
-          <li class="project-item">
-            <h3 class="project-title">Consulting Services</h3>
-            <p>Consultations for businesses and households on installing geothermal systems (starting at $100).</p>
-          </li>
-          <li class="project-item">
-            <h3 class="project-title">Advertising Partnerships</h3>
-            <p>Collaborations with renewable energy companies for advertising on our platform.</p>
-          </li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- Register section -->
-    <section id="register">
-      <h2 class="section-title animate__animated animate__fadeIn">Register</h2>
-      <form class="form-container" onsubmit="return handleRegister(event)">
-        <div class="form-group">
-          <label for="regName">Name:</label>
-          <input type="text" id="regName" class="form-control" placeholder="Enter your name" required>
-        </div>
-        <div class="form-group">
-          <label for="regEmail">Email:</label>
-          <input type="email" id="regEmail" class="form-control" placeholder="Enter your email" required>
-        </div>
-        <div class="form-group">
-          <label for="regPass">Password:</label>
-          <input type="password" id="regPass" class="form-control" placeholder="Enter password" required>
-        </div>
-        <button type="submit" class="btn btn-primary mt-2">Register</button>
-      </form>
-    </section>
-
-    <!-- Login section -->
-    <section id="account">
-      <h2 class="section-title animate__animated animate__fadeIn">Login</h2>
-      <form class="form-container" onsubmit="return handleLogin(event)">
-        <div class="form-group">
-          <label for="loginName">Name or Email:</label>
-          <input type="text" id="loginName" class="form-control" placeholder="Enter name or email" required>
-        </div>
-        <div class="form-group">
-          <label for="loginPass">Password:</label>
-          <input type="password" id="loginPass" class="form-control" placeholder="Enter password" required>
-        </div>
-        <button type="submit" class="btn btn-primary mt-2">Login</button>
-      </form>
-    </section>
-
-    <!-- Profile section -->
-    <section id="profile" class="hidden">
-      <h2 class="section-title animate__animated animate__fadeIn" id="welcomeText">Welcome!</h2>
-      <div class="card">
-        <p><strong>Name:</strong> <span id="profileUsername"></span></p>
-        <p><strong>Email:</strong> <span id="profileEmail"></span></p>
-      </div>
-    </section>
-  </main>
-
-  <!-- Footer -->
-  <footer>
-    <p>Technovation Girls 2025</p>
-  </footer>
-
-  <!-- Scripts -->
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script>
-    // Инициализация карты
-    var map = L.map('map').setView([41.2044, 74.7661], 6); // Центр Кыргызстана, зум 6
-  
-    // Базовая карта (OpenStreetMap)
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    }).addTo(map);
-  
-    // Данные о геотермальных источниках
-    var sources = [
-      { name: 'Jeti-Oguz', nameRu: 'Джети-Огуз', coords: [42.330556, 78.239722], temp: '39–40 °C', depth: 'до 200 м', activity: 'средняя', saving: 350, potential: 'Для отопления домов и теплиц' },
-      { name: 'Jyrgalang', nameRu: 'Джыргалан', coords: [42.600000, 79.030000], temp: '35–43 °C', depth: 'до 200 м', activity: 'средняя', saving: 300, potential: 'Курортное использование' },
-      { name: 'Ak-Suu', nameRu: 'Ак-Суу', coords: [42.461981, 78.539749], temp: '58 °C', depth: 'до 150 м', activity: 'высокая', saving: 500, potential: 'Промышленное использование' },
-      { name: 'Barbulak', nameRu: 'Барбулак', coords: [42.247204, 76.579165], temp: '39–42 °C', depth: 'до 180 м', activity: 'средняя', saving: 320, potential: 'Локальное отопление' },
-      { name: 'Cholpon-Ata', nameRu: 'Чолпон-Ата', coords: [42.650000, 77.083000], temp: '35–53 °C', depth: '200–800 м', activity: 'высокая', saving: 400, potential: 'Курортное и муниципальное использование' },
-      { name: 'Kosh-Kol', nameRu: 'Кош-Кол', coords: [42.530000, 76.610000], temp: '39–42 °C', depth: 'до 200 м', activity: 'средняя', saving: 300, potential: 'Локальное отопление' },
-      { name: 'Bishkek (Alamedin)', nameRu: 'Бишкек (Аламедин)', coords: [42.8746, 74.5698], temp: '70°C', depth: '2000m', activity: 'высокая', saving: 700, potential: 'Очень высокий' },
-      { name: 'Altyn-Arashan', nameRu: 'Алтын-Арашан', coords: [42.8200, 75.3000], temp: '60°C', depth: '1700m', activity: 'высокая', saving: 550, potential: 'Высокий' },
-      { name: 'Osh', nameRu: 'Ош', coords: [40.5300, 72.8000], temp: '35°C', depth: '800m', activity: 'низкая', saving: 250, potential: 'Низкий' },
-      { name: 'Aravan', nameRu: 'Араван', coords: [40.7000, 72.6000], temp: '45°C', depth: '1100m', activity: 'средняя', saving: 350, potential: 'Средний' },
-      { name: 'Naryn', nameRu: 'Нарын', coords: [41.4300, 76.0000], temp: '30°C', depth: '2000m', activity: 'низкая', saving: 200, potential: 'Низкий' },
-      { name: 'Ala-Buka', nameRu: 'Ала-Бука', coords: [41.0000, 72.9000], temp: '55°C', depth: '1500m', activity: 'высокая', saving: 450, potential: 'Высокий' },
-      { name: 'Tash-Kumyr', nameRu: 'Таш-Кумыр', coords: [41.2000, 72.5000], temp: '40°C', depth: '1000m', activity: 'низкая', saving: 300, potential: 'Низкий' },
-    ];
-  
-    // Функция для создания цветных маркеров с помощью SVG
-    function getMarkerIcon(activity) {
-      let color;
-      switch (activity.toLowerCase()) {
-        case 'высокая':
-        case 'high':
-          color = '#28a745'; // Зелёный
-          break;
-        case 'средняя':
-        case 'medium':
-          color = '#ffc107'; // Жёлтый
-          break;
-        case 'низкая':
-        case 'low':
-          color = '#dc3545'; // Красный
-          break;
-        default:
-          color = '#3388ff'; // Синий по умолчанию
-      }
-      return L.divIcon({
-        className: 'custom-marker',
-        html: `
-          <svg width="24" height="36" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 0C5.373 0 0 5.373 0 12c0 9.36 12 24 12 24s12-14.64 12-24C24 5.373 18.627 0 12 0z" fill="${color}" stroke="#fff" stroke-width="1"/>
-            <circle cx="12" cy="12" r="4" fill="#fff"/>
-          </svg>
-        `,
-        iconSize: [24, 36],
-        iconAnchor: [12, 36],
-        popupAnchor: [0, -36]
-      });
-    }
-  
-    // Добавление маркеров с цветами
-    sources.forEach(source => {
-      var isEnglish = window.location.pathname.includes('index-en.html');
-      var markerIcon = getMarkerIcon(source.activity);
-      var marker = L.marker(source.coords, { icon: markerIcon }).addTo(map);
-      var popupContent = isEnglish
-        ? `<b>${source.name}</b><br>Temperature: ${source.temp}<br>Depth: ${source.depth}<br>Activity: ${source.activity}<br>Savings: $${source.saving}/year<br>Potential: ${source.potential}`
-        : `<b>${source.nameRu}</b><br>Температура: ${source.temp}<br>Глубина: ${source.depth}<br>Активность: ${source.activity}<br>Экономия: $${source.saving}/год<br>Потенциал: ${source.potential}`;
-      marker.bindPopup(popupContent);
-    });
-  
-  // Регистрация и вход
-  function handleRegister(event) {
-    event.preventDefault();
-    const name = document.getElementById("regName").value;
-    const pass = document.getElementById("regPass").value;
-    const email = document.getElementById("regEmail").value;
-
-    if (pass.length < 6) {
-      alert("Password must be at least 6 characters long");
-      return false;
-    }
-
-    localStorage.setItem("username", name);
-    localStorage.setItem("password", pass);
-    localStorage.setItem("email", email);
-
-    alert("You have successfully registered! You can now log in.");
-    window.location.href = "#account";
-    return false;
-  }
-
-  function handleLogin(event) {
-    event.preventDefault();
-    const name = document.getElementById("loginName").value;
-    const pass = document.getElementById("loginPass").value;
-    const savedName = localStorage.getItem("username");
-    const savedPass = localStorage.getItem("password");
-    const savedEmail = localStorage.getItem("email");
-
-    if ((name === savedName || name === savedEmail) && pass === savedPass) {
-      document.getElementById("account").classList.add("hidden");
-      document.getElementById("profile").classList.remove("hidden");
-      document.getElementById("profileLink").classList.remove("hidden");
-      document.getElementById("logoutBtn").classList.remove("hidden");
-
-      document.getElementById("welcomeText").textContent = `Welcome, ${savedName}!`;
-      document.getElementById("profileUsername").textContent = savedName;
-      document.getElementById("profileEmail").textContent = savedEmail;
-
-      document.querySelectorAll('.nav-link').forEach(link => {
-        if (link.getAttribute('href') === '#register' || link.getAttribute('href') === '#account') {
-          link.classList.add('hidden');
-        }
-      });
-
-      window.location.href = "#profile";
-    } else {
-      alert("Incorrect username or password");
-    }
-    return false;
-  }
-
-  function logout() {
-    document.getElementById("profile").classList.add("hidden");
-    document.getElementById("profileLink").classList.add("hidden");
-    document.getElementById("logoutBtn").classList.add("hidden");
-
-    document.querySelectorAll('.nav-link').forEach(link => {
-      if (link.getAttribute('href') === '#register' || link.getAttribute('href') === '#account') {
-        link.classList.remove('hidden');
-      }
-    });
-
-    window.location.href = "#about";
-  }
-
-  // Плавная прокрутка
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-      e.preventDefault();
-      const target = document.querySelector(this.getAttribute('href'));
-      if (target) {
-        target.scrollIntoView({
-          behavior: 'smooth'
-        });
-      }
-    });
-  });
-
-  // Анимация при скролле
-  function checkScroll() {
-    const elements = document.querySelectorAll('.animate-on-scroll');
-    elements.forEach(el => {
-      const rect = el.getBoundingClientRect();
-      if (rect.top < window.innerHeight - 100) {
-        el.classList.add('visible');
-      }
-    });
-  }
-
-  window.addEventListener('scroll', checkScroll);
-  checkScroll();
-</script>
-
-<!-- Секция Регистрация -->
-<div id="register" class="modal">
-  <div class="modal-content">
-    <span class="close" onclick="document.getElementById('register').classList.add('hidden')">&times;</span>
-    <h2>Registration</h2>
-    <form onsubmit="handleRegister(event)">
-      <label for="regName">Name:</label><br>
-      <input type="text" id="regName" name="regName" required><br>
-      <label for="regEmail">Email:</label><br>
-      <input type="email" id="regEmail" name="regEmail" required><br>
-      <label for="regPass">Password:</label><br>
-      <input type="password" id="regPass" name="regPass" required><br><br>
-      <button type="submit">Register</button>
-    </form>
-  </div>
-</div>
-
-<!-- Секция Вход -->
-<div id="account" class="modal">
-  <div class="modal-content">
-    <span class="close" onclick="document.getElementById('account').classList.add('hidden')">&times;</span>
-    <h2>Login</h2>
-    <form onsubmit="handleLogin(event)">
-      <label for="loginName">Username or Email:</label><br>
-      <input type="text" id="loginName" name="loginName" required><br>
-      <label for="loginPass">Password:</label><br>
-      <input type="password" id="loginPass" name="loginPass" required><br><br>
-      <button type="submit">Login</button>
-    </form>
-  </div>
-</div>
-
-<script src="chatbot.js"></script>
-</html>
+    <

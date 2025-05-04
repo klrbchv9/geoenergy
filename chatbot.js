@@ -22,14 +22,8 @@ function toggleChatbot() {
     const messageCount = messages.children.length;
   
     if (messageCount === 1) {
-      // Шаг 1: Регион
-      if (isEnglish) {
-        botResponse = 'Thanks! What type of building do you have? (e.g., house, apartment, office)';
-      } else {
-        botResponse = 'Спасибо! Какой тип здания у вас? (например, дом, квартира, офис)';
-      }
+      botResponse = isEnglish ? 'Thanks! What type of building do you have? (e.g., house, apartment, office)' : 'Спасибо! Какой тип здания у вас? (например, дом, квартира, офис)';
     } else if (messageCount === 3) {
-      // Шаг 2: Тип здания
       const region = messages.children[0].textContent.toLowerCase();
       const buildingType = userMessage;
   
@@ -51,15 +45,9 @@ function toggleChatbot() {
         }
       }
     } else if (messageCount === 5) {
-      // Шаг 3: Дополнительный вопрос (опционально)
-      if (isEnglish) {
-        botResponse = 'Awesome! Check our calculator or map for more details. Need help with installers?';
-      } else {
-        botResponse = 'Отлично! Посмотрите наш калькулятор или карту для деталей. Нужна помощь с установщиками?';
-      }
+      botResponse = isEnglish ? 'Awesome! Check our calculator or map for more details. Need help with installers?' : 'Отлично! Посмотрите наш калькулятор или карту для деталей. Нужна помощь с установщиками?';
     }
   
-    // Добавляем ответ бота, если есть
     if (botResponse) {
       const botDiv = document.createElement('div');
       botDiv.className = 'message bot-message';
@@ -67,11 +55,13 @@ function toggleChatbot() {
       messages.appendChild(botDiv);
     }
   
-    // Прокрутка вниз
+    if (messages.children.length > 10) {
+      messages.removeChild(messages.children[0]);
+    }
+  
     messages.scrollTop = messages.scrollHeight;
     input.value = '';
   
-    // Автоматический следующий вопрос
     if (messageCount === 1) {
       setTimeout(() => {
         const nextQuestion = isEnglish
@@ -82,7 +72,7 @@ function toggleChatbot() {
         questionDiv.textContent = nextQuestion;
         messages.appendChild(questionDiv);
         messages.scrollTop = messages.scrollHeight;
-      }, 500); // Задержка 0.5 секунды
+      }, 500);
     } else if (messageCount === 2) {
       setTimeout(() => {
         const nextQuestion = isEnglish
@@ -97,7 +87,6 @@ function toggleChatbot() {
     }
   }
   
-  // Инициализация текста в зависимости от языка
   document.addEventListener('DOMContentLoaded', () => {
     const isEnglish = window.location.pathname.includes('index-en.html') || window.location.pathname.includes('founders-en.html');
     if (isEnglish) {
@@ -110,3 +99,5 @@ function toggleChatbot() {
       document.getElementById('chatbotInput').placeholder = 'Введите ответ...';
     }
   });
+  
+  export { toggleChatbot, sendMessage };
