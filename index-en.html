@@ -329,144 +329,131 @@
       marker.bindPopup(popupContent);
     });
   
-    // Регистрация и вход
-    function handleRegister(event) {
-      event.preventDefault();
-      const name = document.getElementById("regName").value;
-      const pass = document.getElementById("regPass").value;
-      const email = document.getElementById("regEmail").value;
-  
-      if (pass.length < 6) {
-        alert("Password must be at least 6 characters long");
-        return false;
-      }
-  
-      localStorage.setItem("username", name);
-      localStorage.setItem("password", pass);
-      localStorage.setItem("email", email);
-  
-      alert("You have successfully registered! You can now log in.");
-      window.location.href = "#account";
+  // Регистрация и вход
+  function handleRegister(event) {
+    event.preventDefault();
+    const name = document.getElementById("regName").value;
+    const pass = document.getElementById("regPass").value;
+    const email = document.getElementById("regEmail").value;
+
+    if (pass.length < 6) {
+      alert("Password must be at least 6 characters long");
       return false;
     }
-  
-    function handleLogin(event) {
-      event.preventDefault();
-      const name = document.getElementById("loginName").value;
-      const pass = document.getElementById("loginPass").value;
-      const savedName = localStorage.getItem("username");
-      const savedPass = localStorage.getItem("password");
-      const savedEmail = localStorage.getItem("email");
-  
-      if ((name === savedName || name === savedEmail) && pass === savedPass) {
-        document.getElementById("account").classList.add("hidden");
-        document.getElementById("profile").classList.remove("hidden");
-        document.getElementById("profileLink").classList.remove("hidden");
-        document.getElementById("logoutBtn").classList.remove("hidden");
-  
-        document.getElementById("welcomeText").textContent = `Welcome, ${savedName}!`;
-        document.getElementById("profileUsername").textContent = savedName;
-        document.getElementById("profileEmail").textContent = savedEmail;
-  
-        document.querySelectorAll('.nav-link').forEach(link => {
-          if (link.getAttribute('href') === '#register' || link.getAttribute('href') === '#account') {
-            link.classList.add('hidden');
-          }
-        });
-  
-        window.location.href = "#profile";
-      } else {
-        alert("Incorrect username or password");
-      }
-      return false;
-    }
-  
-    function logout() {
-      document.getElementById("profile").classList.add("hidden");
-      document.getElementById("profileLink").classList.add("hidden");
-      document.getElementById("logoutBtn").classList.add("hidden");
-  
+
+    localStorage.setItem("username", name);
+    localStorage.setItem("password", pass);
+    localStorage.setItem("email", email);
+
+    alert("You have successfully registered! You can now log in.");
+    window.location.href = "#account";
+    return false;
+  }
+
+  function handleLogin(event) {
+    event.preventDefault();
+    const name = document.getElementById("loginName").value;
+    const pass = document.getElementById("loginPass").value;
+    const savedName = localStorage.getItem("username");
+    const savedPass = localStorage.getItem("password");
+    const savedEmail = localStorage.getItem("email");
+
+    if ((name === savedName || name === savedEmail) && pass === savedPass) {
+      document.getElementById("account").classList.add("hidden");
+      document.getElementById("profile").classList.remove("hidden");
+      document.getElementById("profileLink").classList.remove("hidden");
+      document.getElementById("logoutBtn").classList.remove("hidden");
+
+      document.getElementById("welcomeText").textContent = `Welcome, ${savedName}!`;
+      document.getElementById("profileUsername").textContent = savedName;
+      document.getElementById("profileEmail").textContent = savedEmail;
+
       document.querySelectorAll('.nav-link').forEach(link => {
         if (link.getAttribute('href') === '#register' || link.getAttribute('href') === '#account') {
-          link.classList.remove('hidden');
+          link.classList.add('hidden');
         }
       });
-  
-      window.location.href = "#about";
+
+      window.location.href = "#profile";
+    } else {
+      alert("Incorrect username or password");
     }
-  
-    // Плавная прокрутка и открытие модальных окон
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        const targetId = this.getAttribute('href').substring(1);
-        const target = document.getElementById(targetId);
-  
-        if (targetId === 'register' || targetId === 'account') {
-          // Открываем модальное окно
-          target.classList.remove('hidden');
-        } else if (target) {
-          // Плавная прокрутка для остальных ссылок
-          target.scrollIntoView({
-            behavior: 'smooth'
-          });
-        }
-      });
-    });
-  
-    // Закрытие модальных окон при клике вне формы
-    window.addEventListener('click', function(event) {
-      if (event.target.classList.contains('modal')) {
-        event.target.classList.add('hidden');
+    return false;
+  }
+
+  function logout() {
+    document.getElementById("profile").classList.add("hidden");
+    document.getElementById("profileLink").classList.add("hidden");
+    document.getElementById("logoutBtn").classList.add("hidden");
+
+    document.querySelectorAll('.nav-link').forEach(link => {
+      if (link.getAttribute('href') === '#register' || link.getAttribute('href') === '#account') {
+        link.classList.remove('hidden');
       }
     });
-  
-    // Анимация при скролле
-    function checkScroll() {
-      const elements = document.querySelectorAll('.animate-on-scroll');
-      elements.forEach(el => {
-        const rect = el.getBoundingClientRect();
-        if (rect.top < window.innerHeight - 100) {
-          el.classList.add('visible');
-        }
-      });
-    }
-  
-    window.addEventListener('scroll', checkScroll);
-    checkScroll();
-  </script>
-  
-  <!-- Секция Регистрация -->
-  <div id="register" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="document.getElementById('register').classList.add('hidden')">×</span>
-      <h2>Registration</h2>
-      <form onsubmit="handleRegister(event)">
-        <label for="regName">Name:</label><br>
-        <input type="text" id="regName" name="regName" required><br>
-        <label for="regEmail">Email:</label><br>
-        <input type="email" id="regEmail" name="regEmail" required><br>
-        <label for="regPass">Password:</label><br>
-        <input type="password" id="regPass" name="regPass" required><br><br>
-        <button type="submit">Register</button>
-      </form>
-    </div>
+
+    window.location.href = "#about";
+  }
+
+  // Плавная прокрутка
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({
+          behavior: 'smooth'
+        });
+      }
+    });
+  });
+
+  // Анимация при скролле
+  function checkScroll() {
+    const elements = document.querySelectorAll('.animate-on-scroll');
+    elements.forEach(el => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight - 100) {
+        el.classList.add('visible');
+      }
+    });
+  }
+
+  window.addEventListener('scroll', checkScroll);
+  checkScroll();
+</script>
+
+<!-- Секция Регистрация -->
+<div id="register" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="document.getElementById('register').classList.add('hidden')">&times;</span>
+    <h2>Registration</h2>
+    <form onsubmit="handleRegister(event)">
+      <label for="regName">Name:</label><br>
+      <input type="text" id="regName" name="regName" required><br>
+      <label for="regEmail">Email:</label><br>
+      <input type="email" id="regEmail" name="regEmail" required><br>
+      <label for="regPass">Password:</label><br>
+      <input type="password" id="regPass" name="regPass" required><br><br>
+      <button type="submit">Register</button>
+    </form>
   </div>
-  
-  <!-- Секция Вход -->
-  <div id="account" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="document.getElementById('account').classList.add('hidden')">×</span>
-      <h2>Login</h2>
-      <form onsubmit="handleLogin(event)">
-        <label for="loginName">Username or Email:</label><br>
-        <input type="text" id="loginName" name="loginName" required><br>
-        <label for="loginPass">Password:</label><br>
-        <input type="password" id="loginPass" name="loginPass" required><br><br>
-        <button type="submit">Login</button>
-      </form>
-    </div>
+</div>
+
+<!-- Секция Вход -->
+<div id="account" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="document.getElementById('account').classList.add('hidden')">&times;</span>
+    <h2>Login</h2>
+    <form onsubmit="handleLogin(event)">
+      <label for="loginName">Username or Email:</label><br>
+      <input type="text" id="loginName" name="loginName" required><br>
+      <label for="loginPass">Password:</label><br>
+      <input type="password" id="loginPass" name="loginPass" required><br><br>
+      <button type="submit">Login</button>
+    </form>
   </div>
-  
-  <script src="chatbot.js"></script>
+</div>
+
+<script src="chatbot.js"></script>
 </html>
