@@ -261,198 +261,70 @@
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script>
     // Инициализация карты
-    const map = L.map('geoMap').setView([41.5, 74.5], 6);
-    document.getElementById('geoMap').classList.add('loading');
+    var map = L.map('map', {
+      maxBounds: L.latLngBounds(
+        L.latLng(39.0, 69.0), // Юго-западный угол (мин. широта, мин. долгота)
+        L.latLng(43.0, 80.0)  // Северо-восточный угол (макс. широта, макс. долгота)
+      ),
+      maxBoundsViscosity: 1.0 // Жёсткое ограничение области
+    }).setView([41.2044, 74.7661], 6); // Центр Кыргызстана, зум 6
+  
+    // Базовая карта (OpenStreetMap)
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '© OpenStreetMap contributors'
-    }).addTo(map).on('load', () => {
-      document.getElementById('geoMap').classList.remove('loading');
-    });
-
-    // Данные геотермальных источников
-    const sources = [
-      {
-        name: 'Джети-Огуз',
-        coords: [42.330556, 78.239722],
-        temp: '39–40 °C',
-        depth: 'до 200 м',
-        activity: 'средняя',
-        saving: '30%',
-        potential: 'Для отопления домов и теплиц'
-      },
-      {
-        name: 'Джыргалан',
-        coords: [42.600000, 79.030000],
-        temp: '35–43 °C',
-        depth: 'до 200 м',
-        activity: 'средняя',
-        saving: '25%',
-        potential: 'Курортное использование'
-      },
-      {
-        name: 'Ак-Суу (Теплоключенка)',
-        coords: [42.461981, 78.539749],
-        temp: '58 °C',
-        depth: 'до 150 м',
-        activity: 'высокая',
-        saving: '35%',
-        potential: 'Промышленное использование'
-      },
-      {
-        name: 'Барбулак',
-        coords: [42.247204, 76.579165],
-        temp: '39–42 °C',
-        depth: 'до 180 м',
-        activity: 'средняя',
-        saving: '28%',
-        potential: 'Локальное отопление'
-      },
-      {
-        name: 'Чолпон-Ата',
-        coords: [42.650000, 77.083000],
-        temp: '35–53 °C',
-        depth: '200–800 м',
-        activity: 'высокая',
-        saving: '30%',
-        potential: 'Курортное и муниципальное использование'
-      },
-      {
-        name: 'Кош-Кол',
-        coords: [42.530000, 76.610000],
-        temp: '39–42 °C',
-        depth: 'до 200 м',
-        activity: 'средняя',
-        saving: '25%',
-        potential: 'Локальное отопление'
-      }
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      maxZoom: 10, // Ограничим максимальный зум, чтобы не показывать детали соседних стран
+      minZoom: 5   // Минимум зум, чтобы избежать вылета за пределы
+    }).addTo(map);
+  
+    // Данные о геотермальных источниках
+    var sources = [
+      { name: 'Jeti-Oguz', nameRu: 'Джети-Огуз', coords: [42.330556, 78.239722], temp: '39–40 °C', depth: 'до 200 м', activity: 'средняя', saving: 350, potential: 'Для отопления домов и теплиц' },
+      { name: 'Jyrgalang', nameRu: 'Джыргалан', coords: [42.600000, 79.030000], temp: '35–43 °C', depth: 'до 200 м', activity: 'средняя', saving: 300, potential: 'Курортное использование' },
+      { name: 'Ak-Suu', nameRu: 'Ак-Суу', coords: [42.461981, 78.539749], temp: '58 °C', depth: 'до 150 м', activity: 'высокая', saving: 500, potential: 'Промышленное использование' },
+      { name: 'Barbulak', nameRu: 'Барбулак', coords: [42.247204, 76.579165], temp: '39–42 °C', depth: 'до 180 м', activity: 'средняя', saving: 320, potential: 'Локальное отопление' },
+      { name: 'Cholpon-Ata', nameRu: 'Чолпон-Ата', coords: [42.650000, 77.083000], temp: '35–53 °C', depth: '200–800 м', activity: 'высокая', saving: 400, potential: 'Курортное и муниципальное использование' },
+      { name: 'Kosh-Kol', nameRu: 'Кош-Кол', coords: [42.530000, 76.610000], temp: '39–42 °C', depth: 'до 200 м', activity: 'средняя', saving: 300, potential: 'Локальное отопление' },
+      { name: 'Bishkek (Alamedin)', nameRu: 'Бишкек (Аламедин)', coords: [42.8746, 74.5698], temp: '70°C', depth: '2000m', activity: 'высокая', saving: 700, potential: 'Очень высокий' },
+      { name: 'Altyn-Arashan', nameRu: 'Алтын-Арашан', coords: [42.8200, 75.3000], temp: '60°C', depth: '1700m', activity: 'высокая', saving: 550, potential: 'Высокий' },
+      { name: 'Osh', nameRu: 'Ош', coords: [40.5300, 72.8000], temp: '35°C', depth: '800m', activity: 'низкая', saving: 250, potential: 'Низкий' },
+      { name: 'Aravan', nameRu: 'Араван', coords: [40.7000, 72.6000], temp: '45°C', depth: '1100m', activity: 'средняя', saving: 350, potential: 'Средний' },
+      { name: 'Alai (Kashka-Suu)', nameRu: 'Алай (Кашка-Суу)', coords: [39.5000, 72.0000], temp: '50°C', depth: '1300m', activity: 'средняя', saving: 400, potential: 'Средний' },
+      { name: 'Naryn', nameRu: 'Нарын', coords: [41.4300, 76.0000], temp: '30°C', depth: '2000m', activity: 'низкая', saving: 200, potential: 'Низкий' },
+      { name: 'Ala-Buka', nameRu: 'Ала-Бука', coords: [41.0000, 72.9000], temp: '55°C', depth: '1500m', activity: 'высокая', saving: 450, potential: 'Высокий' },
+      { name: 'Tash-Kumyr', nameRu: 'Таш-Кумыр', coords: [41.2000, 72.5000], temp: '40°C', depth: '1000m', activity: 'низкая', saving: 300, potential: 'Низкий' },
     ];
-
-    // Добавление маркеров на карту
-    sources.forEach(src => {
-      L.marker(src.coords).addTo(map)
-        .bindPopup(`
-          <strong>${src.name}</strong><br>
-          <b>Температура:</b> ${src.temp}<br>
-          <b>Глубина:</b> ${src.depth}<br>
-          <b>Активность:</b> ${src.activity}<br>
-          <b>Потенциальная экономия:</b> ${src.saving}<br>
-          <b>Потенциал:</b> ${src.potential}
-        `);
+  
+    // Добавление маркеров
+    sources.forEach(source => {
+      var isEnglish = window.location.pathname.includes('index-en.html');
+      var marker = L.marker(source.coords).addTo(map);
+      var popupContent = isEnglish
+        ? `<b>${source.name}</b><br>Temperature: ${source.temp}<br>Depth: ${source.depth}<br>Activity: ${source.activity}<br>Savings: $${source.saving}/year<br>Potential: ${source.potential}`
+        : `<b>${source.nameRu}</b><br>Температура: ${source.temp}<br>Глубина: ${source.depth}<br>Активность: ${source.activity}<br>Экономия: $${source.saving}/год<br>Потенциал: ${source.potential}`;
+      marker.bindPopup(popupContent);
     });
-
-    // Координаты центров регионов
-    const regions = {
-      'Kyrgyzstan': [41.2044, 74.7661],
-      'Issyk-Kul': [42.416668, 77.250000],
-      'Ak-Suu': [42.461981, 78.539749],
-      'Jeti-Oguz': [42.330556, 78.239722],
-      'Jyrgalang': [42.600000, 79.030000],
-      'Barbulak': [42.247204, 76.579165],
-      'Cholpon-Ata': [42.650000, 77.083000],
-      'Kosh-Kol': [42.530000, 76.610000]
-    };
-
-    // Обработчик выбора региона
-    document.getElementById('regionSelect').addEventListener('change', e => {
-      const coords = regions[e.target.value];
-      if (coords) {
-        map.setView(coords, e.target.value === 'Kyrgyzstan' ? 6 : 10);
-      }
-    });
-
-    // Калькулятор
-    function calculate() {
-      const area = parseFloat(document.getElementById("area").value);
-      const source = document.getElementById("source").value;
-      const region = document.getElementById("region").value;
-
-      if (isNaN(area) || area <= 0) {
-        showResult("Пожалуйста, введите корректную площадь дома", false);
-        return;
-      }
-
-      // Коэффициенты для регионов
-      const regionFactors = {
-        "Bishkek": 1.1,
-        "Issyk-Kul": 0.9,
-        "Chuy": 1.05,
-        "Naryn": 0.95,
-        "Osh": 1.0,
-        "General": 1.0
-      };
-
-      const factor = regionFactors[region] || 1;
-
-      const data = {
-        coal: { cost: 90, co2: 3.5, name: "Уголь" },
-        wood: { cost: 70, co2: 2.8, name: "Дрова" },
-        electricity: { cost: 100, co2: 1.5, name: "Электричество" },
-        gas: { cost: 80, co2: 2.0, name: "Природный газ" }
-      };
-
-      const current = data[source];
-      const geoCost = Math.round(area * 40 * factor);
-      const currentCost = Math.round(area * current.cost);
-      const saving = currentCost - geoCost;
-      const payback = saving > 0 ? Math.ceil(geoCost / saving) : "∞";
-      const co2Reduction = Math.round(area * current.co2 * 0.8);
-
-      showResult(`
-        <div class="result-item">
-          <span>Текущий источник:</span>
-          <span>${current.name}</span>
-        </div>
-        <div class="result-item">
-          <span>Текущие расходы:</span>
-          <span>${currentCost} сом/год</span>
-        </div>
-        <div class="result-item highlight">
-          <span>С геотермальной системой:</span>
-          <span>${geoCost} сом/год</span>
-        </div>
-        <div class="result-item highlight">
-          <span>Экономия:</span>
-          <span>${saving} сом/год (${Math.round(saving/currentCost*100)}%)</span>
-        </div>
-        <div class="result-item">
-          <span>Срок окупаемости:</span>
-          <span>${payback} лет</span>
-        </div>
-        <div class="result-item eco">
-          <span>Снижение выбросов CO₂:</span>
-          <span>${co2Reduction} кг/год</span>
-        </div>
-      `, true);
-    }
-
-    function showResult(html, isSuccess) {
-      const result = document.getElementById("result");
-      result.innerHTML = html;
-      result.style.backgroundColor = isSuccess ? "rgba(76, 175, 80, 0.1)" : "rgba(255, 193, 7, 0.1)";
-      result.classList.remove("hidden");
-    }
-
-    // Регистрация и вход
+  
+    // Регистрация и вход (оставляем без изменений)
     function handleRegister(event) {
       event.preventDefault();
       const name = document.getElementById("regName").value;
       const pass = document.getElementById("regPass").value;
       const email = document.getElementById("regEmail").value;
-
+  
       if (pass.length < 6) {
         alert("Пароль должен содержать не менее 6 символов");
         return false;
       }
-
+  
       localStorage.setItem("username", name);
       localStorage.setItem("password", pass);
       localStorage.setItem("email", email);
-
+  
       alert("Вы успешно зарегистрировались! Теперь вы можете войти.");
       window.location.href = "#account";
       return false;
     }
-
+  
     function handleLogin(event) {
       event.preventDefault();
       const name = document.getElementById("loginName").value;
@@ -460,71 +332,44 @@
       const savedName = localStorage.getItem("username");
       const savedPass = localStorage.getItem("password");
       const savedEmail = localStorage.getItem("email");
-
+  
       if ((name === savedName || name === savedEmail) && pass === savedPass) {
         document.getElementById("account").classList.add("hidden");
         document.getElementById("profile").classList.remove("hidden");
         document.getElementById("profileLink").classList.remove("hidden");
         document.getElementById("logoutBtn").classList.remove("hidden");
-
+  
         document.getElementById("welcomeText").textContent = `Добро пожаловать, ${savedName}!`;
         document.getElementById("profileUsername").textContent = savedName;
         document.getElementById("profileEmail").textContent = savedEmail;
-
+  
         document.querySelectorAll('.nav-link').forEach(link => {
           if (link.getAttribute('href') === '#register' || link.getAttribute('href') === '#account') {
             link.classList.add('hidden');
           }
         });
-
+  
         window.location.href = "#profile";
       } else {
         alert("Неверное имя пользователя или пароль");
       }
       return false;
     }
-
+  
     function logout() {
       document.getElementById("profile").classList.add("hidden");
       document.getElementById("profileLink").classList.add("hidden");
       document.getElementById("logoutBtn").classList.add("hidden");
-
+  
       document.querySelectorAll('.nav-link').forEach(link => {
         if (link.getAttribute('href') === '#register' || link.getAttribute('href') === '#account') {
           link.classList.remove('hidden');
         }
       });
-
+  
       window.location.href = "#about";
     }
-
-    // Курсы
-    function openCourse(courseId) {
-      alert(`Курс "${courseId}" будет доступен в ближайшее время!`);
-    }
-
-    // Табы
-    function openTab(tabId) {
-      document.querySelectorAll('.tab-content').forEach(tab => {
-        tab.classList.remove('active');
-      });
-      document.querySelectorAll('.tab-btn').forEach(btn => {
-        btn.classList.remove('active');
-      });
-      document.getElementById(tabId).classList.add('active');
-      event.currentTarget.classList.add('active');
-    }
-
-    // Контакт с проектом
-    function contactProject(projectName) {
-      alert(`В полной версии сайта вы сможете связаться с проектом "${projectName}"`);
-    }
-
-    // Бургер-меню
-    function toggleMenu() {
-      document.querySelector('.nav-menu').classList.toggle('active');
-    }
-
+  
     // Плавная прокрутка
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function(e) {
@@ -537,7 +382,7 @@
         }
       });
     });
-
+  
     // Анимация при скролле
     function checkScroll() {
       const elements = document.querySelectorAll('.animate-on-scroll');
@@ -548,16 +393,11 @@
         }
       });
     }
-
+  
     window.addEventListener('scroll', checkScroll);
     checkScroll();
-
-    // Перенаправление по языку (временно закомментировано для тестирования)
-    // const userLang = navigator.language || navigator.userLanguage;
-    // if (!userLang.startsWith('ru') && !window.location.pathname.includes('index-en.html')) {
-    //   window.location.href = "index-en.html";
-    // }
   </script>
+  <script src="chatbot.js"></script>
 </body>
 <script src="chatbot.js"></script>
 <!-- Чат-бот -->
