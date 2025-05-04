@@ -278,7 +278,7 @@
         marker.bindPopup(popupContent);
       });
     
-      // Регистрация и вход (оставляем без изменений)
+      // Регистрация и вход
       function handleRegister(event) {
         event.preventDefault();
         const name = document.getElementById("regName").value;
@@ -371,6 +371,39 @@
       window.addEventListener('scroll', checkScroll);
       checkScroll();
     </script>
+    
+    <!-- Секция Регистрация -->
+    <div id="register" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="document.getElementById('register').classList.add('hidden')">&times;</span>
+        <h2>Регистрация</h2>
+        <form onsubmit="handleRegister(event)">
+          <label for="regName">Имя:</label><br>
+          <input type="text" id="regName" name="regName" required><br>
+          <label for="regEmail">Email:</label><br>
+          <input type="email" id="regEmail" name="regEmail" required><br>
+          <label for="regPass">Пароль:</label><br>
+          <input type="password" id="regPass" name="regPass" required><br><br>
+          <button type="submit">Зарегистрироваться</button>
+        </form>
+      </div>
+    </div>
+    
+    <!-- Секция Вход -->
+    <div id="account" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="document.getElementById('account').classList.add('hidden')">&times;</span>
+        <h2>Вход</h2>
+        <form onsubmit="handleLogin(event)">
+          <label for="loginName">Имя или Email:</label><br>
+          <input type="text" id="loginName" name="loginName" required><br>
+          <label for="loginPass">Пароль:</label><br>
+          <input type="password" id="loginPass" name="loginPass" required><br><br>
+          <button type="submit">Войти</button>
+        </form>
+      </div>
+    </div>
+    
     <script src="chatbot.js"></script>
 </body>
 <script src="chatbot.js"></script>
