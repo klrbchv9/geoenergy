@@ -139,4 +139,139 @@
       <div id="result" class="result hidden"></div>
     </section>
 
-    <
+    <section id="invest">
+      <h2 class="section-title animate__animated animate__fadeIn">For Investors and Partners</h2>
+      <div class="tabs">
+        <button class="tab-btn active" onclick="openTab('investors')">Investors</button>
+        <button class="tab-btn" onclick="openTab('government')">Government Programs</button>
+        <button class="tab-btn" onclick="openTab('monetization')">Monetization</button>
+      </div>
+      <div id="investors" class="tab-content active">
+        <p>Investors interested in geothermal projects:</p>
+        <ul class="project-list mt-2">
+          <li class="project-item">
+            <h3 class="project-title">Green Energy Fund</h3>
+            <p>An investment fund specializing in renewable energy. Ready to consider projects from $25,000 to $500,000.</p>
+            <button class="btn btn-outline mt-2" onclick="contactProject('Green Energy Fund')">Contact</button>
+          </li>
+        </ul>
+      </div>
+      <div id="government" class="tab-content">
+        <p>Government programs supporting renewable energy:</p>
+        <ul class="project-list mt-2">
+          <li class="project-item">
+            <h3 class="project-title">"Green Energy" Program</h3>
+            <p>Subsidies up to 30% of equipment costs for geothermal installations in private homes.</p>
+            <button class="btn btn-outline mt-2" onclick="contactProject('Green Energy Program')">Learn More</button>
+          </li>
+          <li class="project-item">
+            <h3 class="project-title">Grants for Startups</h3>
+            <p>Competition for the best renewable energy project with a prize pool of up to $20,000.</p>
+            <button class="btn btn-outline mt-2" onclick="contactProject('Grants for Startups')">Learn More</button>
+          </li>
+        </ul>
+      </div>
+      <div id="monetization" class="tab-content">
+        <p>How ZherBulagy generates revenue:</p>
+        <ul class="project-list mt-2">
+          <li class="project-item">
+            <h3 class="project-title">Premium Educational Courses</h3>
+            <p>Paid courses on geothermal energy for homeowners and professionals ($10–50 per course).</p>
+          </li>
+          <li class="project-item">
+            <h3 class="project-title">Consulting Services</h3>
+            <p>Consultations for businesses and households on installing geothermal systems (starting at $100).</p>
+          </li>
+          <li class="project-item">
+            <h3 class="project-title">Advertising Partnerships</h3>
+            <p>Collaborations with renewable energy companies for advertising on our platform.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="register">
+      <h2 class="section-title animate__animated animate__fadeIn">Register</h2>
+      <form class="form-container" onsubmit="return handleRegister(event)">
+        <div class="form-group">
+          <label for="regName">Name:</label>
+          <input type="text" id="regName" class="form-control" placeholder="Enter your name" required>
+        </div>
+        <div class="form-group">
+          <label for="regEmail">Email:</label>
+          <input type="email" id="regEmail" class="form-control" placeholder="Enter your email" required>
+        </div>
+        <div class="form-group">
+          <label for="regPass">Password:</label>
+          <input type="password" id="regPass" class="form-control" placeholder="Enter password" required>
+        </div>
+        <button type="submit" class="btn btn-primary mt-2">Register</button>
+      </form>
+    </section>
+
+    <section id="account">
+      <h2 class="section-title animate__animated animate__fadeIn">Login</h2>
+      <form class="form-container" onsubmit="return handleLogin(event)">
+        <div class="form-group">
+          <label for="loginName">Name or Email:</label>
+          <input type="text" id="loginName" class="form-control" placeholder="Enter name or email" required>
+        </div>
+        <div class="form-group">
+          <label for="loginPass">Password:</label>
+          <input type="password" id="loginPass" class="form-control" placeholder="Enter password" required>
+        </div>
+        <button type="submit" class="btn btn-primary mt-2">Login</button>
+      </form>
+    </section>
+
+    <section id="profile" class="hidden">
+      <h2 class="section-title animate__animated animate__fadeIn" id="welcomeText">Welcome!</h2>
+      <div class="card">
+        <p><strong>Name:</strong> <span id="profileUsername"></span></p>
+        <p><strong>Email:</strong> <span id="profileEmail"></span></p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Technovation Girls 2025</p>
+  </footer>
+
+  <div class="chatbot-container" id="chatbot">
+    <div class="chatbot-header">
+      <h3></h3>
+      <button class="chatbot-close" onclick="toggleChatbot()">×</button>
+    </div>
+    <div class="chatbot-messages" id="chatbotMessages">
+      <div class="message bot-message"></div>
+    </div>
+    <div class="chatbot-input">
+      <input type="text" id="chatbotInput" placeholder="">
+      <button onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+  <button class="chatbot-toggle" onclick="toggleChatbot()">💬</button>
+
+  <script type="module">
+    import { handleRegister, handleLogin, logout } from './auth.js';
+    import { toggleMenu } from './navigation.js';
+    import { toggleChatbot, sendMessage } from './chatbot.js';
+    import { map } from './map.js';
+    import { checkScroll } from './utils.js';
+    import { calculate, openCourse, contactProject, openTab } from './app.js';
+
+    // Экспортируем функции в глобальную область видимости
+    window.handleRegister = handleRegister;
+    window.handleLogin = handleLogin;
+    window.logout = logout;
+    window.toggleMenu = toggleMenu;
+    window.toggleChatbot = toggleChatbot;
+    window.sendMessage = sendMessage;
+    window.calculate = calculate;
+    window.openCourse = openCourse;
+    window.contactProject = contactProject;
+    window.openTab = openTab;
+  </script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</body>
+</html>

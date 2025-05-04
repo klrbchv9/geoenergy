@@ -258,5 +258,20 @@
     import { toggleChatbot, sendMessage } from './chatbot.js';
     import { map } from './map.js';
     import { checkScroll } from './utils.js';
+    import { calculate, openCourse, contactProject, openTab } from './app.js';
+
+    // Экспортируем функции в глобальную область видимости
+    window.handleRegister = handleRegister;
+    window.handleLogin = handleLogin;
+    window.logout = logout;
+    window.toggleMenu = toggleMenu;
+    window.toggleChatbot = toggleChatbot;
+    window.sendMessage = sendMessage;
+    window.calculate = calculate;
+    window.openCourse = openCourse;
+    window.contactProject = contactProject;
+    window.openTab = openTab;
   </script>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</body>
+</html>
