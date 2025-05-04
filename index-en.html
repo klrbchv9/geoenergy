@@ -271,9 +271,9 @@
   
     // Базовая карта (OpenStreetMap)
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-      maxZoom: 10, // Ограничим максимальный зум, чтобы не показывать детали соседних стран
-      minZoom: 5   // Минимум зум, чтобы избежать вылета за пределы
+      attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      maxZoom: 10,
+      minZoom: 5
     }).addTo(map);
   
     // Данные о геотермальных источниках
@@ -294,10 +294,40 @@
       { name: 'Tash-Kumyr', nameRu: 'Таш-Кумыр', coords: [41.2000, 72.5000], temp: '40°C', depth: '1000m', activity: 'низкая', saving: 300, potential: 'Низкий' },
     ];
   
-    // Добавление маркеров
+    // Функция для создания иконок с цветом
+    function getMarkerIcon(activity) {
+      let color;
+      switch (activity.toLowerCase()) {
+        case 'высокая':
+        case 'high':
+          color = '#28a745'; // Зелёный
+          break;
+        case 'средняя':
+        case 'medium':
+          color = '#ffc107'; // Жёлтый
+          break;
+        case 'низкая':
+        case 'low':
+          color = '#dc3545'; // Красный
+          break;
+        default:
+          color = '#3388ff'; // Синий по умолчанию
+      }
+      return new L.Icon({
+        iconUrl: `https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-${color.replace('#', '')}.png`,
+        shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+        iconSize: [25, 41],
+        iconAnchor: [12, 41],
+        popupAnchor: [1, -34],
+        shadowSize: [41, 41]
+      });
+    }
+  
+    // Добавление маркеров с цветами
     sources.forEach(source => {
       var isEnglish = window.location.pathname.includes('index-en.html');
-      var marker = L.marker(source.coords).addTo(map);
+      var markerIcon = getMarkerIcon(source.activity);
+      var marker = L.marker(source.coords, { icon: markerIcon }).addTo(map);
       var popupContent = isEnglish
         ? `<b>${source.name}</b><br>Temperature: ${source.temp}<br>Depth: ${source.depth}<br>Activity: ${source.activity}<br>Savings: $${source.saving}/year<br>Potential: ${source.potential}`
         : `<b>${source.nameRu}</b><br>Температура: ${source.temp}<br>Глубина: ${source.depth}<br>Активность: ${source.activity}<br>Экономия: $${source.saving}/год<br>Потенциал: ${source.potential}`;

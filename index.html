@@ -207,197 +207,176 @@
     </section>
 
     <!-- Секция "Регистрация" -->
-    <section id="register">
-      <h2 class="section-title animate__animated animate__fadeIn">Регистрация</h2>
-      <form class="form-container" onsubmit="return handleRegister(event)">
-        <div class="form-group">
-          <label for="regName">Имя:</label>
-          <input type="text" id="regName" class="form-control" placeholder="Введите ваше имя" required>
-        </div>
-        <div class="form-group">
-          <label for="regEmail">Email:</label>
-          <input type="email" id="regEmail" class="form-control" placeholder="Введите ваш email" required>
-        </div>
-        <div class="form-group">
-          <label for="regPass">Пароль:</label>
-          <input type="password" id="regPass" class="form-control" placeholder="Введите пароль" required>
-        </div>
-        <button type="submit" class="btn btn-primary mt-2">Зарегистрироваться</button>
-      </form>
-    </section>
-
-    <!-- Секция "Вход" -->
-    <section id="account">
-      <h2 class="section-title animate__animated animate__fadeIn">Вход</h2>
-      <form class="form-container" onsubmit="return handleLogin(event)">
-        <div class="form-group">
-          <label for="loginName">Имя или Email:</label>
-          <input type="text" id="loginName" class="form-control" placeholder="Введите имя или email" required>
-        </div>
-        <div class="form-group">
-          <label for="loginPass">Пароль:</label>
-          <input type="password" id="loginPass" class="form-control" placeholder="Введите пароль" required>
-        </div>
-        <button type="submit" class="btn btn-primary mt-2">Войти</button>
-      </form>
-    </section>
-
-    <!-- Секция "Профиль" -->
-    <section id="profile" class="hidden">
-      <h2 class="section-title animate__animated animate__fadeIn" id="welcomeText">Добро пожаловать!</h2>
-      <div class="card">
-        <p><strong>Имя:</strong> <span id="profileUsername"></span></p>
-        <p><strong>Email:</strong> <span id="profileEmail"></span></p>
-      </div>
-    </section>
-  </main>
-
-  <!-- Футер -->
-  <footer>
-    <p>Technovation Girls 2025</p>
-  </footer>
-
-  <!-- Скрипты -->
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script>
-    // Инициализация карты
-    var map = L.map('map', {
-      maxBounds: L.latLngBounds(
-        L.latLng(39.0, 69.0), // Юго-западный угол (мин. широта, мин. долгота)
-        L.latLng(43.0, 80.0)  // Северо-восточный угол (макс. широта, макс. долгота)
-      ),
-      maxBoundsViscosity: 1.0 // Жёсткое ограничение области
-    }).setView([41.2044, 74.7661], 6); // Центр Кыргызстана, зум 6
-  
-    // Базовая карта (OpenStreetMap)
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-      maxZoom: 10, // Ограничим максимальный зум, чтобы не показывать детали соседних стран
-      minZoom: 5   // Минимум зум, чтобы избежать вылета за пределы
-    }).addTo(map);
-  
-    // Данные о геотермальных источниках
-    var sources = [
-      { name: 'Jeti-Oguz', nameRu: 'Джети-Огуз', coords: [42.330556, 78.239722], temp: '39–40 °C', depth: 'до 200 м', activity: 'средняя', saving: 350, potential: 'Для отопления домов и теплиц' },
-      { name: 'Jyrgalang', nameRu: 'Джыргалан', coords: [42.600000, 79.030000], temp: '35–43 °C', depth: 'до 200 м', activity: 'средняя', saving: 300, potential: 'Курортное использование' },
-      { name: 'Ak-Suu', nameRu: 'Ак-Суу', coords: [42.461981, 78.539749], temp: '58 °C', depth: 'до 150 м', activity: 'высокая', saving: 500, potential: 'Промышленное использование' },
-      { name: 'Barbulak', nameRu: 'Барбулак', coords: [42.247204, 76.579165], temp: '39–42 °C', depth: 'до 180 м', activity: 'средняя', saving: 320, potential: 'Локальное отопление' },
-      { name: 'Cholpon-Ata', nameRu: 'Чолпон-Ата', coords: [42.650000, 77.083000], temp: '35–53 °C', depth: '200–800 м', activity: 'высокая', saving: 400, potential: 'Курортное и муниципальное использование' },
-      { name: 'Kosh-Kol', nameRu: 'Кош-Кол', coords: [42.530000, 76.610000], temp: '39–42 °C', depth: 'до 200 м', activity: 'средняя', saving: 300, potential: 'Локальное отопление' },
-      { name: 'Bishkek (Alamedin)', nameRu: 'Бишкек (Аламедин)', coords: [42.8746, 74.5698], temp: '70°C', depth: '2000m', activity: 'высокая', saving: 700, potential: 'Очень высокий' },
-      { name: 'Altyn-Arashan', nameRu: 'Алтын-Арашан', coords: [42.8200, 75.3000], temp: '60°C', depth: '1700m', activity: 'высокая', saving: 550, potential: 'Высокий' },
-      { name: 'Osh', nameRu: 'Ош', coords: [40.5300, 72.8000], temp: '35°C', depth: '800m', activity: 'низкая', saving: 250, potential: 'Низкий' },
-      { name: 'Aravan', nameRu: 'Араван', coords: [40.7000, 72.6000], temp: '45°C', depth: '1100m', activity: 'средняя', saving: 350, potential: 'Средний' },
-      { name: 'Alai (Kashka-Suu)', nameRu: 'Алай (Кашка-Суу)', coords: [39.5000, 72.0000], temp: '50°C', depth: '1300m', activity: 'средняя', saving: 400, potential: 'Средний' },
-      { name: 'Naryn', nameRu: 'Нарын', coords: [41.4300, 76.0000], temp: '30°C', depth: '2000m', activity: 'низкая', saving: 200, potential: 'Низкий' },
-      { name: 'Ala-Buka', nameRu: 'Ала-Бука', coords: [41.0000, 72.9000], temp: '55°C', depth: '1500m', activity: 'высокая', saving: 450, potential: 'Высокий' },
-      { name: 'Tash-Kumyr', nameRu: 'Таш-Кумыр', coords: [41.2000, 72.5000], temp: '40°C', depth: '1000m', activity: 'низкая', saving: 300, potential: 'Низкий' },
-    ];
-  
-    // Добавление маркеров
-    sources.forEach(source => {
-      var isEnglish = window.location.pathname.includes('index-en.html');
-      var marker = L.marker(source.coords).addTo(map);
-      var popupContent = isEnglish
-        ? `<b>${source.name}</b><br>Temperature: ${source.temp}<br>Depth: ${source.depth}<br>Activity: ${source.activity}<br>Savings: $${source.saving}/year<br>Potential: ${source.potential}`
-        : `<b>${source.nameRu}</b><br>Температура: ${source.temp}<br>Глубина: ${source.depth}<br>Активность: ${source.activity}<br>Экономия: $${source.saving}/год<br>Потенциал: ${source.potential}`;
-      marker.bindPopup(popupContent);
-    });
-  
-    // Регистрация и вход (оставляем без изменений)
-    function handleRegister(event) {
-      event.preventDefault();
-      const name = document.getElementById("regName").value;
-      const pass = document.getElementById("regPass").value;
-      const email = document.getElementById("regEmail").value;
-  
-      if (pass.length < 6) {
-        alert("Пароль должен содержать не менее 6 символов");
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+      // Инициализация карты
+      var map = L.map('map', {
+        maxBounds: L.latLngBounds(
+          L.latLng(39.0, 69.0), // Юго-западный угол (мин. широта, мин. долгота)
+          L.latLng(43.0, 80.0)  // Северо-восточный угол (макс. широта, макс. долгота)
+        ),
+        maxBoundsViscosity: 1.0 // Жёсткое ограничение области
+      }).setView([41.2044, 74.7661], 6); // Центр Кыргызстана, зум 6
+    
+      // Базовая карта (OpenStreetMap)
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        maxZoom: 10,
+        minZoom: 5
+      }).addTo(map);
+    
+      // Данные о геотермальных источниках
+      var sources = [
+        { name: 'Jeti-Oguz', nameRu: 'Джети-Огуз', coords: [42.330556, 78.239722], temp: '39–40 °C', depth: 'до 200 м', activity: 'средняя', saving: 350, potential: 'Для отопления домов и теплиц' },
+        { name: 'Jyrgalang', nameRu: 'Джыргалан', coords: [42.600000, 79.030000], temp: '35–43 °C', depth: 'до 200 м', activity: 'средняя', saving: 300, potential: 'Курортное использование' },
+        { name: 'Ak-Suu', nameRu: 'Ак-Суу', coords: [42.461981, 78.539749], temp: '58 °C', depth: 'до 150 м', activity: 'высокая', saving: 500, potential: 'Промышленное использование' },
+        { name: 'Barbulak', nameRu: 'Барбулак', coords: [42.247204, 76.579165], temp: '39–42 °C', depth: 'до 180 м', activity: 'средняя', saving: 320, potential: 'Локальное отопление' },
+        { name: 'Cholpon-Ata', nameRu: 'Чолпон-Ата', coords: [42.650000, 77.083000], temp: '35–53 °C', depth: '200–800 м', activity: 'высокая', saving: 400, potential: 'Курортное и муниципальное использование' },
+        { name: 'Kosh-Kol', nameRu: 'Кош-Кол', coords: [42.530000, 76.610000], temp: '39–42 °C', depth: 'до 200 м', activity: 'средняя', saving: 300, potential: 'Локальное отопление' },
+        { name: 'Bishkek (Alamedin)', nameRu: 'Бишкек (Аламедин)', coords: [42.8746, 74.5698], temp: '70°C', depth: '2000m', activity: 'высокая', saving: 700, potential: 'Очень высокий' },
+        { name: 'Altyn-Arashan', nameRu: 'Алтын-Арашан', coords: [42.8200, 75.3000], temp: '60°C', depth: '1700m', activity: 'высокая', saving: 550, potential: 'Высокий' },
+        { name: 'Osh', nameRu: 'Ош', coords: [40.5300, 72.8000], temp: '35°C', depth: '800m', activity: 'низкая', saving: 250, potential: 'Низкий' },
+        { name: 'Aravan', nameRu: 'Араван', coords: [40.7000, 72.6000], temp: '45°C', depth: '1100m', activity: 'средняя', saving: 350, potential: 'Средний' },
+        { name: 'Alai (Kashka-Suu)', nameRu: 'Алай (Кашка-Суу)', coords: [39.5000, 72.0000], temp: '50°C', depth: '1300m', activity: 'средняя', saving: 400, potential: 'Средний' },
+        { name: 'Naryn', nameRu: 'Нарын', coords: [41.4300, 76.0000], temp: '30°C', depth: '2000m', activity: 'низкая', saving: 200, potential: 'Низкий' },
+        { name: 'Ala-Buka', nameRu: 'Ала-Бука', coords: [41.0000, 72.9000], temp: '55°C', depth: '1500m', activity: 'высокая', saving: 450, potential: 'Высокий' },
+        { name: 'Tash-Kumyr', nameRu: 'Таш-Кумыр', coords: [41.2000, 72.5000], temp: '40°C', depth: '1000m', activity: 'низкая', saving: 300, potential: 'Низкий' },
+      ];
+    
+      // Функция для создания иконок с цветом
+      function getMarkerIcon(activity) {
+        let color;
+        switch (activity.toLowerCase()) {
+          case 'высокая':
+          case 'high':
+            color = '#28a745'; // Зелёный
+            break;
+          case 'средняя':
+          case 'medium':
+            color = '#ffc107'; // Жёлтый
+            break;
+          case 'низкая':
+          case 'low':
+            color = '#dc3545'; // Красный
+            break;
+          default:
+            color = '#3388ff'; // Синий по умолчанию
+        }
+        return new L.Icon({
+          iconUrl: `https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-${color.replace('#', '')}.png`,
+          shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+          iconSize: [25, 41],
+          iconAnchor: [12, 41],
+          popupAnchor: [1, -34],
+          shadowSize: [41, 41]
+        });
+      }
+    
+      // Добавление маркеров с цветами
+      sources.forEach(source => {
+        var isEnglish = window.location.pathname.includes('index-en.html');
+        var markerIcon = getMarkerIcon(source.activity);
+        var marker = L.marker(source.coords, { icon: markerIcon }).addTo(map);
+        var popupContent = isEnglish
+          ? `<b>${source.name}</b><br>Temperature: ${source.temp}<br>Depth: ${source.depth}<br>Activity: ${source.activity}<br>Savings: $${source.saving}/year<br>Potential: ${source.potential}`
+          : `<b>${source.nameRu}</b><br>Температура: ${source.temp}<br>Глубина: ${source.depth}<br>Активность: ${source.activity}<br>Экономия: $${source.saving}/год<br>Потенциал: ${source.potential}`;
+        marker.bindPopup(popupContent);
+      });
+    
+      // Регистрация и вход (оставляем без изменений)
+      function handleRegister(event) {
+        event.preventDefault();
+        const name = document.getElementById("regName").value;
+        const pass = document.getElementById("regPass").value;
+        const email = document.getElementById("regEmail").value;
+    
+        if (pass.length < 6) {
+          alert("Пароль должен содержать не менее 6 символов");
+          return false;
+        }
+    
+        localStorage.setItem("username", name);
+        localStorage.setItem("password", pass);
+        localStorage.setItem("email", email);
+    
+        alert("Вы успешно зарегистрировались! Теперь вы можете войти.");
+        window.location.href = "#account";
         return false;
       }
-  
-      localStorage.setItem("username", name);
-      localStorage.setItem("password", pass);
-      localStorage.setItem("email", email);
-  
-      alert("Вы успешно зарегистрировались! Теперь вы можете войти.");
-      window.location.href = "#account";
-      return false;
-    }
-  
-    function handleLogin(event) {
-      event.preventDefault();
-      const name = document.getElementById("loginName").value;
-      const pass = document.getElementById("loginPass").value;
-      const savedName = localStorage.getItem("username");
-      const savedPass = localStorage.getItem("password");
-      const savedEmail = localStorage.getItem("email");
-  
-      if ((name === savedName || name === savedEmail) && pass === savedPass) {
-        document.getElementById("account").classList.add("hidden");
-        document.getElementById("profile").classList.remove("hidden");
-        document.getElementById("profileLink").classList.remove("hidden");
-        document.getElementById("logoutBtn").classList.remove("hidden");
-  
-        document.getElementById("welcomeText").textContent = `Добро пожаловать, ${savedName}!`;
-        document.getElementById("profileUsername").textContent = savedName;
-        document.getElementById("profileEmail").textContent = savedEmail;
-  
+    
+      function handleLogin(event) {
+        event.preventDefault();
+        const name = document.getElementById("loginName").value;
+        const pass = document.getElementById("loginPass").value;
+        const savedName = localStorage.getItem("username");
+        const savedPass = localStorage.getItem("password");
+        const savedEmail = localStorage.getItem("email");
+    
+        if ((name === savedName || name === savedEmail) && pass === savedPass) {
+          document.getElementById("account").classList.add("hidden");
+          document.getElementById("profile").classList.remove("hidden");
+          document.getElementById("profileLink").classList.remove("hidden");
+          document.getElementById("logoutBtn").classList.remove("hidden");
+    
+          document.getElementById("welcomeText").textContent = `Добро пожаловать, ${savedName}!`;
+          document.getElementById("profileUsername").textContent = savedName;
+          document.getElementById("profileEmail").textContent = savedEmail;
+    
+          document.querySelectorAll('.nav-link').forEach(link => {
+            if (link.getAttribute('href') === '#register' || link.getAttribute('href') === '#account') {
+              link.classList.add('hidden');
+            }
+          });
+    
+          window.location.href = "#profile";
+        } else {
+          alert("Неверное имя пользователя или пароль");
+        }
+        return false;
+      }
+    
+      function logout() {
+        document.getElementById("profile").classList.add("hidden");
+        document.getElementById("profileLink").classList.add("hidden");
+        document.getElementById("logoutBtn").classList.add("hidden");
+    
         document.querySelectorAll('.nav-link').forEach(link => {
           if (link.getAttribute('href') === '#register' || link.getAttribute('href') === '#account') {
-            link.classList.add('hidden');
+            link.classList.remove('hidden');
           }
         });
-  
-        window.location.href = "#profile";
-      } else {
-        alert("Неверное имя пользователя или пароль");
+    
+        window.location.href = "#about";
       }
-      return false;
-    }
-  
-    function logout() {
-      document.getElementById("profile").classList.add("hidden");
-      document.getElementById("profileLink").classList.add("hidden");
-      document.getElementById("logoutBtn").classList.add("hidden");
-  
-      document.querySelectorAll('.nav-link').forEach(link => {
-        if (link.getAttribute('href') === '#register' || link.getAttribute('href') === '#account') {
-          link.classList.remove('hidden');
-        }
+    
+      // Плавная прокрутка
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            target.scrollIntoView({
+              behavior: 'smooth'
+            });
+          }
+        });
       });
-  
-      window.location.href = "#about";
-    }
-  
-    // Плавная прокрутка
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          target.scrollIntoView({
-            behavior: 'smooth'
-          });
-        }
-      });
-    });
-  
-    // Анимация при скролле
-    function checkScroll() {
-      const elements = document.querySelectorAll('.animate-on-scroll');
-      elements.forEach(el => {
-        const rect = el.getBoundingClientRect();
-        if (rect.top < window.innerHeight - 100) {
-          el.classList.add('visible');
-        }
-      });
-    }
-  
-    window.addEventListener('scroll', checkScroll);
-    checkScroll();
-  </script>
-  <script src="chatbot.js"></script>
+    
+      // Анимация при скролле
+      function checkScroll() {
+        const elements = document.querySelectorAll('.animate-on-scroll');
+        elements.forEach(el => {
+          const rect = el.getBoundingClientRect();
+          if (rect.top < window.innerHeight - 100) {
+            el.classList.add('visible');
+          }
+        });
+      }
+    
+      window.addEventListener('scroll', checkScroll);
+      checkScroll();
+    </script>
+    <script src="chatbot.js"></script>
 </body>
 <script src="chatbot.js"></script>
 <!-- Чат-бот -->
