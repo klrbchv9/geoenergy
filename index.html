@@ -559,4 +559,21 @@
     // }
   </script>
 </body>
+<script src="chatbot.js"></script>
+<!-- Чат-бот -->
+<div class="chatbot-container" id="chatbot">
+  <div class="chatbot-header">
+    <h3>ЖерБулагы Чат-бот</h3>
+    <button class="chatbot-close" onclick="toggleChatbot()">✕</button>
+  </div>
+  <div class="chatbot-messages" id="chatbotMessages">
+    <div class="message bot-message">Привет! Я помогу выбрать геотермальное решение. В каком регионе ты находишься?</div>
+  </div>
+  <div class="chatbot-input">
+    <input type="text" id="chatbotInput" placeholder="Введите ответ..." onkeypress="if(event.key === 'Enter') sendMessage()">
+    <button onclick="sendMessage()">➤</button>
+  </div>
+</div>
+<button class="chatbot-toggle" onclick="toggleChatbot()">💬</button>
+
 </html>

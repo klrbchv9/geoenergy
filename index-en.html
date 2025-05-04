@@ -559,4 +559,21 @@
     // }
   </script>
 </body>
+<script src="chatbot.js"></script>
+<!-- Чат-бот -->
+<div class="chatbot-container" id="chatbot">
+  <div class="chatbot-header">
+    <h3>ZherBulagy Chatbot</h3>
+    <button class="chatbot-close" onclick="toggleChatbot()">✕</button>
+  </div>
+  <div class="chatbot-messages" id="chatbotMessages">
+    <div class="message bot-message">Hi! I'll help you choose a geothermal solution. What region are you located in?</div>
+  </div>
+  <div class="chatbot-input">
+    <input type="text" id="chatbotInput" placeholder="Enter your response..." onkeypress="if(event.key === 'Enter') sendMessage()">
+    <button onclick="sendMessage()">➤</button>
+  </div>
+</div>
+<button class="chatbot-toggle" onclick="toggleChatbot()">💬</button>
+
 </html>
