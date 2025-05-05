@@ -5,14 +5,16 @@ function handleRegister(event) {
   const password = document.getElementById('regPass').value;
   const isEnglish = window.location.pathname.includes('index-en.html');
 
-  if (localStorage.getItem(email)) {
+  let users = JSON.parse(localStorage.getItem('users')) || [];
+  if (users.some(user => user.email === email)) {
     alert(isEnglish
       ? 'This email is already registered!'
       : 'Этот email уже зарегистрирован!');
     return false;
   }
 
-  localStorage.setItem(email, JSON.stringify({ name, password }));
+  users.push({ name, email, password });
+  localStorage.setItem('users', JSON.stringify(users));
   alert(isEnglish
     ? 'Registration successful! Please login.'
     : 'Регистрация успешна! Пожалуйста, войдите.');
@@ -24,18 +26,22 @@ function handleRegister(event) {
 
 function handleLogin(event) {
   event.preventDefault();
+  console.log('handleLogin called'); // Debugging
+
   const loginName = document.getElementById('loginName').value;
   const password = document.getElementById('loginPass').value;
   const isEnglish = window.location.pathname.includes('index-en.html');
 
-  const user = JSON.parse(localStorage.getItem(loginName)) || JSON.parse(localStorage.getItem(Object.keys(localStorage).find(key => {
-    const user = JSON.parse(localStorage.getItem(key));
-    return user.name === loginName;
-  })));
+  console.log('Login input:', { loginName, password }); // Debugging
 
-  if (user && user.password === password) {
+  const users = JSON.parse(localStorage.getItem('users')) || [];
+  console.log('Stored users:', users); // Debugging
+
+  const user = users.find(user => (user.name === loginName || user.email === loginName) && user.password === password);
+
+  if (user) {
     localStorage.setItem('currentUser', JSON.stringify(user));
-    updateProfile(user.name, loginName);
+    updateProfile(user.name, user.email);
     alert(isEnglish
       ? 'Login successful!'
       : 'Вход успешен!');
@@ -75,7 +81,7 @@ function updateProfile(name, email) {
 document.addEventListener('DOMContentLoaded', () => {
   const currentUser = JSON.parse(localStorage.getItem('currentUser'));
   if (currentUser) {
-    updateProfile(currentUser.name, Object.keys(localStorage).find(key => JSON.parse(localStorage.getItem(key)).name === currentUser.name));
+    updateProfile(currentUser.name, currentUser.email);
   }
 });
 
