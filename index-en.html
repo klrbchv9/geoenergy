@@ -3,93 +3,345 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ZherBulagy</title>
+  <meta name="description" content="ZherBulagy - Geothermal energy project in Kyrgyzstan. Eco-friendly heating, savings, and education.">
+  <meta name="keywords" content="geothermal energy, Kyrgyzstan, eco-friendly heating, renewable energy, courses, investments">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="Technovation Girls 2025">
+  <link rel="canonical" href="https://zherbulagy.com/index-en.html">
+  <link rel="alternate" hreflang="en" href="https://zherbulagy.com/index-en.html">
+  <link rel="alternate" hreflang="ru" href="https://zherbulagy.com/index.html">
+  <!-- Open Graph -->
+  <meta property="og:title" content="ZherBulagy - Geothermal Energy of the Future">
+  <meta property="og:description" content="A project promoting geothermal energy in Kyrgyzstan. Eco-friendly heating for every home.">
+  <meta property="og:image" content="https://i.imgur.com/zD3oX2x.png">
+  <meta property="og:url" content="https://zherbulagy.com/index-en.html">
+  <meta property="og:type" content="website">
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="ZherBulagy - Geothermal Energy of the Future">
+  <meta name="twitter:description" content="A project promoting geothermal energy in Kyrgyzstan. Eco-friendly heating for every home.">
+  <meta name="twitter:image" content="https://i.imgur.com/zD3oX2x.png">
+  <title>ZherBulagy - Geothermal Energy in Kyrgyzstan</title>
+  <link rel="icon" href="https://i.imgur.com/zD3oX2x.png">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
   <link rel="stylesheet" href="style.css">
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "ZherBulagy",
+    "url": "https://zherbulagy.com",
+    "logo": "https://i.imgur.com/zD3oX2x.png",
+    "description": "A project promoting geothermal energy in Kyrgyzstan.",
+    "sameAs": [
+      "https://www.facebook.com/zherbulagy",
+      "https://www.twitter.com/zherbulagy"
+    ]
+  }
+  </script>
 </head>
 <body>
-  <nav id="navbar">
-    <ul>
-      <li><a href="#home" class="nav-link">Home</a></li>
-      <li><a href="#map-section" class="nav-link">Map</a></li>
-      <li><a href="#about" class="nav-link">About</a></li>
-      <li><a href="#profile" class="nav-link hidden" id="profileLink">Profile</a></li>
-      <li><a href="index.html" class="nav-link">Русский</a></li>
-      <li><button id="logoutBtn" class="hidden">Logout</button></li>
-    </ul>
-  </nav>
+  <header>
+    <div class="header-container">
+      <div class="logo">
+        <div class="logo-icon"></div>
+        <div class="logo-text">
+          <h1>ZherBulagy</h1>
+          <p>Geothermal Energy of the Future</p>
+        </div>
+      </div>
+      <button class="burger-menu" onclick="toggleMenu()">☰</button>
+      <nav>
+        <ul class="nav-menu">
+          <li class="nav-item"><a href="#about" class="nav-link">Home</a></li>
+          <li class="nav-item"><a href="#benefits" class="nav-link">Benefits</a></li>
+          <li class="nav-item"><a href="#education" class="nav-link">Education</a></li>
+          <li class="nav-item"><a href="#map" class="nav-link">Map</a></li>
+          <li class="nav-item"><a href="#calculator" class="nav-link">Calculator</a></li>
+          <li class="nav-item"><a href="#invest" class="nav-link">Investors</a></li>
+          <li class="nav-item"><a href="#register" class="nav-link">Register</a></li>
+          <li class="nav-item"><a href="#account" class="nav-link">Login</a></li>
+          <li class="nav-item"><a href="#profile" id="profileLink" class="nav-link hidden">Profile</a></li>
+          <li class="nav-item"><a href="#" onclick="logout()" id="logoutBtn" class="nav-link hidden">Logout</a></li>
+        </ul>
+        <div class="language-switcher">
+          <a href="index.html" class="lang-btn">RU</a>
+          <a href="index-en.html" class="lang-btn active">EN</a>
+        </div>
+      </nav>
+    </div>
+  </header>
 
-  <section id="home">
-    <h1>ZherBulagy</h1>
-    <p>Explore the unique thermal springs, their healing properties, and natural beauty.</p>
-  </section>
+  <main>
+    <section id="about">
+      <h2 class="section-title animate__animated animate__fadeIn">About ZherBulagy</h2>
+      <div class="card">
+        <p>ZherBulagy is an initiative to promote geothermal energy in Kyrgyzstan. We help households and businesses switch to eco-friendly heating, reducing CO₂ emissions and energy costs. Learn more about our courses and investment opportunities.</p>
+      </div>
+      <div class="mt-4" style="text-align: center;">
+        <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba" alt="Geothermal Source in Kyrgyzstan" loading="lazy" style="max-width: 100%; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+      </div>
+    </section>
 
-  <section id="map-section">
-    <h2>Springs Map</h2>
-    <div id="geoMap" style="height: 500px;"></div>
-    <div id="map-legend">
-      <h3>Legend</h3>
-      <p><span style="color: #ff4d4d;">●</span> High Activity</p>
-      <p><span style="color: #ffd700;">●</span> Medium Activity</p>
-      <p><span style="color: #4da8da;">●</span> Low Activity</p>
-      <div id="filters">
-        <label for="regionSelect">Region:</label>
-        <select id="regionSelect">
-          <option value="kyrgyzstan">All Kyrgyzstan</option>
-          <option value="issyk-kul">Issyk-Kul</option>
-          <option value="alamedin">Alamedin</option>
-          <option value="altyn-arashan">Altyn-Arashan</option>
-          <option value="jyrgalan">Jyrgalan</option>
-          <option value="ak-bermet">Ak-Bermet</option>
-          <option value="keremet-suu">Keremet-Suu</option>
-          <option value="djuuku">Djuuku</option>
-          <option value="inylchek">Inylchek</option>
+    <section id="benefits">
+      <h2 class="section-title animate__animated animate__fadeIn">Benefits of Geothermal Energy</h2>
+      <div class="animate-on-scroll">
+        <div class="card">
+          <h3>Eco-Friendliness</h3>
+          <p>Geothermal energy reduces carbon emissions by 80% compared to traditional sources.</p>
+        </div>
+        <div class="card">
+          <h3>Cost Savings</h3>
+          <p>Save up to 50% on heating and hot water costs annually.</p>
+        </div>
+        <div class="card">
+          <h3>Reliability</h3>
+          <p>Geothermal systems operate consistently year-round.</p>
+        </div>
+      </div>
+      <div class="mt-4" style="text-align: center;">
+        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e" alt="Renewable Energy Benefits" loading="lazy" style="max-width: 100%; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+      </div>
+    </section>
+
+    <section id="education">
+      <h2 class="section-title animate__animated animate__fadeIn">Education</h2>
+      <div class="animate-on-scroll">
+        <div class="card">
+          <h3>Introduction to Geothermal Energy</h3>
+          <p>A beginner course on how geothermal energy works. 5 lessons, 2 weeks, online.</p>
+          <p class="price">Price: 1000 KGS</p>
+          <button class="btn btn-primary mt-2" onclick="openCourse('Introduction to Geothermal Energy')">Enroll</button>
+        </div>
+        <div class="card">
+          <h3>System Installation for Homeowners</h3>
+          <p>Practical course on installing geothermal systems in homes. 8 lessons, 4 weeks, online + practice.</p>
+          <p class="price">Price: 3000 KGS</p>
+          <button class="btn btn-primary mt-2" onclick="openCourse('System Installation for Homeowners')">Enroll</button>
+        </div>
+        <div class="card">
+          <h3>Design for Engineers</h3>
+          <p>Professional course for engineers: system design and maintenance. 10 lessons, 6 weeks, certification.</p>
+          <p class="price">Price: 5000 KGS</p>
+          <button class="btn btn-primary mt-2" onclick="openCourse('Design for Engineers')">Enroll</button>
+        </div>
+      </div>
+      <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Course",
+        "name": "Introduction to Geothermal Energy",
+        "description": "A beginner course on geothermal energy: 5 lessons, 2 weeks, online.",
+        "provider": {
+          "@type": "Organization",
+          "name": "ZherBulagy",
+          "sameAs": "https://zherbulagy.com"
+        },
+        "offers": {
+          "@type": "Offer",
+          "price": "1000",
+          "priceCurrency": "KGS"
+        }
+      }
+      </script>
+    </section>
+
+    <section id="map">
+      <h2 class="section-title animate__animated animate__fadeIn">Map of Geothermal Sources</h2>
+      <div class="form-container mt-4">
+        <label for="regionSelect">Select Region:</label>
+        <select id="regionSelect" class="form-control">
+          <option value="Kyrgyzstan">Kyrgyzstan</option>
+          <option value="Issyk-Kul">Issyk-Kul</option>
+          <option value="Ak-Suu">Ak-Suu</option>
+          <option value="Jeti-Oguz">Jeti-Oguz</option>
+          <option value="Jyrgalang">Jyrgalang</option>
+          <option value="Barbulak">Barbulak</option>
+          <option value="Cholpon-Ata">Cholpon-Ata</option>
+          <option value="Kosh-Kol">Kosh-Kol</option>
         </select>
       </div>
+      <div id="geoMap" class="map-container mt-4"></div>
+    </section>
+
+    <section id="calculator">
+      <h2 class="section-title animate__animated animate__fadeIn">Savings Calculator</h2>
+      <div class="form-container">
+        <div class="form-group">
+          <label for="area">House Area (m²):</label>
+          <input type="number" id="area" class="form-control" placeholder="Enter area">
+        </div>
+        <div class="form-group">
+          <label for="source">Current Energy Source:</label>
+          <select id="source" class="form-control">
+            <option value="coal">Coal</option>
+            <option value="wood">Wood</option>
+            <option value="electricity">Electricity</option>
+            <option value="gas">Natural Gas</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="region">Region:</label>
+          <select id="region" class="form-control">
+            <option value="General">General Estimate</option>
+            <option value="Bishkek">Bishkek</option>
+            <option value="Issyk-Kul">Issyk-Kul</option>
+            <option value="Chuy">Chuy</option>
+            <option value="Naryn">Naryn</option>
+            <option value="Osh">Osh</option>
+          </select>
+        </div>
+        <button class="btn btn-primary mt-2" onclick="calculate()">Calculate</button>
+      </div>
+      <div id="result" class="result hidden"></div>
+    </section>
+
+    <section id="invest">
+      <h2 class="section-title animate__animated animate__fadeIn">For Investors and Partners</h2>
+      <div class="tabs">
+        <button class="tab-btn active" onclick="openTab('investors')">Investors</button>
+        <button class="tab-btn" onclick="openTab('government')">Government Programs</button>
+        <button class="tab-btn" onclick="openTab('monetization')">Monetization</button>
+      </div>
+      <div id="investors" class="tab-content active">
+        <p>Investors interested in geothermal projects:</p>
+        <ul class="project-list mt-2">
+          <li class="project-item">
+            <h3 class="project-title">Enel Green Power</h3>
+            <p>A global leader in renewable energy. Invests in projects starting from $500,000. Focus on Central Asia.</p>
+            <a href="https://www.enelgreenpower.com/contact" target="_blank" class="btn btn-outline mt-2">Contact</a>
+          </li>
+          <li class="project-item">
+            <h3 class="project-title">Ormat Technologies</h3>
+            <p>Experts in geothermal technology. Investments from $300,000. Ready to collaborate in Kyrgyzstan.</p>
+            <a href="https://www.ormat.com/en/contact-us/" target="_blank" class="btn btn-outline mt-2">Contact</a>
+          </li>
+          <li class="project-item">
+            <h3 class="project-title">Siemens Gamesa</h3>
+            <p>A leading provider of renewable energy solutions. Investments from $400,000. Interested in geothermal projects.</p>
+            <a href="https://www.siemensgamesa.com/en-int/contact" target="_blank" class="btn btn-outline mt-2">Contact</a>
+          </li>
+        </ul>
+      </div>
+      <div id="government" class="tab-content">
+        <p>Government programs supporting renewable energy:</p>
+        <ul class="project-list mt-2">
+          <li class="project-item">
+            <h3 class="project-title">EU "Horizon Europe" Program</h3>
+            <p>Grants for renewable energy projects. Up to €500,000 for partner countries, including Kyrgyzstan. Available until 2027.</p>
+            <a href="https://research-and-innovation.ec.europa.eu/funding/funding-opportunities/funding-programmes-and-open-calls/horizon-europe_en" target="_blank" class="btn btn-outline mt-2">Learn More</a>
+          </li>
+          <li class="project-item">
+            <h3 class="project-title">Kyrgyzstan National Program on RES</h3>
+            <p>Subsidies up to 40% for geothermal installations in private households. Available until 2026.</p>
+            <a href="https://minenergo.gov.kg/" target="_blank" class="btn btn-outline mt-2">Learn More</a>
+          </li>
+        </ul>
+      </div>
+      <div id="monetization" class="tab-content">
+        <p>How ZherBulagy generates revenue:</p>
+        <ul class="project-list mt-2">
+          <li class="project-item">
+            <h3 class="project-title">Premium Educational Courses</h3>
+            <p>Geothermal energy courses: 1000 to 5000 KGS per course. Available online and offline.</p>
+          </li>
+          <li class="project-item">
+            <h3 class="project-title">Consulting Services</h3>
+            <p>Individual consultations for system installation: from 7000 KGS per project.</p>
+          </li>
+          <li class="project-item">
+            <h3 class="project-title">Partnerships and Advertising</h3>
+            <p>Collaborations with equipment manufacturers and ads on the site: from $2000 per campaign.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="register">
+      <h2 class="section-title animate__animated animate__fadeIn">Register</h2>
+      <form class="form-container" onsubmit="return handleRegister(event)">
+        <div class="form-group">
+          <label for="regName">Name:</label>
+          <input type="text" id="regName" class="form-control" placeholder="Enter your name" required>
+        </div>
+        <div class="form-group">
+          <label for="regEmail">Email:</label>
+          <input type="email" id="regEmail" class="form-control" placeholder="Enter your email" required>
+        </div>
+        <div class="form-group">
+          <label for="regPass">Password:</label>
+          <input type="password" id="regPass" class="form-control" placeholder="Enter password" required>
+        </div>
+        <button type="submit" class="btn btn-primary mt-2">Register</button>
+      </form>
+    </section>
+
+    <section id="account">
+      <h2 class="section-title animate__animated animate__fadeIn">Login</h2>
+      <form class="form-container" onsubmit="return handleLogin(event)">
+        <div class="form-group">
+          <label for="loginName">Name or Email:</label>
+          <input type="text" id="loginName" class="form-control" placeholder="Enter name or email" required>
+        </div>
+        <div class="form-group">
+          <label for="loginPass">Password:</label>
+          <input type="password" id="loginPass" class="form-control" placeholder="Enter password" required>
+        </div>
+        <button type="submit" class="btn btn-primary mt-2">Login</button>
+      </form>
+    </section>
+
+    <section id="profile" class="hidden">
+      <h2 class="section-title animate__animated animate__fadeIn" id="welcomeText">Welcome!</h2>
+      <div class="card">
+        <p><strong>Name:</strong> <span id="profileUsername"></span></p>
+        <p><strong>Email:</strong> <span id="profileEmail"></span></p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Technovation Girls 2025</p>
+  </footer>
+
+  <div class="chatbot-container" id="chatbot">
+    <div class="chatbot-header">
+      <h3>ZherBulagy Chatbot</h3>
+      <button class="chatbot-close" onclick="toggleChatbot()">×</button>
     </div>
-  </section>
+    <div class="chatbot-messages" id="chatbotMessages">
+      <div class="message bot-message">Hello! How can I help you?</div>
+    </div>
+    <div class="chatbot-input">
+      <input type="text" id="chatbotInput" placeholder="Enter your message">
+      <button onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+  <button class="chatbot-toggle" onclick="toggleChatbot()">💬</button>
 
-  <section id="account">
-    <h2>Login</h2>
-    <form id="loginForm" onsubmit="return false;">
-      <input type="text" id="loginName" placeholder="Name or Email" required>
-      <input type="password" id="loginPass" placeholder="Password" required>
-      <button type="submit">Login</button>
-    </form>
-  </section>
+  <script type="module">
+    import { handleRegister, handleLogin, logout } from './auth.js';
+    import { toggleMenu } from './navigation.js';
+    import { toggleChatbot, sendMessage } from './chatbot.js';
+    import { map } from './map.js';
+    import { checkScroll } from './utils.js';
+    import { calculate, openCourse, contactProject, openTab } from './app.js';
 
-  <section id="register">
-    <h2>Register</h2>
-    <form id="registerForm" onsubmit="return false;">
-      <input type="text" id="regName" placeholder="Name" required>
-      <input type="email" id="regEmail" placeholder="Email" required>
-      <input type="password" id="regPass" placeholder="Password" required>
-      <button type="submit">Register</button>
-    </form>
-  </section>
+    window.handleRegister = handleRegister;
+    window.handleLogin = handleLogin;
+    window.logout = logout;
+    window.toggleMenu = toggleMenu;
+    window.toggleChatbot = toggleChatbot;
+    window.sendMessage = sendMessage;
+    window.calculate = calculate;
+    window.openCourse = openCourse;
+    window.contactProject = contactProject;
+    window.openTab = openTab;
 
-  <section id="profile" class="hidden">
-    <h2>Profile</h2>
-    <p id="welcomeText"></p>
-    <p><strong>Name:</strong> <span id="profileUsername"></span></p>
-    <p><strong>Email:</strong> <span id="profileEmail"></span></p>
-  </section>
-
-  <section id="chatbot">
-    <h2>Chatbot</h2>
-    <div id="chatWindow"></div>
-    <form id="chatForm" onsubmit="return false;">
-      <input type="text" id="chatInput" placeholder="Ask about geothermal springs..." required>
-      <button type="submit">Send</button>
-    </form>
-  </section>
-
-  <section id="about">
-    <h2>About</h2>
-    <p>This project is dedicated to exploring Kyrgyzstan's geothermal springs, their healing properties, and tourism potential.</p>
-  </section>
-
+    checkScroll();
+  </script>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script type="module" src="app.js"></script>
 </body>
 </html>
