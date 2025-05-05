@@ -7,16 +7,12 @@
   <meta name="keywords" content="геотермальная энергия, Кыргызстан, экологичное отопление, возобновляемая энергия, курсы, инвестиции">
   <meta name="robots" content="index, follow">
   <meta name="author" content="Technovation Girls 2025">
-  <link rel="canonical" href="https://zherbulagy.com/index.html">
-  <link rel="alternate" hreflang="en" href="https://zherbulagy.com/index-en.html">
-  <link rel="alternate" hreflang="ru" href="https://zherbulagy.com/index.html">
-  <!-- Open Graph -->
+  <meta property="og:locale" content="ru_RU">
   <meta property="og:title" content="ЖерБулагы - Геотермальная энергия будущего">
   <meta property="og:description" content="Проект по популяризации геотермальной энергии в Кыргызстане. Экологичное отопление для каждого дома.">
   <meta property="og:image" content="https://i.imgur.com/zD3oX2x.png">
   <meta property="og:url" content="https://zherbulagy.com/index.html">
   <meta property="og:type" content="website">
-  <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="ЖерБулагы - Геотермальная энергия будущего">
   <meta name="twitter:description" content="Проект по популяризации геотермальной энергии в Кыргызстане. Экологичное отопление для каждого дома.">
@@ -26,7 +22,6 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
   <link rel="stylesheet" href="style.css">
-  <!-- Structured Data -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -41,6 +36,57 @@
     ]
   }
   </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "itemListElement": [
+      {
+        "@type": "Course",
+        "name": "Введение в геотермальную энергию",
+        "description": "Базовый курс по геотермальной энергии: 5 уроков, 2 недели, онлайн.",
+        "provider": {
+          "@type": "Organization",
+          "name": "ЖерБулагы",
+          "sameAs": "https://zherbulagy.com"
+        },
+        "offers": {
+          "@type": "Offer",
+          "price": "1000",
+          "priceCurrency": "KGS"
+        }
+      },
+      {
+        "@type": "Course",
+        "name": "Установка систем для домовладельцев",
+        "description": "Практический курс по установке геотермальных систем: 8 уроков, 4 недели, онлайн + практика.",
+        "provider": {
+          "@type": "Organization",
+          "name": "ЖерБулагы"
+        },
+        "offers": {
+          "@type": "Offer",
+          "price": "3000",
+          "priceCurrency": "KGS"
+        }
+      },
+      {
+        "@type": "Course",
+        "name": "Проектирование для инженеров",
+        "description": "Профессиональный курс для инженеров: 10 уроков, 6 недель, сертификация.",
+        "provider": {
+          "@type": "Organization",
+          "name": "ЖерБулагы"
+        },
+        "offers": {
+          "@type": "Offer",
+          "price": "5000",
+          "priceCurrency": "KGS"
+        }
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
   <header>
@@ -52,7 +98,7 @@
           <p>Геотермальная энергия будущего</p>
         </div>
       </div>
-      <button class="burger-menu" onclick="toggleMenu()">☰</button>
+      <button class="burger-menu" onclick="toggleMenu()" aria-label="Открыть меню">☰</button>
       <nav>
         <ul class="nav-menu">
           <li class="nav-item"><a href="#about" class="nav-link">Главная</a></li>
@@ -81,7 +127,7 @@
         <p>ЖерБулагы — это инициатива, направленная на внедрение геотермальной энергии в Кыргызстане. Мы помогаем домохозяйствам и бизнесу переходить на экологически чистое отопление, снижая выбросы CO₂ и расходы на энергию. Узнайте больше о наших курсах и инвестиционных возможностях.</p>
       </div>
       <div class="mt-4" style="text-align: center;">
-        <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba" alt="Геотермальный источник в Кыргызстане" loading="lazy" style="max-width: 100%; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+        <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba" alt="Геотермальный источник в Кыргызстане" loading="lazy" width="600" height="400" style="max-width: 100%; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
       </div>
     </section>
 
@@ -102,7 +148,7 @@
         </div>
       </div>
       <div class="mt-4" style="text-align: center;">
-        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e" alt="Преимущества возобновляемой энергии" loading="lazy" style="max-width: 100%; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e" alt="Преимущества возобновляемой энергии" loading="lazy" width="600" height="400" style="max-width: 100%; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
       </div>
     </section>
 
@@ -128,24 +174,6 @@
           <button class="btn btn-primary mt-2" onclick="openCourse('Проектирование для инженеров')">Записаться</button>
         </div>
       </div>
-      <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "Course",
-        "name": "Введение в геотермальную энергию",
-        "description": "Базовый курс по геотермальной энергии: 5 уроков, 2 недели, онлайн.",
-        "provider": {
-          "@type": "Organization",
-          "name": "ЖерБулагы",
-          "sameAs": "https://zherbulagy.com"
-        },
-        "offers": {
-          "@type": "Offer",
-          "price": "1000",
-          "priceCurrency": "KGS"
-        }
-      }
-      </script>
     </section>
 
     <section id="map">
@@ -172,7 +200,8 @@
       <div class="form-container">
         <div class="form-group">
           <label for="area">Площадь дома (м²):</label>
-          <input type="number" id="area" class="form-control" placeholder="Введите площадь">
+          <input type="number" id="area" class="form-control" placeholder="Введите площадь" aria-describedby="areaHelp">
+          <small id="areaHelp" class="form-text">Введите площадь от 1 до 10000 м².</small>
         </div>
         <div class="form-group">
           <label for="source">Текущий источник энергии:</label>
@@ -202,9 +231,9 @@
     <section id="invest">
       <h2 class="section-title animate__animated animate__fadeIn">Инвесторам и партнерам</h2>
       <div class="tabs">
-        <button class="tab-btn active" onclick="openTab('investors')">Инвесторы</button>
-        <button class="tab-btn" onclick="openTab('government')">Гос. программы</button>
-        <button class="tab-btn" onclick="openTab('monetization')">Монетизация</button>
+        <button class="tab-btn active" onclick="openTab('investors')" aria-selected="true">Инвесторы</button>
+        <button class="tab-btn" onclick="openTab('government')" aria-selected="false">Гос. программы</button>
+        <button class="tab-btn" onclick="openTab('monetization')" aria-selected="false">Монетизация</button>
       </div>
       <div id="investors" class="tab-content active">
         <p>Инвесторы, заинтересованные в геотермальных проектах:</p>
@@ -273,7 +302,8 @@
         </div>
         <div class="form-group">
           <label for="regPass">Пароль:</label>
-          <input type="password" id="regPass" class="form-control" placeholder="Введите пароль" required>
+          <input type="password" id="regPass" class="form-control" placeholder="Введите пароль" required aria-describedby="passHelp">
+          <small id="passHelp" class="form-text">Пароль должен быть не менее 6 символов.</small>
         </div>
         <button type="submit" class="btn btn-primary mt-2">Зарегистрироваться</button>
       </form>
@@ -310,17 +340,17 @@
   <div class="chatbot-container" id="chatbot">
     <div class="chatbot-header">
       <h3>Чат-бот ЖерБулагы</h3>
-      <button class="chatbot-close" onclick="toggleChatbot()">×</button>
+      <button class="chatbot-close" onclick="toggleChatbot()" aria-label="Закрыть чат-бот">×</button>
     </div>
     <div class="chatbot-messages" id="chatbotMessages">
       <div class="message bot-message">Здравствуйте! Чем могу помочь?</div>
     </div>
     <div class="chatbot-input">
-      <input type="text" id="chatbotInput" placeholder="Введите сообщение">
-      <button onclick="sendMessage()">Отправить</button>
+      <input type="text" id="chatbotInput" placeholder="Введите сообщение" aria-label="Сообщение для чат-бота">
+      <button onclick="sendMessage()" aria-label="Отправить сообщение">Отправить</button>
     </div>
   </div>
-  <button class="chatbot-toggle" onclick="toggleChatbot()">💬</button>
+  <button class="chatbot-toggle" onclick="toggleChatbot()" aria-label="Открыть чат-бот">💬</button>
 
   <script type="module">
     import { handleRegister, handleLogin, logout } from './auth.js';

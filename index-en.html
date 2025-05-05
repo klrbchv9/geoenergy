@@ -7,16 +7,12 @@
   <meta name="keywords" content="geothermal energy, Kyrgyzstan, eco-friendly heating, renewable energy, courses, investments">
   <meta name="robots" content="index, follow">
   <meta name="author" content="Technovation Girls 2025">
-  <link rel="canonical" href="https://zherbulagy.com/index-en.html">
-  <link rel="alternate" hreflang="en" href="https://zherbulagy.com/index-en.html">
-  <link rel="alternate" hreflang="ru" href="https://zherbulagy.com/index.html">
-  <!-- Open Graph -->
+  <meta property="og:locale" content="en_US">
   <meta property="og:title" content="ZherBulagy - Geothermal Energy of the Future">
   <meta property="og:description" content="A project promoting geothermal energy in Kyrgyzstan. Eco-friendly heating for every home.">
   <meta property="og:image" content="https://i.imgur.com/zD3oX2x.png">
   <meta property="og:url" content="https://zherbulagy.com/index-en.html">
   <meta property="og:type" content="website">
-  <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="ZherBulagy - Geothermal Energy of the Future">
   <meta name="twitter:description" content="A project promoting geothermal energy in Kyrgyzstan. Eco-friendly heating for every home.">
@@ -26,7 +22,6 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
   <link rel="stylesheet" href="style.css">
-  <!-- Structured Data -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -41,6 +36,57 @@
     ]
   }
   </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "itemListElement": [
+      {
+        "@type": "Course",
+        "name": "Introduction to Geothermal Energy",
+        "description": "A beginner course on geothermal energy: 5 lessons, 2 weeks, online.",
+        "provider": {
+          "@type": "Organization",
+          "name": "ZherBulagy",
+          "sameAs": "https://zherbulagy.com"
+        },
+        "offers": {
+          "@type": "Offer",
+          "price": "1000",
+          "priceCurrency": "KGS"
+        }
+      },
+      {
+        "@type": "Course",
+        "name": "System Installation for Homeowners",
+        "description": "Practical course on installing geothermal systems: 8 lessons, 4 weeks, online + practice.",
+        "provider": {
+          "@type": "Organization",
+          "name": "ZherBulagy"
+        },
+        "offers": {
+          "@type": "Offer",
+          "price": "3000",
+          "priceCurrency": "KGS"
+        }
+      },
+      {
+        "@type": "Course",
+        "name": "Design for Engineers",
+        "description": "Professional course for engineers: 10 lessons, 6 weeks, certification.",
+        "provider": {
+          "@type": "Organization",
+          "name": "ZherBulagy"
+        },
+        "offers": {
+          "@type": "Offer",
+          "price": "5000",
+          "priceCurrency": "KGS"
+        }
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
   <header>
@@ -52,7 +98,7 @@
           <p>Geothermal Energy of the Future</p>
         </div>
       </div>
-      <button class="burger-menu" onclick="toggleMenu()">☰</button>
+      <button class="burger-menu" onclick="toggleMenu()" aria-label="Open menu">☰</button>
       <nav>
         <ul class="nav-menu">
           <li class="nav-item"><a href="#about" class="nav-link">Home</a></li>
@@ -81,7 +127,7 @@
         <p>ZherBulagy is an initiative to promote geothermal energy in Kyrgyzstan. We help households and businesses switch to eco-friendly heating, reducing CO₂ emissions and energy costs. Learn more about our courses and investment opportunities.</p>
       </div>
       <div class="mt-4" style="text-align: center;">
-        <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba" alt="Geothermal Source in Kyrgyzstan" loading="lazy" style="max-width: 100%; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+        <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba" alt="Geothermal Source in Kyrgyzstan" loading="lazy" width="600" height="400" style="max-width: 100%; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
       </div>
     </section>
 
@@ -102,7 +148,7 @@
         </div>
       </div>
       <div class="mt-4" style="text-align: center;">
-        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e" alt="Renewable Energy Benefits" loading="lazy" style="max-width: 100%; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e" alt="Renewable Energy Benefits" loading="lazy" width="600" height="400" style="max-width: 100%; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
       </div>
     </section>
 
@@ -128,24 +174,6 @@
           <button class="btn btn-primary mt-2" onclick="openCourse('Design for Engineers')">Enroll</button>
         </div>
       </div>
-      <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "Course",
-        "name": "Introduction to Geothermal Energy",
-        "description": "A beginner course on geothermal energy: 5 lessons, 2 weeks, online.",
-        "provider": {
-          "@type": "Organization",
-          "name": "ZherBulagy",
-          "sameAs": "https://zherbulagy.com"
-        },
-        "offers": {
-          "@type": "Offer",
-          "price": "1000",
-          "priceCurrency": "KGS"
-        }
-      }
-      </script>
     </section>
 
     <section id="map">
@@ -172,7 +200,8 @@
       <div class="form-container">
         <div class="form-group">
           <label for="area">House Area (m²):</label>
-          <input type="number" id="area" class="form-control" placeholder="Enter area">
+          <input type="number" id="area" class="form-control" placeholder="Enter area" aria-describedby="areaHelp">
+          <small id="areaHelp" class="form-text">Enter area between 1 and 10000 m².</small>
         </div>
         <div class="form-group">
           <label for="source">Current Energy Source:</label>
@@ -202,9 +231,9 @@
     <section id="invest">
       <h2 class="section-title animate__animated animate__fadeIn">For Investors and Partners</h2>
       <div class="tabs">
-        <button class="tab-btn active" onclick="openTab('investors')">Investors</button>
-        <button class="tab-btn" onclick="openTab('government')">Government Programs</button>
-        <button class="tab-btn" onclick="openTab('monetization')">Monetization</button>
+        <button class="tab-btn active" onclick="openTab('investors')" aria-selected="true">Investors</button>
+        <button class="tab-btn" onclick="openTab('government')" aria-selected="false">Government Programs</button>
+        <button class="tab-btn" onclick="openTab('monetization')" aria-selected="false">Monetization</button>
       </div>
       <div id="investors" class="tab-content active">
         <p>Investors interested in geothermal projects:</p>
@@ -273,7 +302,8 @@
         </div>
         <div class="form-group">
           <label for="regPass">Password:</label>
-          <input type="password" id="regPass" class="form-control" placeholder="Enter password" required>
+          <input type="password" id="regPass" class="form-control" placeholder="Enter password" required aria-describedby="passHelp">
+          <small id="passHelp" class="form-text">Password must be at least 6 characters.</small>
         </div>
         <button type="submit" class="btn btn-primary mt-2">Register</button>
       </form>
@@ -310,17 +340,17 @@
   <div class="chatbot-container" id="chatbot">
     <div class="chatbot-header">
       <h3>ZherBulagy Chatbot</h3>
-      <button class="chatbot-close" onclick="toggleChatbot()">×</button>
+      <button class="chatbot-close" onclick="toggleChatbot()" aria-label="Close chatbot">×</button>
     </div>
     <div class="chatbot-messages" id="chatbotMessages">
       <div class="message bot-message">Hello! How can I help you?</div>
     </div>
     <div class="chatbot-input">
-      <input type="text" id="chatbotInput" placeholder="Enter your message">
-      <button onclick="sendMessage()">Send</button>
+      <input type="text" id="chatbotInput" placeholder="Enter your message" aria-label="Message for chatbot">
+      <button onclick="sendMessage()" aria-label="Send message">Send</button>
     </div>
   </div>
-  <button class="chatbot-toggle" onclick="toggleChatbot()">💬</button>
+  <button class="chatbot-toggle" onclick="toggleChatbot()" aria-label="Open chatbot">💬</button>
 
   <script type="module">
     import { handleRegister, handleLogin, logout } from './auth.js';

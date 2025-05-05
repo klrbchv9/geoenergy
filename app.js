@@ -1,14 +1,25 @@
+function escapeHTML(str) {
+  return str.replace(/[&<>"']/g, match => ({
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#39;'
+  }[match]));
+}
+
+const isEnglish = () => window.location.pathname.includes('index-en.html');
+
 function calculate() {
   const area = parseFloat(document.getElementById('area').value);
   const source = document.getElementById('source').value;
   const region = document.getElementById('region').value;
   const resultDiv = document.getElementById('result');
-  const isEnglish = window.location.pathname.includes('index-en.html');
 
-  if (isNaN(area) || area <= 0) {
-    resultDiv.innerHTML = isEnglish
-      ? '<p>Please enter a valid house area.</p>'
-      : '<p>Пожалуйста, введите корректную площадь дома.</p>';
+  if (isNaN(area) || area <= 0 || area > 10000) {
+    resultDiv.innerHTML = isEnglish()
+      ? '<p>Please enter a valid house area (1–10000 m²).</p>'
+      : '<p>Пожалуйста, введите корректную площадь дома (1–10000 м²).</p>';
     resultDiv.classList.remove('hidden');
     return;
   }
@@ -34,31 +45,30 @@ function calculate() {
   const savings = currentCost - geothermalCost;
   const co2Reduction = area * 0.8;
 
-  resultDiv.innerHTML = isEnglish
+  resultDiv.innerHTML = isEnglish()
     ? `
-      <div class="result-item"><span>Current Annual Cost:</span><span>$${currentCost.toFixed(2)}</span></div>
-      <div class="result-item"><span>Geothermal Annual Cost:</span><span>$${geothermalCost.toFixed(2)}</span></div>
-      <div class="result-item highlight"><span>Annual Savings:</span><span>$${savings.toFixed(2)}</span></div>
-      <div class="result-item eco"><span>CO₂ Reduction:</span><span>${co2Reduction.toFixed(2)} tons/year</span></div>
+      <div class="result-item"><span>Current Annual Cost:</span><span>$${currentCost.toLocaleString('en-US', { minimumFractionDigits: 2 })}</span></div>
+      <div class="result-item"><span>Geothermal Annual Cost:</span><span>$${geothermalCost.toLocaleString('en-US', { minimumFractionDigits: 2 })}</span></div>
+      <div class="result-item highlight"><span>Annual Savings:</span><span>$${savings.toLocaleString('en-US', { minimumFractionDigits: 2 })}</span></div>
+      <div class="result-item eco"><span>CO₂ Reduction:</span><span>${co2Reduction.toLocaleString('en-US', { minimumFractionDigits: 2 })} tons/year</span></div>
     `
     : `
-      <div class="result-item"><span>Текущая годовая стоимость:</span><span>$${currentCost.toFixed(2)}</span></div>
-      <div class="result-item"><span>Геотермальная годовая стоимость:</span><span>$${geothermalCost.toFixed(2)}</span></div>
-      <div class="result-item highlight"><span>Годовая экономия:</span><span>$${savings.toFixed(2)}</span></div>
-      <div class="result-item eco"><span>Снижение CO₂:</span><span>${co2Reduction.toFixed(2)} тонн/год</span></div>
+      <div class="result-item"><span>Текущая годовая стоимость:</span><span>$${currentCost.toLocaleString('ru-RU', { minimumFractionDigits: 2 })}</span></div>
+      <div class="result-item"><span>Геотермальная годовая стоимость:</span><span>$${geothermalCost.toLocaleString('ru-RU', { minimumFractionDigits: 2 })}</span></div>
+      <div class="result-item highlight"><span>Годовая экономия:</span><span>$${savings.toLocaleString('ru-RU', { minimumFractionDigits: 2 })}</span></div>
+      <div class="result-item eco"><span>Снижение CO₂:</span><span>${co2Reduction.toLocaleString('ru-RU', { minimumFractionDigits: 2 })} тонн/год</span></div>
     `;
   resultDiv.classList.remove('hidden');
 }
 
 function openCourse(courseName) {
-  const isEnglish = window.location.pathname.includes('index-en.html');
   const modal = document.createElement('div');
   modal.className = 'modal';
-  modal.innerHTML = isEnglish
+  modal.innerHTML = isEnglish()
     ? `
       <div class="modal-content">
-        <span class="close" onclick="this.parentElement.parentElement.remove()">&times;</span>
-        <h2>Enroll in "${courseName}"</h2>
+        <span class="close" onclick="this.parentElement.parentElement.remove()" aria-label="Close">&times;</span>
+        <h2>Enroll in "${escapeHTML(courseName)}"</h2>
         <p>Please provide your details to enroll in the course.</p>
         <form onsubmit="event.preventDefault(); alert('Enrollment successful! You will receive an email with details.'); this.closest('.modal').remove();">
           <div class="form-group">
@@ -75,8 +85,8 @@ function openCourse(courseName) {
     `
     : `
       <div class="modal-content">
-        <span class="close" onclick="this.parentElement.parentElement.remove()">&times;</span>
-        <h2>Запись на курс "${courseName}"</h2>
+        <span class="close" onclick="this.parentElement.parentElement.remove()" aria-label="Закрыть">&times;</span>
+        <h2>Запись на курс "${escapeHTML(courseName)}"</h2>
         <p>Пожалуйста, укажите ваши данные для записи на курс.</p>
         <form onsubmit="event.preventDefault(); alert('Запись успешна! Вы получите письмо с деталями.'); this.closest('.modal').remove();">
           <div class="form-group">
@@ -96,19 +106,41 @@ function openCourse(courseName) {
 }
 
 function contactProject(projectName) {
-  const isEnglish = window.location.pathname.includes('index-en.html');
-  alert(isEnglish
-    ? `You have requested to contact "${projectName}". Please visit their official website for more details.`
-    : `Вы запросили связь с "${projectName}". Пожалуйста, посетите их официальный сайт для получения подробностей.`);
+  const modal = document.createElement('div');
+  modal.className = 'modal';
+  modal.innerHTML = isEnglish()
+    ? `
+      <div class="modal-content">
+        <span class="close" onclick="this.parentElement.parentElement.remove()" aria-label="Close">&times;</span>
+        <h2>Contact "${escapeHTML(projectName)}"</h2>
+        <p>Please visit their official website for more details or contact them directly.</p>
+        <button class="btn btn-primary mt-2" onclick="this.closest('.modal').remove()">Close</button>
+      </div>
+    `
+    : `
+      <div class="modal-content">
+        <span class="close" onclick="this.parentElement.parentElement.remove()" aria-label="Закрыть">&times;</span>
+        <h2>Связаться с "${escapeHTML(projectName)}"</h2>
+        <p>Пожалуйста, посетите их официальный сайт для получения подробностей или свяжитесь напрямую.</p>
+        <button class="btn btn-primary mt-2" onclick="this.closest('.modal').remove()">Закрыть</button>
+      </div>
+    `;
+  document.body.appendChild(modal);
+  modal.style.display = 'block';
 }
 
 function openTab(tabId) {
   const tabs = document.querySelectorAll('.tab-content');
   const buttons = document.querySelectorAll('.tab-btn');
   tabs.forEach(tab => tab.classList.remove('active'));
-  buttons.forEach(btn => btn.classList.remove('active'));
+  buttons.forEach(btn => {
+    btn.classList.remove('active');
+    btn.setAttribute('aria-selected', 'false');
+  });
   document.getElementById(tabId).classList.add('active');
-  document.querySelector(`button[onclick="openTab('${tabId}')"]`).classList.add('active');
+  const activeButton = document.querySelector(`button[onclick="openTab('${tabId}')"]`);
+  activeButton.classList.add('active');
+  activeButton.setAttribute('aria-selected', 'true');
 }
 
 export { calculate, openCourse, contactProject, openTab };
