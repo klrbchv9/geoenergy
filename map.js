@@ -1,59 +1,105 @@
-import sources from './data.js';
+import * as L from 'leaflet';
+import { regions } from './data.js';
 
 // Инициализация карты с центром на Кыргызстане
-const map = L.map('geoMap').setView([41.2044, 74.7661], 6);
+const map = L.map('map').setView([41.0, 74.0], 7);
 
-// Добавление слоя карты OpenStreetMap
+// Добавление тайлов OpenStreetMap
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+  attribution: '© OpenStreetMap contributors'
 }).addTo(map);
 
-// Определение цветов для меток в зависимости от активности
-const activityColors = {
-  'High': '#ff4d4d',    // Красный для высокой активности
-  'Medium': '#ffd700',  // Золотой для средней активности
-  'Low': '#4da8da'      // Синий для низкой активности
-};
-
-// Функция для создания метки с цветом
-function createMarker(coord, activityEn, popupContent) {
-  const color = activityColors[activityEn] || '#4da8da'; // Значение по умолчанию — синий
-  const marker = L.circleMarker(coord, {
-    radius: 8,
-    fillColor: color,
-    color: '#fff',
-    weight: 1,
-    opacity: 1,
-    fillOpacity: 0.8
-  }).addTo(map);
-
-  marker.bindPopup(popupContent);
-  return marker;
-}
-
-// Добавление маркеров на карту
-sources.forEach(source => {
-  const isEnglish = window.location.pathname.includes('index-en.html');
-  const popupContent = isEnglish
-    ? `<b>${source.name}</b><br>Temperature: ${source.temp}<br>Depth: ${source.depth}<br>Activity: ${source.activityEn}<br>Savings: $${source.saving}/year<br>Potential: ${source.potentialEn}<br>Region: ${source.region}`
-    : `<b>${source.nameRu}</b><br>Температура: ${source.temp}<br>Глубина: ${source.depth}<br>Активность: ${source.activity}<br>Экономия: $${source.saving}/год<br>Потенциал: ${source.potential}<br>Регион: ${source.regionRu}`;
-
-  createMarker(source.coords, source.activityEn, popupContent);
+// Слой для существующих регионов
+const regionLayer = L.layerGroup().addTo(map);
+regions.forEach(region => {
+  const marker = L.marker([region.lat, region.lng])
+    .bindPopup(`<b>${region.name}</b><br>${region.description}`);
+  regionLayer.addLayer(marker);
 });
 
-// Фильтрация маркеров по региону
-document.getElementById('regionSelect').addEventListener('change', function() {
-  const selectedRegion = this.value.toLowerCase();
-  map.eachLayer(layer => {
-    if (layer instanceof L.CircleMarker) {
-      const source = sources.find(s => s.coords[0] === layer.getLatLng().lat && s.coords[1] === layer.getLatLng().lng);
-      const isIssykKulSubregion = ['ak-suu', 'jeti-oguz', 'jyrgalang', 'barbulak', 'cholpon-ata', 'kosh-kol'].includes(source.region.toLowerCase());
-      const regionMatch = selectedRegion === 'kyrgyzstan' ||
-                          source.region.toLowerCase() === selectedRegion ||
-                          (selectedRegion === 'issyk-kul' && isIssykKulSubregion);
-      regionMatch ? map.addLayer(layer) : map.removeLayer(layer);
-    }
-  });
+// Данные геотермальных источников
+const hotSprings = [
+  {
+    name: 'Алтын-Арашан',
+    lat: 42.373,
+    lng: 78.612,
+    temperature: '~34°C',
+    properties: 'Радоновая вода, помогает при дыхательных и кожных заболеваниях, общее оздоровление.',
+    note: 'Точные координаты'
+  },
+  {
+    name: 'Джууку',
+    lat: 42.2367,
+    lng: 77.9528,
+    temperature: '~34°C',
+    properties: 'Радоновая вода, помогает при дыхательных и кожных заболеваниях, общее оздоровление.',
+    note: 'Приближённые координаты, требуется уточнение'
+  },
+  {
+    name: 'Орукту',
+    lat: 42.655,
+    lng: 77.083,
+    temperature: 'Не указана',
+    properties: 'Лечит желудочно-кишечные заболевания, печень, почки, диабет, нервы.',
+    note: 'Координаты на основе Plus Code PRGJ+MHX, требуется уточнение'
+  },
+  {
+    name: 'Таш-суу',
+    lat: 42.655,
+    lng: 77.083,
+    temperature: '43–48°C',
+    properties: 'Минеральная вода, общее оздоровление, SPA-процедуры.',
+    note: 'Координаты на основе Plus Code PRGJ+MHX, требуется уточнение'
+  },
+  {
+    name: 'Чон-кызыл-суу',
+    lat: 42.433,
+    lng: 78.000,
+    temperature: '+43°C',
+    properties: 'Сероводородная вода, помогает при кожных и дыхательных заболеваниях, общее оздоровление.',
+    note: 'Приближённые координаты на основе описания, требуется уточнение'
+  }
+];
+
+// Слой для геотермальных источников
+const hotSpringsLayer = L.layerGroup().addTo(map);
+hotSprings.forEach(spring => {
+  const marker = L.marker([spring.lat, spring.lng], {
+    icon: L.icon({
+      iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png',
+      iconSize: [25, 41],
+      iconAnchor: [12, 41]
+    })
+  }).bindPopup(`
+    <b>${spring.name}</b><br>
+    <b>Температура:</b> ${spring.temperature}<br>
+    <b>Свойства:</b> ${spring.properties}<br>
+    <b>Примечание:</b> ${spring.note}
+  `);
+  hotSpringsLayer.addLayer(marker);
 });
 
-export { map };
+// Кластеризация маркеров
+const markerCluster = L.markerClusterGroup();
+hotSprings.forEach(spring => {
+  const marker = L.marker([spring.lat, spring.lng], {
+    icon: L.icon({
+      iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png',
+      iconSize: [25, 41],
+      iconAnchor: [12, 41]
+    })
+  }).bindPopup(`
+    <b>${spring.name}</b><br>
+    <b>Температура:</b> ${spring.temperature}<br>
+    <b>Свойства:</b> ${spring.properties}<br>
+    <b>Примечание:</b> ${spring.note}
+  `);
+  markerCluster.addLayer(marker);
+});
+map.addLayer(markerCluster);
+
+// Центрирование карты на геотермальных источниках
+const bounds = L.latLngBounds(hotSprings.map(spring => [spring.lat, spring.lng]));
+map.fitBounds(bounds, { padding: [50, 50] });
+
+export { map, regionLayer, hotSpringsLayer };
