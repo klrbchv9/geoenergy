@@ -32,27 +32,26 @@ function createMarker(coord, activityEn, popupContent) {
 }
 
 // Добавление маркеров на карту
+const markers = [];
 sources.forEach(source => {
   const isEnglish = window.location.pathname.includes('index-en.html');
   const popupContent = isEnglish
     ? `<b>${source.name}</b><br>Temperature: ${source.temp}<br>Depth: ${source.depth}<br>Activity: ${source.activityEn}<br>Savings: $${source.saving}/year<br>Potential: ${source.potentialEn}<br>Region: ${source.region}`
     : `<b>${source.nameRu}</b><br>Температура: ${source.temp}<br>Глубина: ${source.depth}<br>Активность: ${source.activity}<br>Экономия: $${source.saving}/год<br>Потенциал: ${source.potential}<br>Регион: ${source.regionRu}`;
 
-  createMarker(source.coords, source.activityEn, popupContent);
+  const marker = createMarker(source.coords, source.activityEn, popupContent);
+  markers.push({ marker, region: source.region });
 });
 
 // Фильтрация маркеров по региону
 document.getElementById('regionSelect').addEventListener('change', function() {
   const selectedRegion = this.value.toLowerCase();
-  map.eachLayer(layer => {
-    if (layer instanceof L.CircleMarker) {
-      const source = sources.find(s => s.coords[0] === layer.getLatLng().lat && s.coords[1] === layer.getLatLng().lng);
-      const isIssykKulSubregion = ['ak-suu', 'jeti-oguz', 'jyrgalang', 'barbulak', 'cholpon-ata', 'kosh-kol'].includes(source.region.toLowerCase());
-      const regionMatch = selectedRegion === 'kyrgyzstan' ||
-                          source.region.toLowerCase() === selectedRegion ||
-                          (selectedRegion === 'issyk-kul' && isIssykKulSubregion);
-      regionMatch ? map.addLayer(layer) : map.removeLayer(layer);
-    }
+  markers.forEach(({ marker, region }) => {
+    const isIssykKulSubregion = ['ak-suu', 'jeti-oguz', 'jyrgalang', 'barbulak', 'cholpon-ata', 'kosh-kol'].includes(region.toLowerCase());
+    const regionMatch = selectedRegion === 'kyrgyzstan' ||
+                        region.toLowerCase() === selectedRegion ||
+                        (selectedRegion === 'issyk-kul' && isIssykKulSubregion);
+    regionMatch ? map.addLayer(marker) : map.removeLayer(marker);
   });
 });
 
