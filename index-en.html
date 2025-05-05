@@ -29,6 +29,8 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
   <link rel="stylesheet" href="style.css">
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <!-- Structured Data -->
   <script type="application/ld+json">
   {
@@ -63,6 +65,7 @@
           <li class="nav-item"><a href="#education" class="nav-link">Education</a></li>
           <li class="nav-item"><a href="#map" class="nav-link">Map</a></li>
           <li class="nav-item"><a href="#calculator" class="nav-link">Calculator</a></li>
+          <li class="nav-item"><a href="#installers" class="nav-link">Installers</a></li>
           <li class="nav-item"><a href="#invest" class="nav-link">Investors</a></li>
           <li class="nav-item"><a href="#register" class="nav-link">Register</a></li>
           <li class="nav-item"><a href="#account" class="nav-link">Login</a></li>
@@ -122,7 +125,7 @@
           <h3>System Installation for Homeowners</h3>
           <p>Practical course on installing geothermal systems in homes. 8 lessons, 4 weeks, online + practice.</p>
           <p class="price">Price: 3000 KGS</p>
-          <button class="btn btn-primary mt-2" onclick="openCourse('System Installation for Homeowners')">Enroll</button>
+          <button class Carole="btn btn-primary mt-2" onclick="openCourse('System Installation for Homeowners')">Enroll</button>
         </div>
         <div class="card">
           <h3>Design for Engineers</h3>
@@ -153,6 +156,10 @@
 
     <section id="map">
       <h2 class="section-title animate__animated animate__fadeIn">Map of Geothermal Sources</h2>
+      <div class="form-container mt-4">
+        <label for="sourceSearch">Search Sources:</label>
+        <input type="text" id="sourceSearch" class="form-control" placeholder="Enter source name or potential">
+      </div>
       <div class="form-container mt-4">
         <label for="regionSelect">Select Region:</label>
         <select id="regionSelect" class="form-control">
@@ -187,6 +194,13 @@
           <input type="number" id="area" class="form-control" placeholder="Enter area">
         </div>
         <div class="form-group">
+          <label for="buildingType">Building Type:</label>
+          <select id="buildingType" class="form-control">
+            <option value="residential">Residential</option>
+            <option value="commercial">Commercial</option>
+          </select>
+        </div>
+        <div class="form-group">
           <label for="source">Current Energy Source:</label>
           <select id="source" class="form-control">
             <option value="coal">Coal</option>
@@ -209,6 +223,20 @@
         <button class="btn btn-primary mt-2" onclick="calculate()">Calculate</button>
       </div>
       <div id="result" class="result hidden"></div>
+    </section>
+
+    <section id="installers">
+      <h2 class="section-title animate__animated animate__fadeIn">Find Installers</h2>
+      <div class="form-container mt-4">
+        <label for="installerRegion">Select Region:</label>
+        <select id="installerRegion" class="form-control">
+          <option value="all">All Regions</option>
+          <option value="Ak-Suu">Ak-Suu</option>
+          <option value="Bishkek">Bishkek</option>
+          <option value="Issyk-Kul">Issyk-Kul</option>
+        </select>
+      </div>
+      <ul class="project-list mt-2" id="installerList"></ul>
     </section>
 
     <section id="invest">
@@ -284,6 +312,17 @@
           <input type="email" id="regEmail" class="form-control" placeholder="Enter your email" required>
         </div>
         <div class="form-group">
+          <label for="regRegion">Region:</label>
+          <select id="regRegion" class="form-control">
+            <option value="General">General Estimate</option>
+            <option value="Bishkek">Bishkek</option>
+            <option value="Issyk-Kul">Issyk-Kul</option>
+            <option value="Chuy">Chuy</option>
+            <option value="Naryn">Naryn</option>
+            <option value="Osh">Osh</option>
+          </select>
+        </div>
+        <div class="form-group">
           <label for="regPass">Password:</label>
           <input type="password" id="regPass" class="form-control" placeholder="Enter password" required>
         </div>
@@ -311,6 +350,7 @@
       <div class="card">
         <p><strong>Name:</strong> <span id="profileUsername"></span></p>
         <p><strong>Email:</strong> <span id="profileEmail"></span></p>
+        <p><strong>Region:</strong> <span id="profileRegion"></span></p>
       </div>
     </section>
   </main>
@@ -340,7 +380,7 @@
     import { toggleChatbot, sendMessage } from './chatbot.js';
     import { map } from './map.js';
     import { checkScroll } from './utils.js';
-    import { calculate, openCourse, contactProject, openTab } from './app.js';
+    import { calculate, openCourse, contactProject, openTab, showWelcomeModal, loadInstallers } from './app.js';
 
     window.handleRegister = handleRegister;
     window.handleLogin = handleLogin;
@@ -352,9 +392,13 @@
     window.openCourse = openCourse;
     window.contactProject = contactProject;
     window.openTab = openTab;
+    window.showWelcomeModal = showWelcomeModal;
+    window.loadInstallers = loadInstallers;
 
     checkScroll();
+    showWelcomeModal();
   </script>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet.heat@0.2.0/dist/leaflet-heat.js"></script>
 </body>
 </html>

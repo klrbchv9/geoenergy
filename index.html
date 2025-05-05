@@ -29,6 +29,8 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
   <link rel="stylesheet" href="style.css">
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <!-- Structured Data -->
   <script type="application/ld+json">
   {
@@ -63,6 +65,7 @@
           <li class="nav-item"><a href="#education" class="nav-link">Обучение</a></li>
           <li class="nav-item"><a href="#map" class="nav-link">Карта</a></li>
           <li class="nav-item"><a href="#calculator" class="nav-link">Калькулятор</a></li>
+          <li class="nav-item"><a href="#installers" class="nav-link">Установщики</a></li>
           <li class="nav-item"><a href="#invest" class="nav-link">Инвесторам</a></li>
           <li class="nav-item"><a href="#register" class="nav-link">Регистрация</a></li>
           <li class="nav-item"><a href="#account" class="nav-link">Вход</a></li>
@@ -154,6 +157,10 @@
     <section id="map">
       <h2 class="section-title animate__animated animate__fadeIn">Карта геотермальных источников</h2>
       <div class="form-container mt-4">
+        <label for="sourceSearch">Поиск источников:</label>
+        <input type="text" id="sourceSearch" class="form-control" placeholder="Введите название или потенциал">
+      </div>
+      <div class="form-container mt-4">
         <label for="regionSelect">Выберите регион:</label>
         <select id="regionSelect" class="form-control">
           <option value="Kyrgyzstan">Кыргызстан</option>
@@ -187,6 +194,13 @@
           <input type="number" id="area" class="form-control" placeholder="Введите площадь">
         </div>
         <div class="form-group">
+          <label for="buildingType">Тип здания:</label>
+          <select id="buildingType" class="form-control">
+            <option value="residential">Жилое</option>
+            <option value="commercial">Коммерческое</option>
+          </select>
+        </div>
+        <div class="form-group">
           <label for="source">Текущий источник энергии:</label>
           <select id="source" class="form-control">
             <option value="coal">Уголь</option>
@@ -209,6 +223,20 @@
         <button class="btn btn-primary mt-2" onclick="calculate()">Рассчитать</button>
       </div>
       <div id="result" class="result hidden"></div>
+    </section>
+
+    <section id="installers">
+      <h2 class="section-title animate__animated animate__fadeIn">Найти установщиков</h2>
+      <div class="form-container mt-4">
+        <label for="installerRegion">Выберите регион:</label>
+        <select id="installerRegion" class="form-control">
+          <option value="all">Все регионы</option>
+          <option value="Ak-Suu">Ак-Суу</option>
+          <option value="Bishkek">Бишкек</option>
+          <option value="Issyk-Kul">Иссык-Куль</option>
+        </select>
+      </div>
+      <ul class="project-list mt-2" id="installerList"></ul>
     </section>
 
     <section id="invest">
@@ -284,6 +312,17 @@
           <input type="email" id="regEmail" class="form-control" placeholder="Введите email" required>
         </div>
         <div class="form-group">
+          <label for="regRegion">Регион:</label>
+          <select id="regRegion" class="form-control">
+            <option value="General">Общая оценка</option>
+            <option value="Bishkek">Бишкек</option>
+            <option value="Issyk-Kul">Иссык-Куль</option>
+            <option value="Chuy">Чуй</option>
+            <option value="Naryn">Нарын</option>
+            <option value="Osh">Ош</option>
+          </select>
+        </div>
+        <div class="form-group">
           <label for="regPass">Пароль:</label>
           <input type="password" id="regPass" class="form-control" placeholder="Введите пароль" required>
         </div>
@@ -311,6 +350,7 @@
       <div class="card">
         <p><strong>Имя:</strong> <span id="profileUsername"></span></p>
         <p><strong>Email:</strong> <span id="profileEmail"></span></p>
+        <p><strong>Регион:</strong> <span id="profileRegion"></span></p>
       </div>
     </section>
   </main>
@@ -340,7 +380,7 @@
     import { toggleChatbot, sendMessage } from './chatbot.js';
     import { map } from './map.js';
     import { checkScroll } from './utils.js';
-    import { calculate, openCourse, contactProject, openTab } from './app.js';
+    import { calculate, openCourse, contactProject, openTab, showWelcomeModal, loadInstallers } from './app.js';
 
     window.handleRegister = handleRegister;
     window.handleLogin = handleLogin;
@@ -352,9 +392,13 @@
     window.openCourse = openCourse;
     window.contactProject = contactProject;
     window.openTab = openTab;
+    window.showWelcomeModal = showWelcomeModal;
+    window.loadInstallers = loadInstallers;
 
     checkScroll();
+    showWelcomeModal();
   </script>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet.heat@0.2.0/dist/leaflet-heat.js"></script>
 </body>
 </html>

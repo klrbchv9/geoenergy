@@ -239,4 +239,10 @@ const sources = [
   }
 ];
 
-export default sources;
+const installers = [
+  { region: "Ak-Suu", name: "EcoHeat", contact: "info@ecoheat.kg", website: "https://ecoheat.kg" },
+  { region: "Bishkek", name: "GreenTech", contact: "contact@greentech.kg", website: "https://greentech.kg" },
+  { region: "Issyk-Kul", name: "GeoInstall", contact: "support@geoinstall.kg", website: "https://geoinstall.kg" }
+];
+
+export { sources, installers };
