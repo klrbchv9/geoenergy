@@ -3,10 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Geothermal Springs of Kyrgyzstan</title>
+  <title>ZherBulagy</title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
-  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -22,20 +20,31 @@
   </nav>
 
   <section id="home">
-    <h1>Geothermal Springs of Kyrgyzstan</h1>
+    <h1>ZherBulagy</h1>
     <p>Explore the unique thermal springs, their healing properties, and natural beauty.</p>
   </section>
 
   <section id="map-section">
     <h2>Springs Map</h2>
-    <div id="map" style="height: 500px;"></div>
+    <div id="geoMap" style="height: 500px;"></div>
     <div id="map-legend">
       <h3>Legend</h3>
-      <p><img src="https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png" alt="Marker"> Geothermal Springs</p>
+      <p><span style="color: #ff4d4d;">●</span> High Activity</p>
+      <p><span style="color: #ffd700;">●</span> Medium Activity</p>
+      <p><span style="color: #4da8da;">●</span> Low Activity</p>
       <div id="filters">
-        <label><input type="checkbox" id="radonFilter" checked> Radon</label>
-        <label><input type="checkbox" id="sulfurFilter" checked> Sulfur</label>
-        <label><input type="checkbox" id="mineralFilter" checked> Mineral</label>
+        <label for="regionSelect">Region:</label>
+        <select id="regionSelect">
+          <option value="kyrgyzstan">All Kyrgyzstan</option>
+          <option value="issyk-kul">Issyk-Kul</option>
+          <option value="alamedin">Alamedin</option>
+          <option value="altyn-arashan">Altyn-Arashan</option>
+          <option value="jyrgalan">Jyrgalan</option>
+          <option value="ak-bermet">Ak-Bermet</option>
+          <option value="keremet-suu">Keremet-Suu</option>
+          <option value="djuuku">Djuuku</option>
+          <option value="inylchek">Inylchek</option>
+        </select>
       </div>
     </div>
   </section>
@@ -81,8 +90,6 @@
   </section>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
   <script type="module" src="app.js"></script>
 </body>
 </html>

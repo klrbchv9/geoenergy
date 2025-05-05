@@ -1,106 +1,59 @@
-import * as L from 'leaflet';
-import { regions, hotSprings } from './data.js';
+import sources from './data.js';
 
-function initMap() {
-  // Проверка контейнера карты
-  const mapContainer = document.getElementById('map');
-  if (!mapContainer) {
-    console.error('Контейнер карты с id="map" не найден');
-    return;
-  }
+// Инициализация карты с центром на Кыргызстане
+const map = L.map('geoMap').setView([41.2044, 74.7661], 6);
 
-  // Инициализация карты
-  const map = L.map('map').setView([41.0, 74.0], 7);
+// Добавление слоя карты OpenStreetMap
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
 
-  // Тайлы OpenStreetMap
-  L.tileLayer('https://tile.openstreetmap.de/{z}/{x}/{y}.png', {
-    attribution: '© OpenStreetMap contributors',
-    maxZoom: 18,
-    tileSize: 256,
-    zoomOffset: 0
-  }).addTo(map).on('tileerror', (error) => {
-    console.error('Ошибка загрузки тайлов:', error);
-  });
+// Определение цветов для меток в зависимости от активности
+const activityColors = {
+  'High': '#ff4d4d',    // Красный для высокой активности
+  'Medium': '#ffd700',  // Золотой для средней активности
+  'Low': '#4da8da'      // Синий для низкой активности
+};
 
-  // Слой для регионов
-  const regionLayer = L.layerGroup().addTo(map);
-  try {
-    regions.forEach(region => {
-      if (region.lat && region.lng) {
-        const marker = L.marker([region.lat, region.lng])
-          .bindPopup(`<b>${region.name}</b><br>${region.description}`);
-        regionLayer.addLayer(marker);
-      } else {
-        console.warn(`Некорректные координаты для региона: ${region.name}`);
-      }
-    });
-  } catch (error) {
-    console.error('Ошибка при добавлении регионов:', error);
-  }
+// Функция для создания метки с цветом
+function createMarker(coord, activityEn, popupContent) {
+  const color = activityColors[activityEn] || '#4da8da'; // Значение по умолчанию — синий
+  const marker = L.circleMarker(coord, {
+    radius: 8,
+    fillColor: color,
+    color: '#fff',
+    weight: 1,
+    opacity: 1,
+    fillOpacity: 0.8
+  }).addTo(map);
 
-  // Слой для источников
-  const hotSpringsLayer = L.layerGroup().addTo(map);
-  const markerCluster = L.markerClusterGroup();
-
-  function updateMarkers() {
-    hotSpringsLayer.clearLayers();
-    markerCluster.clearLayers();
-
-    const radonFilter = document.getElementById('radonFilter').checked;
-    const sulfurFilter = document.getElementById('sulfurFilter').checked;
-    const mineralFilter = document.getElementById('mineralFilter').checked;
-
-    hotSprings.forEach(spring => {
-      if (
-        (spring.type === 'radon' && radonFilter) ||
-        (spring.type === 'sulfur' && sulfurFilter) ||
-        (spring.type === 'mineral' && mineralFilter)
-      ) {
-        if (spring.lat && spring.lng) {
-          const marker = L.marker([spring.lat, spring.lng], {
-            icon: L.icon({
-              iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
-              iconSize: [25, 41],
-              iconAnchor: [12, 41]
-            })
-          }).bindPopup(`
-            <b>${spring.name}</b><br>
-            <b>${isEnglish() ? 'Temperature' : 'Температура'}:</b> ${spring.temperature}<br>
-            <b>${isEnglish() ? 'Properties' : 'Свойства'}:</b> ${spring.properties}<br>
-            <b>${isEnglish() ? 'Note' : 'Примечание'}:</b> ${spring.note}
-          `);
-          hotSpringsLayer.addLayer(marker);
-          markerCluster.addLayer(marker.clone());
-        } else {
-          console.warn(`Некорректные координаты для источника: ${spring.name}`);
-        }
-      }
-    });
-
-    map.addLayer(markerCluster);
-  }
-
-  // Фильтры
-  const filterInputs = document.querySelectorAll('#filters input');
-  filterInputs.forEach(input => {
-    input.addEventListener('change', updateMarkers);
-  });
-
-  // Начальная загрузка маркеров
-  updateMarkers();
-
-  // Центрирование карты
-  try {
-    const bounds = L.latLngBounds(hotSprings.map(spring => [spring.lat, spring.lng]));
-    map.fitBounds(bounds, { padding: [50, 50] });
-  } catch (error) {
-    console.error('Ошибка при установке границ карты:', error);
-  }
+  marker.bindPopup(popupContent);
+  return marker;
 }
 
-// Проверка языка
-const isEnglish = () => window.location.pathname.includes('index-en.html');
+// Добавление маркеров на карту
+sources.forEach(source => {
+  const isEnglish = window.location.pathname.includes('index-en.html');
+  const popupContent = isEnglish
+    ? `<b>${source.name}</b><br>Temperature: ${source.temp}<br>Depth: ${source.depth}<br>Activity: ${source.activityEn}<br>Savings: $${source.saving}/year<br>Potential: ${source.potentialEn}<br>Region: ${source.region}`
+    : `<b>${source.nameRu}</b><br>Температура: ${source.temp}<br>Глубина: ${source.depth}<br>Активность: ${source.activity}<br>Экономия: $${source.saving}/год<br>Потенциал: ${source.potential}<br>Регион: ${source.regionRu}`;
 
-document.addEventListener('DOMContentLoaded', initMap);
+  createMarker(source.coords, source.activityEn, popupContent);
+});
 
-export { initMap };
+// Фильтрация маркеров по региону
+document.getElementById('regionSelect').addEventListener('change', function() {
+  const selectedRegion = this.value.toLowerCase();
+  map.eachLayer(layer => {
+    if (layer instanceof L.CircleMarker) {
+      const source = sources.find(s => s.coords[0] === layer.getLatLng().lat && s.coords[1] === layer.getLatLng().lng);
+      const isIssykKulSubregion = ['ak-suu', 'jeti-oguz', 'jyrgalang', 'barbulak', 'cholpon-ata', 'kosh-kol'].includes(source.region.toLowerCase());
+      const regionMatch = selectedRegion === 'kyrgyzstan' ||
+                          source.region.toLowerCase() === selectedRegion ||
+                          (selectedRegion === 'issyk-kul' && isIssykKulSubregion);
+      regionMatch ? map.addLayer(layer) : map.removeLayer(layer);
+    }
+  });
+});
+
+export { map };

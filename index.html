@@ -3,16 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Геотермальные источники Кыргызстана</title>
-  <!-- Leaflet и MarkerCluster -->
+  <title>ЖерБулагы</title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
-  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
-  <!-- Собственные стили -->
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Навигация -->
   <nav id="navbar">
     <ul>
       <li><a href="#home" class="nav-link">Главная</a></li>
@@ -24,28 +19,36 @@
     </ul>
   </nav>
 
-  <!-- Главная секция -->
   <section id="home">
-    <h1>Геотермальные источники Кыргызстана</h1>
+    <h1>ЖерБулагы</h1>
     <p>Исследуйте уникальные термальные источники, их лечебные свойства и природную красоту.</p>
   </section>
 
-  <!-- Карта -->
   <section id="map-section">
     <h2>Карта источников</h2>
-    <div id="map" style="height: 500px;"></div>
+    <div id="geoMap" style="height: 500px;"></div>
     <div id="map-legend">
       <h3>Легенда</h3>
-      <p><img src="https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png" alt="Marker"> Геотермальные источники</p>
+      <p><span style="color: #ff4d4d;">●</span> Высокая активность</p>
+      <p><span style="color: #ffd700;">●</span> Средняя активность</p>
+      <p><span style="color: #4da8da;">●</span> Низкая активность</p>
       <div id="filters">
-        <label><input type="checkbox" id="radonFilter" checked> Радоновые</label>
-        <label><input type="checkbox" id="sulfurFilter" checked> Сероводородные</label>
-        <label><input type="checkbox" id="mineralFilter" checked> Минеральные</label>
+        <label for="regionSelect">Регион:</label>
+        <select id="regionSelect">
+          <option value="kyrgyzstan">Весь Кыргызстан</option>
+          <option value="issyk-kul">Иссык-Куль</option>
+          <option value="alamedin">Аламедин</option>
+          <option value="altyn-arashan">Алтын-Арашан</option>
+          <option value="jyrgalan">Жыргалан</option>
+          <option value="ak-bermet">Ак-Бермет</option>
+          <option value="keremet-suu">Керемет-Суу</option>
+          <option value="djuuku">Джууку</option>
+          <option value="inylchek">Иныльчек</option>
+        </select>
       </div>
     </div>
   </section>
 
-  <!-- Авторизация -->
   <section id="account">
     <h2>Вход</h2>
     <form id="loginForm" onsubmit="return false;">
@@ -55,7 +58,6 @@
     </form>
   </section>
 
-  <!-- Регистрация -->
   <section id="register">
     <h2>Регистрация</h2>
     <form id="registerForm" onsubmit="return false;">
@@ -66,7 +68,6 @@
     </form>
   </section>
 
-  <!-- Профиль -->
   <section id="profile" class="hidden">
     <h2>Профиль</h2>
     <p id="welcomeText"></p>
@@ -74,7 +75,6 @@
     <p><strong>Email:</strong> <span id="profileEmail"></span></p>
   </section>
 
-  <!-- Чат-бот -->
   <section id="chatbot">
     <h2>Чат-бот</h2>
     <div id="chatWindow"></div>
@@ -84,16 +84,12 @@
     </form>
   </section>
 
-  <!-- О проекте -->
   <section id="about">
     <h2>О проекте</h2>
     <p>Этот проект посвящён исследованию геотермальных источников Кыргызстана, их лечебным свойствам и туристическому потенциалу.</p>
   </section>
 
-  <!-- Скрипты -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
   <script type="module" src="app.js"></script>
 </body>
 </html>
