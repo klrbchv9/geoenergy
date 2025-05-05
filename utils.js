@@ -1,26 +1,14 @@
-// Экранирование HTML для защиты от XSS
-function escapeHTML(str) {
-  if (typeof str !== 'string') return '';
-  return str.replace(/[&<>"']/g, match => ({
-    '&': '&amp;',
-    '<': '&lt;',
-    '>': '&gt;',
-    '"': '&quot;',
-    "'": '&apos;'
-  }[match]));
-}
-
-// Троттлинг
-function throttle(func, wait) {
-  let timeout;
-  return function (...args) {
-    if (!timeout) {
-      timeout = setTimeout(() => {
-        timeout = null;
-        func.apply(this, args);
-      }, wait);
+function checkScroll() {
+  const elements = document.querySelectorAll('.animate-on-scroll');
+  elements.forEach(el => {
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight - 100) {
+      el.classList.add('visible');
     }
-  };
+  });
 }
 
-export { escapeHTML, throttle };
+window.addEventListener('scroll', checkScroll);
+checkScroll();
+
+export { checkScroll };
