@@ -610,3 +610,29 @@ footer {
   color: var(--text);
   text-decoration: none;
 }
+
+/* Стили для логотипа в заголовке */
+.logo-text {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Отступ между иконкой и текстом */
+}
+
+.logo-img {
+  width: 40px; /* Размер иконки */
+  height: 40px;
+  object-fit: contain; /* Сохраняет пропорции изображения */
+}
+
+/* Адаптивность для маленьких экранов */
+@media (max-width: 600px) {
+  .logo-img {
+    width: 30px;
+    height: 30px;
+  }
+  .logo-text {
+    gap: 5px;
+  }
+}
+
+/* Существующие стили (если есть) не изменяются. Добавьте их сюда, если style.css уже существует */
