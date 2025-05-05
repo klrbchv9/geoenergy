@@ -8,41 +8,37 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
 
-// Функция для создания кастомной иконки маркера в зависимости от активности источника
-function getMarkerIcon(activity) {
-  const color = activity.toLowerCase() === 'высокая' || activity.toLowerCase() === 'high' ? 'green' :
-                activity.toLowerCase() === 'средняя' || activity.toLowerCase() === 'medium' ? 'orange' :
-                activity.toLowerCase() === 'низкая' || activity.toLowerCase() === 'low' ? 'red' : 'gray';
-  return L.divIcon({
-    className: 'custom-marker',
-    html: `<div style="background-color: ${color}; width: 10px; height: 10px; border-radius: 50%; border: 2px solid #fff;"></div>`,
-    iconSize: [14, 14],
-    iconAnchor: [7, 7]
-  });
-}
+// Кастомная иконка для маркеров
+const customIcon = L.icon({
+  iconUrl: 'https://cdn-icons-png.flaticon.com/512/3163/3163665.png', // Иконка термального источника
+  iconSize: [32, 32], // Размер иконки
+  iconAnchor: [16, 32], // Точка привязки (низ иконки)
+  popupAnchor: [0, -32] // Смещение попапа
+});
 
 // Добавление маркеров на карту
 sources.forEach(source => {
   const isEnglish = window.location.pathname.includes('index-en.html');
-  const markerIcon = getMarkerIcon(source.activity);
-  const marker = L.marker(source.coords, { icon: markerIcon }).addTo(map);
+  const marker = L.marker(source.coords, { icon: customIcon }).addTo(map);
 
-  // Формирование контента попапа в зависимости от языка
   const popupContent = isEnglish
-    ? `<b>${source.name}</b><br>Temperature: ${source.temp}<br>Depth: ${source.depth}<br>Activity: ${source.activityEn}<br>Savings: $${source.saving}/year<br>Potential: ${source.potentialEn}`
-    : `<b>${source.nameRu}</b><br>Температура: ${source.temp}<br>Глубина: ${source.depth}<br>Активность: ${source.activity}<br>Экономия: $${source.saving}/год<br>Потенциал: ${source.potential}`;
+    ? `<b>${source.name}</b><br>Temperature: ${source.temp}<br>Depth: ${source.depth}<br>Activity: ${source.activityEn}<br>Savings: $${source.saving}/year<br>Potential: ${source.potentialEn}<br>Region: ${source.region}`
+    : `<b>${source.nameRu}</b><br>Температура: ${source.temp}<br>Глубина: ${source.depth}<br>Активность: ${source.activity}<br>Экономия: $${source.saving}/год<br>Потенциал: ${source.potential}<br>Регион: ${source.regionRu}`;
 
   marker.bindPopup(popupContent);
 });
 
 // Фильтрация маркеров по региону
 document.getElementById('regionSelect').addEventListener('change', function() {
-  const region = this.value.toLowerCase();
+  const selectedRegion = this.value.toLowerCase();
   map.eachLayer(layer => {
     if (layer instanceof L.Marker) {
-      const content = layer.getPopup().getContent().toLowerCase();
-      const regionMatch = region === 'kyrgyzstan' || content.includes(region);
-      regionMatch ? layer.addTo(map) : map.removeLayer(layer);
+      const source = sources.find(s => s.coords[0] === layer.getLatLng().lat && s.coords[1] === layer.getLatLng().lng);
+      const isIssykKulSubregion = ['ak-suu', 'jeti-oguz', 'jyrgalang', 'barbulak', 'cholpon-ata', 'kosh-kol'].includes(source.region.toLowerCase());
+      const regionMatch = selectedRegion === 'kyrgyzstan' ||
+                          source.region.toLowerCase() === selectedRegion ||
+                          (selectedRegion === 'issyk-kul' && isIssykKulSubregion);
+      regionMatch ? map.addLayer(layer) : map.removeLayer(layer);
     }
   });
 });
