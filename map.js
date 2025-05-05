@@ -1,105 +1,106 @@
 import * as L from 'leaflet';
-import { regions } from './data.js';
+import { regions, hotSprings } from './data.js';
 
-// Инициализация карты с центром на Кыргызстане
-const map = L.map('map').setView([41.0, 74.0], 7);
-
-// Добавление тайлов OpenStreetMap
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  attribution: '© OpenStreetMap contributors'
-}).addTo(map);
-
-// Слой для существующих регионов
-const regionLayer = L.layerGroup().addTo(map);
-regions.forEach(region => {
-  const marker = L.marker([region.lat, region.lng])
-    .bindPopup(`<b>${region.name}</b><br>${region.description}`);
-  regionLayer.addLayer(marker);
-});
-
-// Данные геотермальных источников
-const hotSprings = [
-  {
-    name: 'Алтын-Арашан',
-    lat: 42.373,
-    lng: 78.612,
-    temperature: '~34°C',
-    properties: 'Радоновая вода, помогает при дыхательных и кожных заболеваниях, общее оздоровление.',
-    note: 'Точные координаты'
-  },
-  {
-    name: 'Джууку',
-    lat: 42.2367,
-    lng: 77.9528,
-    temperature: '~34°C',
-    properties: 'Радоновая вода, помогает при дыхательных и кожных заболеваниях, общее оздоровление.',
-    note: 'Приближённые координаты, требуется уточнение'
-  },
-  {
-    name: 'Орукту',
-    lat: 42.655,
-    lng: 77.083,
-    temperature: 'Не указана',
-    properties: 'Лечит желудочно-кишечные заболевания, печень, почки, диабет, нервы.',
-    note: 'Координаты на основе Plus Code PRGJ+MHX, требуется уточнение'
-  },
-  {
-    name: 'Таш-суу',
-    lat: 42.655,
-    lng: 77.083,
-    temperature: '43–48°C',
-    properties: 'Минеральная вода, общее оздоровление, SPA-процедуры.',
-    note: 'Координаты на основе Plus Code PRGJ+MHX, требуется уточнение'
-  },
-  {
-    name: 'Чон-кызыл-суу',
-    lat: 42.433,
-    lng: 78.000,
-    temperature: '+43°C',
-    properties: 'Сероводородная вода, помогает при кожных и дыхательных заболеваниях, общее оздоровление.',
-    note: 'Приближённые координаты на основе описания, требуется уточнение'
+function initMap() {
+  // Проверка контейнера карты
+  const mapContainer = document.getElementById('map');
+  if (!mapContainer) {
+    console.error('Контейнер карты с id="map" не найден');
+    return;
   }
-];
 
-// Слой для геотермальных источников
-const hotSpringsLayer = L.layerGroup().addTo(map);
-hotSprings.forEach(spring => {
-  const marker = L.marker([spring.lat, spring.lng], {
-    icon: L.icon({
-      iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png',
-      iconSize: [25, 41],
-      iconAnchor: [12, 41]
-    })
-  }).bindPopup(`
-    <b>${spring.name}</b><br>
-    <b>Температура:</b> ${spring.temperature}<br>
-    <b>Свойства:</b> ${spring.properties}<br>
-    <b>Примечание:</b> ${spring.note}
-  `);
-  hotSpringsLayer.addLayer(marker);
-});
+  // Инициализация карты
+  const map = L.map('map').setView([41.0, 74.0], 7);
 
-// Кластеризация маркеров
-const markerCluster = L.markerClusterGroup();
-hotSprings.forEach(spring => {
-  const marker = L.marker([spring.lat, spring.lng], {
-    icon: L.icon({
-      iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png',
-      iconSize: [25, 41],
-      iconAnchor: [12, 41]
-    })
-  }).bindPopup(`
-    <b>${spring.name}</b><br>
-    <b>Температура:</b> ${spring.temperature}<br>
-    <b>Свойства:</b> ${spring.properties}<br>
-    <b>Примечание:</b> ${spring.note}
-  `);
-  markerCluster.addLayer(marker);
-});
-map.addLayer(markerCluster);
+  // Тайлы OpenStreetMap
+  L.tileLayer('https://tile.openstreetmap.de/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap contributors',
+    maxZoom: 18,
+    tileSize: 256,
+    zoomOffset: 0
+  }).addTo(map).on('tileerror', (error) => {
+    console.error('Ошибка загрузки тайлов:', error);
+  });
 
-// Центрирование карты на геотермальных источниках
-const bounds = L.latLngBounds(hotSprings.map(spring => [spring.lat, spring.lng]));
-map.fitBounds(bounds, { padding: [50, 50] });
+  // Слой для регионов
+  const regionLayer = L.layerGroup().addTo(map);
+  try {
+    regions.forEach(region => {
+      if (region.lat && region.lng) {
+        const marker = L.marker([region.lat, region.lng])
+          .bindPopup(`<b>${region.name}</b><br>${region.description}`);
+        regionLayer.addLayer(marker);
+      } else {
+        console.warn(`Некорректные координаты для региона: ${region.name}`);
+      }
+    });
+  } catch (error) {
+    console.error('Ошибка при добавлении регионов:', error);
+  }
 
-export { map, regionLayer, hotSpringsLayer };
+  // Слой для источников
+  const hotSpringsLayer = L.layerGroup().addTo(map);
+  const markerCluster = L.markerClusterGroup();
+
+  function updateMarkers() {
+    hotSpringsLayer.clearLayers();
+    markerCluster.clearLayers();
+
+    const radonFilter = document.getElementById('radonFilter').checked;
+    const sulfurFilter = document.getElementById('sulfurFilter').checked;
+    const mineralFilter = document.getElementById('mineralFilter').checked;
+
+    hotSprings.forEach(spring => {
+      if (
+        (spring.type === 'radon' && radonFilter) ||
+        (spring.type === 'sulfur' && sulfurFilter) ||
+        (spring.type === 'mineral' && mineralFilter)
+      ) {
+        if (spring.lat && spring.lng) {
+          const marker = L.marker([spring.lat, spring.lng], {
+            icon: L.icon({
+              iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
+              iconSize: [25, 41],
+              iconAnchor: [12, 41]
+            })
+          }).bindPopup(`
+            <b>${spring.name}</b><br>
+            <b>${isEnglish() ? 'Temperature' : 'Температура'}:</b> ${spring.temperature}<br>
+            <b>${isEnglish() ? 'Properties' : 'Свойства'}:</b> ${spring.properties}<br>
+            <b>${isEnglish() ? 'Note' : 'Примечание'}:</b> ${spring.note}
+          `);
+          hotSpringsLayer.addLayer(marker);
+          markerCluster.addLayer(marker.clone());
+        } else {
+          console.warn(`Некорректные координаты для источника: ${spring.name}`);
+        }
+      }
+    });
+
+    map.addLayer(markerCluster);
+  }
+
+  // Фильтры
+  const filterInputs = document.querySelectorAll('#filters input');
+  filterInputs.forEach(input => {
+    input.addEventListener('change', updateMarkers);
+  });
+
+  // Начальная загрузка маркеров
+  updateMarkers();
+
+  // Центрирование карты
+  try {
+    const bounds = L.latLngBounds(hotSprings.map(spring => [spring.lat, spring.lng]));
+    map.fitBounds(bounds, { padding: [50, 50] });
+  } catch (error) {
+    console.error('Ошибка при установке границ карты:', error);
+  }
+}
+
+// Проверка языка
+const isEnglish = () => window.location.pathname.includes('index-en.html');
+
+document.addEventListener('DOMContentLoaded', initMap);
+
+export { initMap };

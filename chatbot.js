@@ -1,45 +1,53 @@
-function toggleChatbot() {
-  const chatbot = document.getElementById('chatbot');
-  chatbot.style.display = chatbot.style.display === 'none' || !chatbot.style.display ? 'flex' : 'none';
-}
+import { escapeHTML } from './utils.js';
 
-function sendMessage() {
-  const input = document.getElementById('chatbotInput');
-  const messages = document.getElementById('chatbotMessages');
-  const message = input.value.trim();
-  const isEnglish = window.location.pathname.includes('index-en.html');
+const responses = {
+  ru: {
+    'алтын-арашан': 'Алтын-Арашан — радоновые источники на высоте 2600 м, температура ~34°C. Полезны для дыхательных и кожных заболеваний.',
+    'джууку': 'Джууку — радоновые ванны в Иссык-Кульской области, температура ~34°C. Подходят для оздоровления.',
+    'орукту': 'Орукту — минеральный источник в Чон-Орукту. Лечит желудок, печень, почки, диабет.',
+    'таш-суу': 'Таш-суу — минеральный источник в Чон-Орукту, температура 43–48°C. Используется для SPA.',
+    'чон-кызыл-суу': 'Чон-кызыл-суу — сероводородные источники, температура +43°C. Полезны для кожи и дыхания.',
+    'привет': 'Здравствуйте! Задайте вопрос о геотермальных источниках Кыргызстана.',
+    default: 'Извините, я не понял вопроса. Попробуйте спросить о конкретном источнике, например, "Алтын-Арашан".'
+  },
+  en: {
+    'altyn-arashan': 'Altyn-Arashan — radon springs at 2600m, ~34°C. Good for respiratory and skin conditions.',
+    'juuku': 'Juuku — radon baths in Issyk-Kul, ~34°C. Great for general health.',
+    'oruktu': 'Oruktu — mineral spring in Chon-Oruktu. Treats stomach, liver, kidneys, diabetes.',
+    'tash-suu': 'Tash-suu — mineral spring in Chon-Oruktu, 43–48°C. Used for SPA.',
+    'chon-kyzyl-suu': 'Chon-kyzyl-suu — sulfur springs, +43°C. Good for skin and respiratory issues.',
+    'hello': 'Hello! Ask about Kyrgyzstan’s geothermal springs.',
+    default: 'Sorry, I didn’t understand. Try asking about a specific spring, e.g., "Altyn-Arashan".'
+  }
+};
 
-  if (!message) return;
+function initChatbot() {
+  const chatForm = document.getElementById('chatForm');
+  const chatInput = document.getElementById('chatInput');
+  const chatWindow = document.getElementById('chatWindow');
 
-  const userMessage = document.createElement('div');
-  userMessage.className = 'message user-message';
-  userMessage.textContent = message;
-  messages.appendChild(userMessage);
-
-  const botMessage = document.createElement('div');
-  botMessage.className = 'message bot-message';
-
-  if (message.toLowerCase().includes('курс') || message.toLowerCase().includes('course')) {
-    botMessage.innerHTML = isEnglish
-      ? 'We offer courses on geothermal energy! Check the "Education" section for more details.'
-      : 'Мы предлагаем курсы по геотермальной энергии! Ознакомьтесь с разделом "Обучение" для получения подробностей.';
-  } else if (message.toLowerCase().includes('инвест') || message.toLowerCase().includes('invest')) {
-    botMessage.innerHTML = isEnglish
-      ? 'Interested in investing? Visit the "Investors" section to learn more!'
-      : 'Интересуетесь инвестициями? Посетите раздел "Инвесторам" для получения информации!';
-  } else if (message.toLowerCase().includes('источник') || message.toLowerCase().includes('source')) {
-    botMessage.innerHTML = isEnglish
-      ? 'You can find geothermal sources on our interactive map in the "Map" section.'
-      : 'Вы можете найти геотермальные источники на нашей интерактивной карте в разделе "Карта".';
-  } else {
-    botMessage.textContent = isEnglish
-      ? 'I’m here to help! Try asking about courses, investments, or geothermal sources.'
-      : 'Я здесь, чтобы помочь! Попробуйте спросить о курсах, инвестициях или геотермальных источниках.';
+  if (!chatForm || !chatInput || !chatWindow) {
+    console.error('Элементы чат-бота не найдены');
+    return;
   }
 
-  messages.appendChild(botMessage);
-  messages.scrollTop = messages.scrollHeight;
-  input.value = '';
+  const isEnglish = window.location.pathname.includes('index-en.html');
+  const lang = isEnglish ? 'en' : 'ru';
+
+  chatForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const input = escapeHTML(chatInput.value.trim().toLowerCase());
+    if (!input) return;
+
+    const response = responses[lang][input] || responses[lang].default;
+    const userMessage = `<p><strong>${isEnglish ? 'You' : 'Вы'}:</strong> ${escapeHTML(chatInput.value)}</p>`;
+    const botMessage = `<p><strong>Bot:</strong> ${escapeHTML(response)}</p>`;
+
+    chatWindow.innerHTML += userMessage + botMessage;
+    chatWindow.scrollTop = chatWindow.scrollHeight;
+    chatInput.value = '';
+    chatInput.focus();
+  });
 }
 
-export { toggleChatbot, sendMessage };
+export { initChatbot };

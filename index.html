@@ -3,376 +3,97 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="ЖерБулагы - проект по геотермальной энергии в Кыргызстане. Экологичное отопление, экономия и обучение.">
-  <meta name="keywords" content="геотермальная энергия, Кыргызстан, экологичное отопление, возобновляемая энергия, курсы, инвестиции">
-  <meta name="robots" content="index, follow">
-  <meta name="author" content="Technovation Girls 2025">
-  <meta property="og:locale" content="ru_RU">
-  <meta property="og:title" content="ЖерБулагы - Геотермальная энергия будущего">
-  <meta property="og:description" content="Проект по популяризации геотермальной энергии в Кыргызстане. Экологичное отопление для каждого дома.">
-  <meta property="og:image" content="https://i.imgur.com/zD3oX2x.png">
-  <meta property="og:url" content="https://zherbulagy.com/index.html">
-  <meta property="og:type" content="website">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="ЖерБулагы - Геотермальная энергия будущего">
-  <meta name="twitter:description" content="Проект по популяризации геотермальной энергии в Кыргызстане. Экологичное отопление для каждого дома.">
-  <meta name="twitter:image" content="https://i.imgur.com/zD3oX2x.png">
-  <title>ЖерБулагы - Геотермальная энергия в Кыргызстане</title>
-  <link rel="icon" href="https://i.imgur.com/zD3oX2x.png">
+  <title>Геотермальные источники Кыргызстана</title>
+  <!-- Leaflet и MarkerCluster -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
+  <!-- Собственные стили -->
   <link rel="stylesheet" href="style.css">
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "ЖерБулагы",
-    "url": "https://zherbulagy.com",
-    "logo": "https://i.imgur.com/zD3oX2x.png",
-    "description": "Проект по популяризации геотермальной энергии в Кыргызстане.",
-    "sameAs": [
-      "https://www.facebook.com/zherbulagy",
-      "https://www.twitter.com/zherbulagy"
-    ]
-  }
-  </script>
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    "itemListElement": [
-      {
-        "@type": "Course",
-        "name": "Введение в геотермальную энергию",
-        "description": "Базовый курс по геотермальной энергии: 5 уроков, 2 недели, онлайн.",
-        "provider": {
-          "@type": "Organization",
-          "name": "ЖерБулагы",
-          "sameAs": "https://zherbulagy.com"
-        },
-        "offers": {
-          "@type": "Offer",
-          "price": "1000",
-          "priceCurrency": "KGS"
-        }
-      },
-      {
-        "@type": "Course",
-        "name": "Установка систем для домовладельцев",
-        "description": "Практический курс по установке геотермальных систем: 8 уроков, 4 недели, онлайн + практика.",
-        "provider": {
-          "@type": "Organization",
-          "name": "ЖерБулагы"
-        },
-        "offers": {
-          "@type": "Offer",
-          "price": "3000",
-          "priceCurrency": "KGS"
-        }
-      },
-      {
-        "@type": "Course",
-        "name": "Проектирование для инженеров",
-        "description": "Профессиональный курс для инженеров: 10 уроков, 6 недель, сертификация.",
-        "provider": {
-          "@type": "Organization",
-          "name": "ЖерБулагы"
-        },
-        "offers": {
-          "@type": "Offer",
-          "price": "5000",
-          "priceCurrency": "KGS"
-        }
-      }
-    ]
-  }
-  </script>
 </head>
 <body>
-  <header>
-    <div class="header-container">
-      <div class="logo">
-        <div class="logo-icon"></div>
-        <div class="logo-text">
-          <h1>ЖерБулагы</h1>
-          <p>Геотермальная энергия будущего</p>
-        </div>
+  <!-- Навигация -->
+  <nav id="navbar">
+    <ul>
+      <li><a href="#home" class="nav-link">Главная</a></li>
+      <li><a href="#map-section" class="nav-link">Карта</a></li>
+      <li><a href="#about" class="nav-link">О проекте</a></li>
+      <li><a href="#profile" class="nav-link hidden" id="profileLink">Профиль</a></li>
+      <li><a href="index-en.html" class="nav-link">English</a></li>
+      <li><button id="logoutBtn" class="hidden">Выйти</button></li>
+    </ul>
+  </nav>
+
+  <!-- Главная секция -->
+  <section id="home">
+    <h1>Геотермальные источники Кыргызстана</h1>
+    <p>Исследуйте уникальные термальные источники, их лечебные свойства и природную красоту.</p>
+  </section>
+
+  <!-- Карта -->
+  <section id="map-section">
+    <h2>Карта источников</h2>
+    <div id="map" style="height: 500px;"></div>
+    <div id="map-legend">
+      <h3>Легенда</h3>
+      <p><img src="https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png" alt="Marker"> Геотермальные источники</p>
+      <div id="filters">
+        <label><input type="checkbox" id="radonFilter" checked> Радоновые</label>
+        <label><input type="checkbox" id="sulfurFilter" checked> Сероводородные</label>
+        <label><input type="checkbox" id="mineralFilter" checked> Минеральные</label>
       </div>
-      <button class="burger-menu" onclick="toggleMenu()" aria-label="Открыть меню">☰</button>
-      <nav>
-        <ul class="nav-menu">
-          <li class="nav-item"><a href="#about" class="nav-link">Главная</a></li>
-          <li class="nav-item"><a href="#benefits" class="nav-link">Преимущества</a></li>
-          <li class="nav-item"><a href="#education" class="nav-link">Обучение</a></li>
-          <li class="nav-item"><a href="#map" class="nav-link">Карта</a></li>
-          <li class="nav-item"><a href="#calculator" class="nav-link">Калькулятор</a></li>
-          <li class="nav-item"><a href="#invest" class="nav-link">Инвесторам</a></li>
-          <li class="nav-item"><a href="#register" class="nav-link">Регистрация</a></li>
-          <li class="nav-item"><a href="#account" class="nav-link">Вход</a></li>
-          <li class="nav-item"><a href="#profile" id="profileLink" class="nav-link hidden">Профиль</a></li>
-          <li class="nav-item"><a href="#" onclick="logout()" id="logoutBtn" class="nav-link hidden">Выйти</a></li>
-        </ul>
-        <div class="language-switcher">
-          <a href="index.html" class="lang-btn active">RU</a>
-          <a href="index-en.html" class="lang-btn">EN</a>
-        </div>
-      </nav>
     </div>
-  </header>
+  </section>
 
-  <main>
-    <section id="about">
-      <h2 class="section-title animate__animated animate__fadeIn">О проекте ЖерБулагы</h2>
-      <div class="card">
-        <p>ЖерБулагы — это инициатива, направленная на внедрение геотермальной энергии в Кыргызстане. Мы помогаем домохозяйствам и бизнесу переходить на экологически чистое отопление, снижая выбросы CO₂ и расходы на энергию. Узнайте больше о наших курсах и инвестиционных возможностях.</p>
-      </div>
-      <div class="mt-4" style="text-align: center;">
-        <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba" alt="Геотермальный источник в Кыргызстане" loading="lazy" width="600" height="400" style="max-width: 100%; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
-      </div>
-    </section>
+  <!-- Авторизация -->
+  <section id="account">
+    <h2>Вход</h2>
+    <form id="loginForm" onsubmit="return false;">
+      <input type="text" id="loginName" placeholder="Имя или Email" required>
+      <input type="password" id="loginPass" placeholder="Пароль" required>
+      <button type="submit">Войти</button>
+    </form>
+  </section>
 
-    <section id="benefits">
-      <h2 class="section-title animate__animated animate__fadeIn">Преимущества геотермальной энергии</h2>
-      <div class="animate-on-scroll">
-        <div class="card">
-          <h3>Экологичность</h3>
-          <p>Геотермальная энергия снижает выбросы углерода на 80% по сравнению с традиционными источниками.</p>
-        </div>
-        <div class="card">
-          <h3>Экономия</h3>
-          <p>Экономьте до 50% на отоплении и горячем водоснабжении ежегодно.</p>
-        </div>
-        <div class="card">
-          <h3>Надежность</h3>
-          <p>Геотермальные системы работают стабильно в любое время года.</p>
-        </div>
-      </div>
-      <div class="mt-4" style="text-align: center;">
-        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e" alt="Преимущества возобновляемой энергии" loading="lazy" width="600" height="400" style="max-width: 100%; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
-      </div>
-    </section>
+  <!-- Регистрация -->
+  <section id="register">
+    <h2>Регистрация</h2>
+    <form id="registerForm" onsubmit="return false;">
+      <input type="text" id="regName" placeholder="Имя" required>
+      <input type="email" id="regEmail" placeholder="Email" required>
+      <input type="password" id="regPass" placeholder="Пароль" required>
+      <button type="submit">Зарегистрироваться</button>
+    </form>
+  </section>
 
-    <section id="education">
-      <h2 class="section-title animate__animated animate__fadeIn">Обучение</h2>
-      <div class="animate-on-scroll">
-        <div class="card">
-          <h3>Введение в геотермальную энергию</h3>
-          <p>Базовый курс для всех, кто хочет узнать, как работает геотермальная энергия. 5 уроков, 2 недели, онлайн.</p>
-          <p class="price">Цена: 1000 сом</p>
-          <button class="btn btn-primary mt-2" onclick="openCourse('Введение в геотермальную энергию')">Записаться</button>
-        </div>
-        <div class="card">
-          <h3>Установка систем для домовладельцев</h3>
-          <p>Практический курс по установке геотермальных систем в частных домах. 8 уроков, 4 недели, онлайн + практика.</p>
-          <p class="price">Цена: 3000 сом</p>
-          <button class="btn btn-primary mt-2" onclick="openCourse('Установка систем для домовладельцев')">Записаться</button>
-        </div>
-        <div class="card">
-          <h3>Проектирование для инженеров</h3>
-          <p>Профессиональный курс для инженеров: проектирование и обслуживание систем. 10 уроков, 6 недель, сертификация.</p>
-          <p class="price">Цена: 5000 сом</p>
-          <button class="btn btn-primary mt-2" onclick="openCourse('Проектирование для инженеров')">Записаться</button>
-        </div>
-      </div>
-    </section>
+  <!-- Профиль -->
+  <section id="profile" class="hidden">
+    <h2>Профиль</h2>
+    <p id="welcomeText"></p>
+    <p><strong>Имя:</strong> <span id="profileUsername"></span></p>
+    <p><strong>Email:</strong> <span id="profileEmail"></span></p>
+  </section>
 
-    <section id="map">
-      <h2 class="section-title animate__animated animate__fadeIn">Карта геотермальных источников</h2>
-      <div class="form-container mt-4">
-        <label for="regionSelect">Выберите регион:</label>
-        <select id="regionSelect" class="form-control">
-          <option value="Kyrgyzstan">Кыргызстан</option>
-          <option value="Issyk-Kul">Иссык-Куль</option>
-          <option value="Ak-Suu">Ак-Суу</option>
-          <option value="Jeti-Oguz">Джети-Огуз</option>
-          <option value="Jyrgalang">Джыргалан</option>
-          <option value="Barbulak">Барбулак</option>
-          <option value="Cholpon-Ata">Чолпон-Ата</option>
-          <option value="Kosh-Kol">Кош-Кол</option>
-          <option value="Alamedin">Аламедин</option>
-        </select>
-      </div>
-      <div id="geoMap" class="map-container mt-4"></div>
-    </section>
+  <!-- Чат-бот -->
+  <section id="chatbot">
+    <h2>Чат-бот</h2>
+    <div id="chatWindow"></div>
+    <form id="chatForm" onsubmit="return false;">
+      <input type="text" id="chatInput" placeholder="Задайте вопрос о геотермальных источниках..." required>
+      <button type="submit">Отправить</button>
+    </form>
+  </section>
 
-    <section id="calculator">
-      <h2 class="section-title animate__animated animate__fadeIn">Калькулятор экономии</h2>
-      <div class="form-container">
-        <div class="form-group">
-          <label for="area">Площадь дома (м²):</label>
-          <input type="number" id="area" class="form-control" placeholder="Введите площадь" aria-describedby="areaHelp">
-          <small id="areaHelp" class="form-text">Введите площадь от 1 до 10000 м².</small>
-        </div>
-        <div class="form-group">
-          <label for="source">Текущий источник энергии:</label>
-          <select id="source" class="form-control">
-            <option value="coal">Уголь</option>
-            <option value="wood">Дрова</option>
-            <option value="electricity">Электричество</option>
-            <option value="gas">Природный газ</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="region">Регион:</label>
-          <select id="region" class="form-control">
-            <option value="General">Общая оценка</option>
-            <option value="Bishkek">Бишкек</option>
-            <option value="Issyk-Kul">Иссык-Куль</option>
-            <option value="Chuy">Чуй</option>
-            <option value="Naryn">Нарын</option>
-            <option value="Osh">Ош</option>
-          </select>
-        </div>
-        <button class="btn btn-primary mt-2" onclick="calculate()">Рассчитать</button>
-      </div>
-      <div id="result" class="result hidden"></div>
-    </section>
+  <!-- О проекте -->
+  <section id="about">
+    <h2>О проекте</h2>
+    <p>Этот проект посвящён исследованию геотермальных источников Кыргызстана, их лечебным свойствам и туристическому потенциалу.</p>
+  </section>
 
-    <section id="invest">
-      <h2 class="section-title animate__animated animate__fadeIn">Инвесторам и партнерам</h2>
-      <div class="tabs">
-        <button class="tab-btn active" onclick="openTab('investors')" aria-selected="true">Инвесторы</button>
-        <button class="tab-btn" onclick="openTab('government')" aria-selected="false">Гос. программы</button>
-        <button class="tab-btn" onclick="openTab('monetization')" aria-selected="false">Монетизация</button>
-      </div>
-      <div id="investors" class="tab-content active">
-        <p>Инвесторы, заинтересованные в геотермальных проектах:</p>
-        <ul class="project-list mt-2">
-          <li class="project-item">
-            <h3 class="project-title">Enel Green Power</h3>
-            <p>Мировой лидер в возобновляемой энергетике. Инвестирует в проекты от $500,000. Фокус на Центральной Азии.</p>
-            <a href="https://www.enelgreenpower.com/contact" target="_blank" class="btn btn-outline mt-2">Связаться</a>
-          </li>
-          <li class="project-item">
-            <h3 class="project-title">Ormat Technologies</h3>
-            <p>Специалисты по геотермальным технологиям. Инвестиции от $300,000. Готовы к сотрудничеству в Кыргызстане.</p>
-            <a href="https://www.ormat.com/en/contact-us/" target="_blank" class="btn btn-outline mt-2">Связаться</a>
-          </li>
-          <li class="project-item">
-            <h3 class="project-title">Siemens Gamesa</h3>
-            <p>Ведущий производитель решений для возобновляемой энергии. Инвестиции от $400,000. Интерес к геотермальным проектам.</p>
-            <a href="https://www.siemensgamesa.com/en-int/contact" target="_blank" class="btn btn-outline mt-2">Связаться</a>
-          </li>
-        </ul>
-      </div>
-      <div id="government" class="tab-content">
-        <p>Государственные программы поддержки возобновляемой энергетики:</p>
-        <ul class="project-list mt-2">
-          <li class="project-item">
-            <h3 class="project-title">Программа ЕС "Horizon Europe"</h3>
-            <p>Гранты на проекты в области возобновляемой энергии. До €500,000 для стран-партнёров, включая Кыргызстан. Действует до 2027 года.</p>
-            <a href="https://research-and-innovation.ec.europa.eu/funding/funding-opportunities/funding-programmes-and-open-calls/horizon-europe_en" target="_blank" class="btn btn-outline mt-2">Подробнее</a>
-          </li>
-          <li class="project-item">
-            <h3 class="project-title">Национальная программа по ВИЭ (Кыргызстан)</h3>
-            <p>Субсидии до 40% на геотермальные установки для частных домохозяйств. Действует до 2026 года.</p>
-            <a href="https://minenergo.gov.kg/" target="_blank" class="btn btn-outline mt-2">Подробнее</a>
-          </li>
-        </ul>
-      </div>
-      <div id="monetization" class="tab-content">
-        <p>Как ЖерБулагы зарабатывает:</p>
-        <ul class="project-list mt-2">
-          <li class="project-item">
-            <h3 class="project-title">Платные образовательные курсы</h3>
-            <p>Курсы по геотермальной энергии: от 1000 до 5000 сом за курс. Доступны онлайн и оффлайн.</p>
-          </li>
-          <li class="project-item">
-            <h3 class="project-title">Консультационные услуги</h3>
-            <p>Индивидуальные консультации по установке систем: от 7000 сом за проект.</p>
-          </li>
-          <li class="project-item">
-            <h3 class="project-title">Партнерства и реклама</h3>
-            <p>Сотрудничество с производителями оборудования и реклама на сайте: от $2000 за кампанию.</p>
-          </li>
-        </ul>
-      </div>
-    </section>
-
-    <section id="register">
-      <h2 class="section-title animate__animated animate__fadeIn">Регистрация</h2>
-      <form class="form-container" onsubmit="return handleRegister(event)">
-        <div class="form-group">
-          <label for="regName">Имя:</label>
-          <input type="text" id="regName" class="form-control" placeholder="Введите имя" required>
-        </div>
-        <div class="form-group">
-          <label for="regEmail">Email:</label>
-          <input type="email" id="regEmail" class="form-control" placeholder="Введите email" required>
-        </div>
-        <div class="form-group">
-          <label for="regPass">Пароль:</label>
-          <input type="password" id="regPass" class="form-control" placeholder="Введите пароль" required aria-describedby="passHelp">
-          <small id="passHelp" class="form-text">Пароль должен быть не менее 6 символов.</small>
-        </div>
-        <button type="submit" class="btn btn-primary mt-2">Зарегистрироваться</button>
-      </form>
-    </section>
-
-    <section id="account">
-      <h2 class="section-title animate__animated animate__fadeIn">Вход</h2>
-      <form class="form-container" onsubmit="return handleLogin(event)">
-        <div class="form-group">
-          <label for="loginName">Имя или Email:</label>
-          <input type="text" id="loginName" class="form-control" placeholder="Введите имя или email" required>
-        </div>
-        <div class="form-group">
-          <label for="loginPass">Пароль:</label>
-          <input type="password" id="loginPass" class="form-control" placeholder="Введите пароль" required>
-        </div>
-        <button type="submit" class="btn btn-primary mt-2">Войти</button>
-      </form>
-    </section>
-
-    <section id="profile" class="hidden">
-      <h2 class="section-title animate__animated animate__fadeIn" id="welcomeText">Добро пожаловать!</h2>
-      <div class="card">
-        <p><strong>Имя:</strong> <span id="profileUsername"></span></p>
-        <p><strong>Email:</strong> <span id="profileEmail"></span></p>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <p>Technovation Girls 2025</p>
-  </footer>
-
-  <div class="chatbot-container" id="chatbot">
-    <div class="chatbot-header">
-      <h3>Чат-бот ЖерБулагы</h3>
-      <button class="chatbot-close" onclick="toggleChatbot()" aria-label="Закрыть чат-бот">×</button>
-    </div>
-    <div class="chatbot-messages" id="chatbotMessages">
-      <div class="message bot-message">Здравствуйте! Чем могу помочь?</div>
-    </div>
-    <div class="chatbot-input">
-      <input type="text" id="chatbotInput" placeholder="Введите сообщение" aria-label="Сообщение для чат-бота">
-      <button onclick="sendMessage()" aria-label="Отправить сообщение">Отправить</button>
-    </div>
-  </div>
-  <button class="chatbot-toggle" onclick="toggleChatbot()" aria-label="Открыть чат-бот">💬</button>
-
-  <script type="module">
-    import { handleRegister, handleLogin, logout } from './auth.js';
-    import { toggleMenu } from './navigation.js';
-    import { toggleChatbot, sendMessage } from './chatbot.js';
-    import { map } from './map.js';
-    import { checkScroll } from './utils.js';
-    import { calculate, openCourse, contactProject, openTab } from './app.js';
-
-    window.handleRegister = handleRegister;
-    window.handleLogin = handleLogin;
-    window.logout = logout;
-    window.toggleMenu = toggleMenu;
-    window.toggleChatbot = toggleChatbot;
-    window.sendMessage = sendMessage;
-    window.calculate = calculate;
-    window.openCourse = openCourse;
-    window.contactProject = contactProject;
-    window.openTab = openTab;
-
-    checkScroll();
-  </script>
+  <!-- Скрипты -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
+  <script type="module" src="app.js"></script>
 </body>
 </html>

@@ -1,31 +1,43 @@
-function toggleMenu() {
-    document.querySelector('.nav-menu').classList.toggle('active');
+import { throttle } from './utils.js';
+
+function initNavigation() {
+  const navLinks = document.querySelectorAll('.nav-link');
+  const navbar = document.getElementById('navbar');
+
+  if (!navLinks.length || !navbar) {
+    console.error('Элементы навигации не найдены');
+    return;
   }
-  
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-      e.preventDefault();
-      const target = document.querySelector(this.getAttribute('href'));
-      if (target) {
-        target.scrollIntoView({
-          behavior: 'smooth'
-        });
-        document.querySelector('.nav-menu').classList.remove('active');
+
+  // Плавная прокрутка
+  navLinks.forEach(link => {
+    link.addEventListener('click', (event) => {
+      event.preventDefault();
+      const targetId = link.getAttribute('href').substring(1);
+      const targetElement = document.getElementById(targetId);
+      if (targetElement) {
+        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } else {
+        console.warn(`Элемент с id "${targetId}" не найден`);
       }
     });
   });
-  
-  function checkScroll() {
-    const elements = document.querySelectorAll('.animate-on-scroll');
-    elements.forEach(el => {
-      const rect = el.getBoundingClientRect();
-      if (rect.top < window.innerHeight - 100) {
-        el.classList.add('visible');
+
+  // Активные ссылки и липкая навигация
+  const checkScroll = throttle(() => {
+    const scrollPosition = window.scrollY + 100;
+    navLinks.forEach(link => {
+      const sectionId = link.getAttribute('href').substring(1);
+      const section = document.getElementById(sectionId);
+      if (section && scrollPosition >= section.offsetTop && scrollPosition < section.offsetTop + section.offsetHeight) {
+        link.classList.add('active');
+      } else {
+        link.classList.remove('active');
       }
     });
-  }
-  
+  }, 100);
+
   window.addEventListener('scroll', checkScroll);
-  checkScroll();
-  
-  export { toggleMenu };
+}
+
+export { initNavigation };
